@@ -2,7 +2,7 @@ import { Hand } from "./hand";
 import { Card, Player } from "./types";
 
 describe("Play card", () => {
-  test("Should add a card to the current round", () => {
+  it("Should add a card to the current round", () => {
     const player: Player = {name: 'Player 1', cards: []}
     const card: Card = {rank: "1", suit: "ESPADA" }
     const hand: Hand = new Hand();
@@ -11,7 +11,6 @@ describe("Play card", () => {
 
     expect(hand.cardPlayed(player, 0)).toBe(card);
   });
-  // NOTE: it is an alias of test
   it("Shouldn't add the card if the player has already placed a card", () => {
     const player: Player = {name: 'Player 1', cards: []}
     const card: Card = {rank: "1", suit: "ESPADA" }
