@@ -5,7 +5,6 @@ export type Card = {
 
 export type Player = {
   name: string
-  cards: Card[]
 }
 
 export type Suit = 'ESPADA' | 'BASTO' | 'ORO' | 'COPA';

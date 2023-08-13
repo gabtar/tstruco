@@ -12,7 +12,7 @@ describe("Play Card", () => {
     expect(round.cardPlayed(player)).toBe(card);
   })
   it("Shouldn't add the card if the player has already placed a card", () => {
-    const player: Player = {name: 'Player 1', cards: []}
+    const player: Player = { name: 'Player 1' }
     const round = new Round();
 
     round.playCard(player,card);
@@ -28,8 +28,8 @@ describe("Finished", () => {
     expect(round.isFinished()).toBeFalsy();
   })
   it("Should return true if all players played a card", () => {
-    const player1 = { name: 'Player 1', cards: [] }
-    const player2 = { name: 'Player 2', cards: [] }
+    const player1 = { name: 'Player 1' }
+    const player2 = { name: 'Player 2' }
     const card1 = { rank: '1', suit: 'ESPADA' } as Card
     const card2 = { rank: '1', suit: 'BASTO' } as Card
     const round = new Round();
@@ -42,8 +42,8 @@ describe("Finished", () => {
 
 describe("Winner", () => {
   it("Should return the winner when a player has won the round", () => {
-    const player1 = { name: 'Player 1', cards: [] }
-    const player2 = { name: 'Player 2', cards: [] }
+    const player1 = { name: 'Player 1' }
+    const player2 = { name: 'Player 2' }
     const card1 = { rank: '1', suit: 'ESPADA' } as Card
     const card2 = { rank: '1', suit: 'BASTO' } as Card
     const round = new Round();
@@ -55,8 +55,8 @@ describe("Winner", () => {
   })
 
   it("Should return the both players if there is a tie", () => {
-    const player1 = { name: 'Player 1', cards: [] }
-    const player2 = { name: 'Player 2', cards: [] }
+    const player1 = { name: 'Player 1' }
+    const player2 = { name: 'Player 2' }
     const card1 = { rank: '3', suit: 'COPA' } as Card
     const card2 = { rank: '3', suit: 'ORO' } as Card
     const round = new Round();

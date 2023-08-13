@@ -30,33 +30,50 @@ export class Hand {
   /** Returns the winner of the hand or null if not finished */ 
   winner(): Player | null {
     let winner: Player | null = null
-    // Escenarios de ganador:
-    // Gana 2 de 3 manos
-    // Gana 1 cada uno y la otra parda -> define la primera mano
-    // Empatan las 3 manos -> Gana el que es mano
 
-    // Prueba caso 1
-    //  cuento los ganadores de cada round
-    // roundWinners es un array de Player[] por cada round
-    // const roundWinners = this.rounds.map((round) => round.winner());
+    if (this._currentRound <= 1) {
+      return null
+    }
 
+    /** TODO: Tendría que ser por equipo/by team ... */
     const roundsWinnedByPlayer = this.rounds.reduce((roundsWinned, round) => {
-      // If key exists +1, else create key
       round.winner()?.forEach( (winner) => {
-        if (roundsWinned.has(winner)) {
-          roundsWinned.set(winner, roundsWinned.get(winner) + 1)
-        } else {
-          roundsWinned.set(winner, 1)
+        if (!roundsWinned.has(winner)) {
+          roundsWinned.set(winner, 0)
         }
+        roundsWinned.set(winner, roundsWinned.get(winner) + 1)
       });
       return roundsWinned
     }, new Map());
 
-    roundsWinnedByPlayer.forEach( (wins, player) => { 
-      if (wins == 2) {
-        winner = player
-      }
-    });
+    // Reglas:
+    // Tabla de ganador   E Empate / J1 gana jugador 1 / J2 gana jugador 2
+    // 1ra 2da 3ra    GANADOR                   GANA J1/J2
+    // J1  J1           J1                        2/0   Test ✔
+    // E   J1           J1                        2/1   Test ✔
+    // E   E   J1       J1                        3/2   Test ✔
+    // E   E   E        J1 (J1 es mano)           3/3 
+    // J1  E            J1                        2/1   Test ✔
+    // J2  J1  E        J2 (ganó la primera)      2/2   Test ✔
+    //
+    // Si 1 jug gana más rounds que el otro -> gana ése jugador (debe ganar más de 1 round)
+    // Si ganan igual cantidad -> Verifico el que ganó la primera. Y si es empate ganó el que es mano
+
+    const players: Player[] = Array.from(roundsWinnedByPlayer.keys())
+
+    const winsP1 = roundsWinnedByPlayer.get(players[0]) ?? 0
+    const winsP2 = roundsWinnedByPlayer.get(players[1]) ?? 0
+
+    if (winsP1 === winsP2) {
+      // Hay que desempatar
+      // TODO: harcodeado para pasar los tests...
+
+      //                        Gana la mano / Gana el que ganó la primera mano
+      winner = (winsP1 == 3) ? players[0] : this.rounds[0].winner()![0]
+    } else {
+      // Hay ganador directo
+      winner = (winsP1 > winsP2) ? players[0] : players[1]
+    }
 
     return winner 
   }

@@ -39,11 +39,12 @@ export class Round {
 /** Para calcular el valor de las cartas */
 const cardCode = (card: Card): string => card.rank+card.suit
 
+/** Maps a card code to card value in truco */
 const CardValue: Map<string, number> = new Map<string, number>(
   [
     ['1ESPADA', 13],
     ['1BASTO', 12],
-    ['7ESPADA', 10],
+    ['7ESPADA', 11],
     ['7ORO', 10],
     ['3ORO', 9],
     ['3COPA', 9],
