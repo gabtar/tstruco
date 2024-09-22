@@ -6,7 +6,7 @@ export class Round {
     // cardsPlayed is a map that holds the card that a player has been played
     public cardsPlayed: Map<Player, Card>,
     public players: Player[],
-  ) { }
+  ) {}
 
   /* Returns if the round is already finished */
   isFinished(): boolean {

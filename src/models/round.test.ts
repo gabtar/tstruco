@@ -37,6 +37,8 @@ describe('Play card', () => {
     const round2 = new Round(new Map<Player, Card>(), players);
     round2.playCard(players[0], card1);
 
-    expect(() => round2.playCard(players[0], card2)).toThrow('Player already played a card in this round!');
+    expect(() => round2.playCard(players[0], card2)).toThrow(
+      'Player already played a card in this round!',
+    );
   });
 });

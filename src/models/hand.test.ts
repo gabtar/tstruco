@@ -1,6 +1,6 @@
-import { HandFactory } from "../factories/hand.factory";
-import { PlayerFactory } from "../factories/player.factory";
-import { Card } from "./card";
+import { HandFactory } from '../factories/hand.factory';
+import { PlayerFactory } from '../factories/player.factory';
+import { Card } from './card';
 
 describe('currentRound', () => {
   const card1 = new Card('1', 'E');
@@ -18,5 +18,4 @@ describe('currentRound', () => {
 
     expect(hand.currentRound).toBe(1);
   });
-
 });

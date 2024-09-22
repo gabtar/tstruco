@@ -1,6 +1,7 @@
 import { Deck } from '../models/deck';
 import { Hand } from '../models/hand';
 import { Player } from '../models/player';
+import { Turn } from '../models/turn';
 import { RoundFactory } from './round.fatory';
 
 export class HandFactory {
@@ -9,11 +10,12 @@ export class HandFactory {
    * NOTE: number of players shoud be 2, 4, or 6
    */
   public static createHand(players: Player[]): Hand {
-    let rounds = RoundFactory.createRounds(players);
+    const rounds = RoundFactory.createRounds(players);
 
     // NOTE: Hand turns should be setted on the CreateNewHandCommand to set new hand player and dealer
+    const turns = new Turn(players, null, null, null);
 
     // TODO: check game phases and hand player / turns
-    return new Hand(new Deck(), players, rounds, 0, 'TRUCO');
+    return new Hand(new Deck(), players, rounds, turns, 0, 'TRUCO');
   }
 }
