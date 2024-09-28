@@ -3,12 +3,14 @@
 # TODO:
 
 # Game
-[ ] - Game object with public api for play during the game.
+[x] - Game object with public api for play during the game.
 [ ] - Serialize object???? (Maybe strings codes with game data)
 
 
 # Commands:
 [x] - Play card command
+[x] - New Game command
+[ ] - New Hand command ***
 [ ] - Chant Envido command
 [ ] - Raise Envido command
 [ ] - Response to Envido command - Accept/Decline
@@ -21,4 +23,3 @@
 [ ] - Response to Flor command
 [ ] - Play Flor command
 [ ] - Go To Deck command
-[ ] - New Hand command

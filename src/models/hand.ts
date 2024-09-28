@@ -11,7 +11,7 @@ export class Hand {
     public turns: Turn,
     public handPlayer: number,
     public phase: string, // FIX: envido - truco or flor, should be a type or enum...
-  ) {}
+  ) { }
 
   /* Returns the current round */
   get currentRound(): number {
@@ -36,4 +36,14 @@ export class Hand {
 
     return this.players[number];
   }
+
+  /** Deals cards to all players in the hand **/
+  dealCards(): void {
+    const cards = this.deck.dealCards(this.players.length);
+
+    for (let i = 0; i < this.players.length; i++) {
+      this.players[i].cards = cards.splice(0, 3);
+    }
+  }
+
 }

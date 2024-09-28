@@ -19,3 +19,18 @@ describe('currentRound', () => {
     expect(hand.currentRound).toBe(1);
   });
 });
+
+describe('dealCards', () => {
+  const players = PlayerFactory.createPlayers(2);
+  const hand = HandFactory.createHand(players);
+
+  it('Should deal 3 cards for each player in the hand', () => {
+    hand.dealCards();
+
+    for (const player of hand.players) {
+      expect(player.cards.length).toBe(3);
+      console.log(player.cards);
+    }
+
+  });
+});

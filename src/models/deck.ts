@@ -4,9 +4,9 @@ export class Deck {
   private cards: Card[] = [];
 
   constructor() {
-    for (let rank in Ranks) {
-      for (let suit in Suits) {
-        this.cards.push(new Card(rank, suit));
+    for (const rank in Ranks) {
+      for (const suit in Suits) {
+        this.cards.push(new Card(Ranks[rank], Suits[suit]));
       }
     }
   }

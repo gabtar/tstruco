@@ -1,4 +1,3 @@
-import exp = require('constants');
 import { PlayerFactory } from './player.factory';
 
 describe('PlayerFactory createPlayers', () => {
