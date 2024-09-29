@@ -10,7 +10,7 @@
 # Commands:
 [x] - Play card command
 [x] - New Game command
-[ ] - New Hand command ***
+[x] - New Hand command
 [ ] - Chant Envido command
 [ ] - Raise Envido command
 [ ] - Response to Envido command - Accept/Decline

@@ -18,7 +18,6 @@ export class PlayCardCommand implements Command {
       throw Error(`${this.player.id} is not your turn!`);
     }
 
-    // TODO: check card is not already played in a round...
     if (this.alreadyPlayed(this.card)) {
       throw Error(`${this.card} was already played`);
     }
@@ -43,6 +42,6 @@ export class PlayCardCommand implements Command {
 }
 
 export interface Command {
-  execute(): void;
+  execute(): GameState;
 }
 

@@ -1,7 +1,8 @@
 import { HandFactory } from "../factories/hand.factory";
 import { GameState } from "../models/game-state";
+import { Command } from "./play-card-command";
 
-export class NewHandCommand {
+export class NewHandCommand implements Command {
   constructor(private state: GameState) { }
 
   public execute(): GameState {
