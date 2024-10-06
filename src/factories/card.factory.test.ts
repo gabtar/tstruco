@@ -1,7 +1,6 @@
-import { CardFactory } from "./card.factory";
+import { CardFactory } from './card.factory';
 
 describe('CardFactory #createCard', () => {
-
   it('Should create an 1 of spades', () => {
     const card = CardFactory.from('1E');
 
@@ -14,6 +13,5 @@ describe('CardFactory #createCard', () => {
     const card = CardFactory.from('ZZ');
 
     // TODO: ......
-
   });
 });

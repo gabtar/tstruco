@@ -4,11 +4,12 @@
 
 # Game
 [x] - Game object with public api for play during the game.
-[ ] - Serialize object???? (Maybe strings codes with game data)
+[ ] - Serialize object - JSON? or a string code, eg 0123Player1E2BCards...
 
 
 # Commands:
 [x] - Play card command
+    [ ] - TODO: play a card that ends the round/hand/game
 [x] - New Game command
 [x] - New Hand command
 [ ] - Chant Envido command

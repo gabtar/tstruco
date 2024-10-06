@@ -7,5 +7,11 @@ export interface GameRules {
 export interface ActionParams {
   playCard: { player: number; card: string };
   newGame: { rules: GameRules };
-  newHand: {}
+  newHand: {};
+}
+
+export enum EnvidoLevel {
+  Envido = 1,
+  RealEnvido,
+  FaltaEnvido,
 }

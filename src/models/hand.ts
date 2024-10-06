@@ -1,4 +1,5 @@
 import { Deck } from './deck';
+import { Envido } from './envido';
 import { Player } from './player';
 import { Round } from './round';
 import { Turn } from './turn';
@@ -8,10 +9,11 @@ export class Hand {
     public deck: Deck,
     public players: Player[],
     public rounds: Round[],
+    public envido: Envido,
     public turns: Turn,
     public handPlayer: number,
     public phase: string, // FIX: envido - truco or flor, should be a type or enum...
-  ) { }
+  ) {}
 
   /* Returns the current round */
   get currentRound(): number {
@@ -45,5 +47,4 @@ export class Hand {
       this.players[i].cards = cards.splice(0, 3);
     }
   }
-
 }

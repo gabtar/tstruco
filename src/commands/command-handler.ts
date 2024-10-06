@@ -40,10 +40,8 @@ export class CommandHandler {
   }
 
   private newHand(state: GameState): GameState {
-    return (new NewHandCommand(state)).execute()
-
+    return new NewHandCommand(state).execute();
   }
-
 }
 
 // Commands / Actions

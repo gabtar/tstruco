@@ -29,8 +29,6 @@ describe('dealCards', () => {
 
     for (const player of hand.players) {
       expect(player.cards.length).toBe(3);
-      console.log(player.cards);
     }
-
   });
 });

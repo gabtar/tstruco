@@ -24,11 +24,11 @@ console.log(truco.getState().hand.handPlayer);
 const handPlayer = truco.getState().hand.handPlayer;
 const handPlayerCards = truco.getState().hand.players[handPlayer].cards;
 
-truco.action('playCard', { player: handPlayer, card: handPlayerCards[0].toString() })
-
+truco.action('playCard', {
+  player: handPlayer,
+  card: handPlayerCards[0].toString(),
+});
 
 // TODO: should remove the card from the player
 console.log(truco.getState().hand.players[0].cards);
 console.log(truco.getState().hand.rounds[0].cardsPlayed);
-
-

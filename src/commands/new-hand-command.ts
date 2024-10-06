@@ -1,15 +1,16 @@
-import { HandFactory } from "../factories/hand.factory";
-import { GameState } from "../models/game-state";
-import { Command } from "./play-card-command";
+import { HandFactory } from '../factories/hand.factory';
+import { GameState } from '../models/game-state';
+import { Command } from './play-card-command';
 
 export class NewHandCommand implements Command {
-  constructor(private state: GameState) { }
+  constructor(private state: GameState) {}
 
   public execute(): GameState {
     const handPlayer = this.state.hand.handPlayer;
     const numberOfPlayers = this.state.rules.numberOfPlayers;
 
-    const nextHandPlayer = handPlayer === numberOfPlayers - 1 ? 0 : handPlayer + 1;
+    const nextHandPlayer =
+      handPlayer === numberOfPlayers - 1 ? 0 : handPlayer + 1;
 
     const newHand = HandFactory.createHand(this.state.hand.players);
     newHand.handPlayer = nextHandPlayer;

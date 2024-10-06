@@ -1,4 +1,5 @@
 import { Deck } from '../models/deck';
+import { Envido } from '../models/envido';
 import { Hand } from '../models/hand';
 import { Player } from '../models/player';
 import { Turn } from '../models/turn';
@@ -14,8 +15,8 @@ export class HandFactory {
 
     // NOTE: Hand turns should be setted on the CreateNewHandCommand to set new hand player and dealer
     const turns = new Turn(players, null, null, null);
+    const envido = new Envido();
 
-    // TODO: check game phases and hand player / turns
-    return new Hand(new Deck(), players, rounds, turns, 0, 'TRUCO');
+    return new Hand(new Deck(), players, rounds, envido, turns, 0, 'TRUCO');
   }
 }

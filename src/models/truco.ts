@@ -11,7 +11,7 @@ export class Truco {
       maxPoints: 15,
     }),
     private handler: CommandHandler = new CommandHandler(),
-  ) { }
+  ) {}
 
   action<K extends keyof ActionParams>(
     actionType: K,

@@ -7,7 +7,7 @@ export class PlayCardCommand implements Command {
     private state: GameState,
     private player: Player,
     private card: Card,
-  ) { }
+  ) {}
 
   public execute(): GameState {
     if (this.state.hand.phase != 'TRUCO') {
@@ -29,14 +29,14 @@ export class PlayCardCommand implements Command {
 
     // TODO:
     // what happens if the card played ends the round/hand?
-    // maybe trigger an event to end the hand?
+    // maybe trigger an event to end the hand or advance to next round...?
 
     return this.state;
   }
 
   private alreadyPlayed(card: Card): boolean {
-    return this.state.hand.rounds.some(round =>
-      Array.from(round.cardsPlayed.values()).includes(card)
+    return this.state.hand.rounds.some((round) =>
+      Array.from(round.cardsPlayed.values()).includes(card),
     );
   }
 }
@@ -44,4 +44,3 @@ export class PlayCardCommand implements Command {
 export interface Command {
   execute(): GameState;
 }
-
