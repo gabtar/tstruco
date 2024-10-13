@@ -1,7 +1,10 @@
 import { EnvidoLevel } from '../types';
 
 export class Envido {
-  constructor(public chanted: EnvidoLevel[] = []) {}
+  constructor(
+    public chanted: EnvidoLevel[] = [],
+    public accepted?: boolean,
+  ) {}
 
   addChant(chant: EnvidoLevel) {
     if (this.isValidEnvidoLevel(chant)) {

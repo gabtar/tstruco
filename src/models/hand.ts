@@ -27,6 +27,7 @@ export class Hand {
 
   /** Returns the winner of the hand or null if not finished */
   winner(): Player | null {
+    // TODO: get the winner of the hand...
     return null;
   }
 

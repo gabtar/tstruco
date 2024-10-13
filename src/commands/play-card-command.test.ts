@@ -1,6 +1,7 @@
 import { GameStateFactory } from '../factories/game-state.factory';
 import { PlayerFactory } from '../factories/player.factory';
 import { Card } from '../models/card';
+import { GamePhase } from '../types';
 import { PlayCardCommand } from './play-card-command';
 
 describe('execute', () => {
@@ -33,11 +34,11 @@ describe('execute', () => {
   it('Should throw an Error if is not Truco phase', () => {
     const player1 = players[0];
     state.hand.turns.playCardTurn = players[0];
-    state.hand.phase = 'ENVIDO';
+    state.hand.phase = GamePhase.ChantEnvido;
     const playCardCommand = new PlayCardCommand(state, player1, card1);
 
     expect(() => playCardCommand.execute()).toThrow(
-      'Cannot play a card during ENVIDO',
+      'Cannot play a card during CHANT_ENVIDO',
     );
   });
 });

@@ -1,6 +1,7 @@
 import { Card } from '../models/card';
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
+import { GamePhase } from '../types';
 
 export class PlayCardCommand implements Command {
   constructor(
@@ -10,7 +11,7 @@ export class PlayCardCommand implements Command {
   ) {}
 
   public execute(): GameState {
-    if (this.state.hand.phase != 'TRUCO') {
+    if (this.state.hand.phase != GamePhase.Truco) {
       throw Error(`Cannot play a card during ${this.state.hand.phase}!`);
     }
 
@@ -21,6 +22,8 @@ export class PlayCardCommand implements Command {
     if (this.alreadyPlayed(this.card)) {
       throw Error(`${this.card} was already played`);
     }
+
+    // TODO: also validate that the card was dealed to the player...
 
     let currentRound = this.state.hand.rounds[this.state.hand.currentRound];
     currentRound.playCard(this.player, this.card);

@@ -14,7 +14,7 @@ export class HandFactory {
     const rounds = RoundFactory.createRounds(players);
 
     // NOTE: Hand turns should be setted on the CreateNewHandCommand to set new hand player and dealer
-    const turns = new Turn(players, null, null, null);
+    const turns = new Turn(players);
     const envido = new Envido();
 
     return new Hand(new Deck(), players, rounds, envido, turns, 0, 'TRUCO');
