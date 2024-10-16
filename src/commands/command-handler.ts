@@ -5,6 +5,7 @@ import { ChantEnvidoCommmand } from './chant-envido-command';
 import { NewGameCommand } from './new-game-command';
 import { NewHandCommand } from './new-hand-command';
 import { PlayCardCommand } from './play-card-command';
+import { PlayEnvidoCommand } from './play-envido-command';
 import { RespondEnvidoCommmand } from './respond-envido-command';
 
 export class CommandHandler {
@@ -27,6 +28,8 @@ export class CommandHandler {
           state,
           params as ActionParams['respondEnvido'],
         );
+      case 'playEnvido':
+        return this.playEnvido(state, params as ActionParams['playEnvido']);
       default:
         throw Error('Invalid action!');
     }
@@ -71,11 +74,13 @@ export class CommandHandler {
 
     return new RespondEnvidoCommmand(state, player, accepted).execute();
   }
-}
 
-// Commands / Actions
-// Play card - Player, Card, Hand
-// Chant envido - Player, Envido Level
-// Raise envido - Player, Envido Level
-// Response to envido - Player, Accept/Decline
-// New hand command
+  private playEnvido(
+    state: GameState,
+    params: ActionParams['playEnvido'],
+  ): GameState {
+    const player = state.hand.getPlayer(params.player);
+
+    return new PlayEnvidoCommand(state, player, params.cards).execute();
+  }
+}

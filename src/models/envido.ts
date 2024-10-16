@@ -1,10 +1,12 @@
 import { EnvidoLevel } from '../types';
+import { Card } from './card';
 
 export class Envido {
   constructor(
+    public cardsPlayed: Map<number, Card[]> = new Map<number, Card[]>(),
     public chanted: EnvidoLevel[] = [],
     public accepted?: boolean,
-  ) {}
+  ) { }
 
   addChant(chant: EnvidoLevel) {
     if (this.isValidEnvidoLevel(chant)) {
@@ -12,6 +14,10 @@ export class Envido {
     }
 
     this.chanted.push(chant);
+  }
+
+  playCards(playerNumber: number, cards: Card[]) {
+    this.cardsPlayed.set(playerNumber, cards);
   }
 
   private isValidEnvidoLevel(chant: EnvidoLevel): boolean {

@@ -2,10 +2,10 @@
 
 # TODO:
 
-# Game
+# Game - ideas
 [x] - Game object with public api for play during the game.
 [ ] - Serialize object - JSON? or a string code, eg 0123Player1E2BCards...
-
+[ ] - Use an enum or object to identify player numbers?
 
 # Commands:
 [x] - Play card command

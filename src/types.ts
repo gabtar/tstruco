@@ -1,3 +1,5 @@
+import { Card } from "./models/card";
+
 export interface GameRules {
   numberOfPlayers: number;
   maxPoints: number;
@@ -10,6 +12,7 @@ export interface ActionParams {
   newHand: {};
   chantEnvido: { player: number; chant: EnvidoLevel };
   respondEnvido: { player: number; accepted: boolean };
+  playEnvido: { player: number, cards: Card[] }
 }
 
 export enum EnvidoLevel {

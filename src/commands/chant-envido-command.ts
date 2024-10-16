@@ -1,13 +1,14 @@
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
 import { EnvidoLevel, GamePhase } from '../types';
+import { Command } from './play-card-command';
 
-export class ChantEnvidoCommmand {
+export class ChantEnvidoCommmand implements Command {
   constructor(
     private state: GameState,
     private player: Player,
     private chant: EnvidoLevel,
-  ) {}
+  ) { }
 
   public execute(): GameState {
     if (this.state.hand.currentRound > 0) {

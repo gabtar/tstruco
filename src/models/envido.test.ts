@@ -1,4 +1,5 @@
 import { EnvidoLevel } from '../types';
+import { Card } from './card';
 import { Envido } from './envido';
 
 describe('chant', () => {
@@ -19,4 +20,14 @@ describe('chant', () => {
       'Cannot chant Envido!',
     );
   });
+
+  it('Should add the cards played for the player passed', () => {
+    const card1 = new Card('1', 'O');
+    const card2 = new Card('6', 'O');
+
+    envido.playCards(0, [card1, card2]);
+
+    expect(envido.cardsPlayed.has(0)).toBeTruthy();
+  });
+
 });
