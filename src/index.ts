@@ -17,16 +17,16 @@ const newGameRequest = {
 truco.action('newGame', newGameRequest);
 truco.action('newHand', {});
 
-console.log(truco.getState().hand.handPlayer);
+console.log(truco.getState().hand.turns.handPlayer);
 console.log(truco.getState().hand.players[0].cards);
-console.log(truco.getState().hand.handPlayer);
+console.log(truco.getState().hand.turns.handPlayer);
 
-const handPlayer = truco.getState().hand.handPlayer;
-const handPlayerCards = truco.getState().hand.players[handPlayer].cards;
+const handPlayer = truco.getState().hand.turns.handPlayer;
+const handPlayerCards = truco.getState().hand.players[handPlayer!.id].cards;
 
 truco.action('playCard', {
-  player: handPlayer,
-  card: handPlayerCards[0].toString(),
+  player: handPlayer!.id,
+  cardCode: handPlayerCards[0].toString(),
 });
 
 // TODO: should remove the card from the player

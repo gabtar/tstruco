@@ -2,9 +2,8 @@ import { Player } from './player';
 
 export class Turn {
   constructor(
-    // TODO: keep track of the hand player
     public players: Player[], // should be ordered in sequence of players for each team
-    // TODO: refactor remove nulleable (set a default value instead?)
+    public handPlayer?: Player,
     public chantEnvidoTurn?: Player,
     public chantTrucoTurn?: Player,
     public playCardTurn?: Player,
@@ -18,6 +17,7 @@ export class Turn {
   drawInitialTurns(): void {
     const randomIndex = Math.floor(Math.random() * this.players.length) + 1;
 
+    this.handPlayer = this.players[randomIndex];
     this.chantEnvidoTurn = this.players[randomIndex];
     this.chantTrucoTurn = this.players[randomIndex];
     this.playCardTurn = this.players[randomIndex];
@@ -32,6 +32,18 @@ export class Turn {
     this.chantEnvidoTurn = this.players[nextPlayerIndex];
     this.chantTrucoTurn = this.players[nextPlayerIndex];
     this.playCardTurn = this.players[nextPlayerIndex];
+  }
+
+  /*
+   * Returns an array with the order of the handPlayer to the rest for envido
+   */
+  handPlayerOrder(): number[] {
+    // from handplayer number to all players...
+    const totalPlayers = this.players.length;
+    // Array.from()
+    // Array.from({ length: totalPlayers - this + 1 }, (_, i) => min + i);
+
+    return [];
   }
 
   /*

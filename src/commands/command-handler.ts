@@ -1,4 +1,5 @@
 import { CardFactory } from '../factories/card.factory';
+import { EnvidoPairFactory } from '../factories/envido-pair.factory';
 import { GameState } from '../models/game-state';
 import { ActionParams } from '../types';
 import { ChantEnvidoCommmand } from './chant-envido-command';
@@ -40,7 +41,7 @@ export class CommandHandler {
     params: ActionParams['playCard'],
   ): GameState {
     const player = state.hand.getPlayer(params.player);
-    const card = CardFactory.from(params.card!);
+    const card = CardFactory.from(params.cardCode!);
 
     return new PlayCardCommand(state, player, card).execute();
   }
@@ -80,7 +81,12 @@ export class CommandHandler {
     params: ActionParams['playEnvido'],
   ): GameState {
     const player = state.hand.getPlayer(params.player);
+    const cards = [CardFactory.from(params.cardsCode[0])];
 
-    return new PlayEnvidoCommand(state, player, params.cards).execute();
+    if (params.cardsCode.length > 1) {
+      cards.push(CardFactory.from(params.cardsCode[1]));
+    }
+
+    return new PlayEnvidoCommand(state, player, cards).execute();
   }
 }

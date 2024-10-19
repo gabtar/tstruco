@@ -1,6 +1,6 @@
-import { GameStateFactory } from "../factories/game-state.factory";
-import { Card } from "../models/card";
-import { PlayEnvidoCommand } from "./play-envido-command";
+import { GameStateFactory } from '../factories/game-state.factory';
+import { Card } from '../models/card';
+import { PlayEnvidoCommand } from './play-envido-command';
 
 describe('#execute', () => {
   const rules = {
@@ -18,28 +18,34 @@ describe('#execute', () => {
   beforeEach(() => {
     gameState = GameStateFactory.createGame(rules);
     gameState.hand.turns.chantEnvidoTurn = player1;
-    gameState.hand.players[0].cards = [card1, card2]
+    gameState.hand.players[0].cards = [card1, card2];
   });
 
   it('Should set the envido score for the player', () => {
-
-    gameState = new PlayEnvidoCommand(gameState, player1, [card1, card2]).execute()
+    gameState = new PlayEnvidoCommand(gameState, player1, [
+      card1,
+      card2,
+    ]).execute();
 
     expect(gameState.hand.envido.cardsPlayed.has(0)).toBeTruthy();
   });
 
   it('Should throw error when its not player turn', () => {
     gameState.hand.turns.chantEnvidoTurn = player2;
-    const playEnvidoCommand = new PlayEnvidoCommand(gameState, player1, [card1, card2]);
+    const playEnvidoCommand = new PlayEnvidoCommand(gameState, player1, [
+      card1,
+      card2,
+    ]);
 
-    expect(() => playEnvidoCommand.execute()).toThrow(
-      '0 is not your turn!',
-    );
+    expect(() => playEnvidoCommand.execute()).toThrow('0 is not your turn!');
   });
 
   it('Should throw error when player does not have the cards passed', () => {
     player1.cards = [];
-    const playEnvidoCommand = new PlayEnvidoCommand(gameState, player1, [card1, card2]);
+    const playEnvidoCommand = new PlayEnvidoCommand(gameState, player1, [
+      card1,
+      card2,
+    ]);
 
     expect(() => playEnvidoCommand.execute()).toThrow(
       'You dont have a 1E card',

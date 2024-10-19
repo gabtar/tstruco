@@ -21,7 +21,15 @@ describe('#nextTurn', () => {
   test('Should set the next player on the array', () => {
     const players = PlayerFactory.createPlayers(6);
 
-    const turn = new Turn(players, players[3], players[3], players[3]);
+    const turn = new Turn(
+      players,
+      players[3],
+      players[3],
+      players[3],
+      players[3],
+    );
+
+    console.log(turn.players);
     turn.nextTurn();
 
     expect(turn.playCardTurn).toBe(players[4]);

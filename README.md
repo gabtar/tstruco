@@ -5,7 +5,7 @@
 # Game - ideas
 [x] - Game object with public api for play during the game.
 [ ] - Serialize object - JSON? or a string code, eg 0123Player1E2BCards...
-[ ] - Use an enum or object to identify player numbers?
+[ ] - Use a PlayerNumber/PlayerList object with a next() method to get next player on the table/hand
 
 # Commands:
 [x] - Play card command

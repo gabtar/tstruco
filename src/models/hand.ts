@@ -11,7 +11,6 @@ export class Hand {
     public rounds: Round[],
     public envido: Envido,
     public turns: Turn,
-    public handPlayer: number,
     public phase: string, // FIX: envido - truco or flor, should be a type or enum...
   ) {}
 

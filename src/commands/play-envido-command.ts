@@ -1,17 +1,18 @@
-import { Card } from "../models/card";
-import { GameState } from "../models/game-state";
-import { Player } from "../models/player";
-import { Command } from "./play-card-command";
+import { EnvidoPairFactory } from '../factories/envido-pair.factory';
+import { Card } from '../models/card';
+import { GameState } from '../models/game-state';
+import { Player } from '../models/player';
+import { Command } from './play-card-command';
 
 export class PlayEnvidoCommand implements Command {
   constructor(
     private state: GameState,
     private player: Player,
     private cards: Card[],
-  ) { }
+  ) {}
 
   public execute(): GameState {
-    this.cards.forEach(card => {
+    this.cards.forEach((card) => {
       if (!this.player.cards.includes(card)) {
         throw new Error(`You dont have a ${card} card`);
       }
@@ -21,11 +22,28 @@ export class PlayEnvidoCommand implements Command {
       throw new Error(`${this.player.id} is not your turn!`);
     }
 
-    this.state.hand.envido.playCards(this.player.id, this.cards);
+    const cardOne = this.cards[0];
+    let cardTwo = undefined;
+
+    if (this.cards.length > 1) {
+      cardTwo = this.cards[1];
+    }
+
+    this.state.hand.envido.playCards(
+      this.player.id,
+      EnvidoPairFactory.createEnvidoPair(cardOne, cardTwo),
+    );
+    this.state.hand.turns.updateChantEnvidoTurn();
 
     // TODO: check if all player played the envido...
+    // If all played update envido score to the game
+    if (
+      this.state.hand.envido.envidoPlaysCount ==
+      this.state.rules.numberOfPlayers
+    ) {
+      // set score
+    }
 
     return this.state;
   }
-
 }

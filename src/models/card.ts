@@ -8,6 +8,11 @@ export class Card {
     return this.rank + this.suit;
   }
 
+  get envidoScore(): number {
+    let rankNumber = Number(this.rank);
+    return rankNumber >= 10 ? 0 : rankNumber;
+  }
+
   value(): number {
     return CardValues.get(this.toString()) || 0;
   }
