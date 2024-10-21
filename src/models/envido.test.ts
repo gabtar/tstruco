@@ -3,8 +3,8 @@ import { EnvidoLevel } from '../types';
 import { Card } from './card';
 import { Envido } from './envido';
 
-describe('chant', () => {
-  const envido = new Envido([]);
+describe('#chant', () => {
+  const envido = new Envido([1, 0]);
 
   it('Should add envido to the chanted array', () => {
     const envidoLevel = EnvidoLevel.Envido;
@@ -21,6 +21,10 @@ describe('chant', () => {
       'Cannot chant Envido!',
     );
   });
+});
+
+describe('#playCards', () => {
+  const envido = new Envido([1, 0]);
 
   it('Should add the cards played for the player passed', () => {
     const card1 = new Card('1', 'O');
@@ -31,6 +35,10 @@ describe('chant', () => {
 
     expect(envido.cardsPlayed.has(0)).toBeTruthy();
   });
+});
+
+describe('#winner', () => {
+  const envido = new Envido([1, 0]);
 
   it('Should return the winner of the envido', () => {
     const card1 = new Card('1', 'O');
@@ -45,10 +53,10 @@ describe('chant', () => {
     envido.playCards(0, higestEnvidoPair);
     envido.playCards(1, lowerEnvidoPair);
 
-    expect(envido.winner()).toEqual([0]);
+    expect(envido.winner()).toEqual(0);
   });
 
-  it('Should return both winners when they have an EnvidoPair of equal score', () => {
+  it('Should return the first player who is next to the hand player when both players tie the envido score', () => {
     const card1 = new Card('7', 'O');
     const card2 = new Card('6', 'O');
     const envidoPairOne = EnvidoPairFactory.createEnvidoPair(card1, card2);
@@ -60,6 +68,38 @@ describe('chant', () => {
     envido.playCards(0, envidoPairOne);
     envido.playCards(1, envidoPairTwo);
 
-    expect(envido.winner()).toEqual([0, 1]);
+    expect(envido.winner()).toEqual(1);
+  });
+});
+
+describe('#totalScorePoints', () => {
+  const envido = new Envido([1, 0]);
+
+  it('Should return 2 when only envido has been chanted and accepted', () => {
+    envido.chanted = [EnvidoLevel.Envido];
+    envido.accepted = true;
+
+    expect(envido.totalScorePoints()).toBe(2);
+  });
+
+  it('Should return 1 when only envido has been chanted and has been declined', () => {
+    envido.chanted = [EnvidoLevel.Envido];
+    envido.accepted = false;
+
+    expect(envido.totalScorePoints()).toBe(1);
+  });
+
+  it('Should return 3 when envido and real envido have been chanted, but declined', () => {
+    envido.chanted = [EnvidoLevel.Envido, EnvidoLevel.RealEnvido];
+    envido.accepted = false;
+
+    expect(envido.totalScorePoints()).toBe(3);
+  });
+
+  it('Should return 5 when envido and real envido have been chanted and accepted', () => {
+    envido.chanted = [EnvidoLevel.Envido, EnvidoLevel.RealEnvido];
+    envido.accepted = true;
+
+    expect(envido.totalScorePoints()).toBe(5);
   });
 });

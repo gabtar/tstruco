@@ -32,18 +32,39 @@ export class Envido {
   }
 
   /*
-   * Returns an array with the ids of the winners of the envido. The player(s) who has the highest EnvidoPair score
+   * Returns the id of the winner of the Envido play
    */
-  winner(): number[] {
+  winner(): number {
     const higestEnvidoPair = [...this.cardsPlayed.values()].reduce(
       (pair, current) => {
         return pair.score() > current.score() ? pair : current;
       },
     );
 
-    return [...this.cardsPlayed.entries()]
+    const winners = [...this.cardsPlayed.entries()]
       .filter(([k, v]) => v.score() == higestEnvidoPair.score())
       .map(([k]) => k);
+
+    if (winners.length > 0) {
+      winners.sort(
+        (a, b) =>
+          this.handPlayerOrder.indexOf(a) - this.handPlayerOrder.indexOf(b),
+      );
+    }
+
+    return winners[0];
+  }
+
+  /*
+   * Returns the total score points for envido based on the chants and if it was accepted or declined
+   */
+  totalScorePoints(): number {
+    let score = this.chanted.reduce((total, current) => total + current);
+    if (!this.accepted) {
+      score -= this.chanted[this.chanted.length - 1];
+      score += 1;
+    }
+    return score;
   }
 
   private isValidEnvidoLevel(chant: EnvidoLevel): boolean {

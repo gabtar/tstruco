@@ -14,9 +14,9 @@ export interface ActionParams {
 }
 
 export enum EnvidoLevel {
-  Envido = 1,
-  RealEnvido,
-  FaltaEnvido,
+  Envido = 2,
+  RealEnvido = 3,
+  FaltaEnvido = 30, // TODO: check if rival has more or less of 15 score points...
 }
 
 export enum PlayerNumber {

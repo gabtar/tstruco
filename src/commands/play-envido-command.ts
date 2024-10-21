@@ -35,13 +35,18 @@ export class PlayEnvidoCommand implements Command {
     );
     this.state.hand.turns.updateChantEnvidoTurn();
 
-    // TODO: check if all player played the envido...
-    // If all played update envido score to the game
     if (
       this.state.hand.envido.envidoPlaysCount ==
       this.state.rules.numberOfPlayers
     ) {
-      // set score
+      const envidoPoints = this.state.hand.envido.totalScorePoints();
+      const winner = this.state.hand.envido.winner();
+
+      // TODO: si es par es equipo A y impar es equipo B
+      // TODO: Tests for this...
+      const team = winner % 2 == 0 ? 'A' : 'B';
+
+      this.state.score.set(team, this.state.score.get(team)! + envidoPoints);
     }
 
     return this.state;

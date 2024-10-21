@@ -15,7 +15,7 @@ export class Turn {
    * Draws the initial turns for a new hand
    */
   drawInitialTurns(): void {
-    const randomIndex = Math.floor(Math.random() * this.players.length) + 1;
+    const randomIndex = Math.floor(Math.random() * this.players.length);
 
     this.handPlayer = this.players[randomIndex];
     this.chantEnvidoTurn = this.players[randomIndex];
@@ -38,12 +38,13 @@ export class Turn {
    * Returns an array with the order of the handPlayer to the rest for envido
    */
   handPlayerOrder(): number[] {
-    // from handplayer number to all players...
     const totalPlayers = this.players.length;
-    // Array.from()
-    // Array.from({ length: totalPlayers - this + 1 }, (_, i) => min + i);
+    const initialPlayerNumber = this.handPlayer!.id;
 
-    return [];
+    return Array.from(
+      { length: totalPlayers - initialPlayerNumber },
+      (_, i) => initialPlayerNumber + i,
+    ).concat(...Array(initialPlayerNumber).keys());
   }
 
   /*

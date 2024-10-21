@@ -29,7 +29,6 @@ describe('#nextTurn', () => {
       players[3],
     );
 
-    console.log(turn.players);
     turn.nextTurn();
 
     expect(turn.playCardTurn).toBe(players[4]);
@@ -46,5 +45,15 @@ describe('#updateChantEnvidoTurn', () => {
     turn.updateChantEnvidoTurn();
 
     expect(turn.chantEnvidoTurn).toBe(players[4]);
+  });
+});
+
+describe('#handPlayerOrder', () => {
+  it('Should return an array with the player order starting from the hand player', () => {
+    const players = PlayerFactory.createPlayers(6);
+
+    const turn = new Turn(players, players[3], players[3], players[3]);
+
+    expect(turn.handPlayerOrder()).toEqual([3, 4, 5, 0, 1, 2]);
   });
 });
