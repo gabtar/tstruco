@@ -2,7 +2,7 @@ import { HandFactory } from '../factories/hand.factory';
 import { PlayerFactory } from '../factories/player.factory';
 import { Card } from './card';
 
-describe('currentRound', () => {
+describe('#currentRound', () => {
   const card1 = new Card('1', 'E');
   const card2 = new Card('3', 'B');
   const players = PlayerFactory.createPlayers(2);
@@ -20,7 +20,7 @@ describe('currentRound', () => {
   });
 });
 
-describe('dealCards', () => {
+describe('#dealCards', () => {
   const players = PlayerFactory.createPlayers(2);
   const hand = HandFactory.createHand(players);
 
@@ -30,5 +30,16 @@ describe('dealCards', () => {
     for (const player of hand.players) {
       expect(player.cards.length).toBe(3);
     }
+  });
+});
+
+describe('#getPlayer', () => {
+  const players = PlayerFactory.createPlayers(2);
+  const hand = HandFactory.createHand(players);
+
+  it('Should return the player of the index passed', () => {
+    const player = hand.getPlayer(1);
+
+    expect(player).toBe(players[1]);
   });
 });

@@ -7,7 +7,7 @@ export class RespondEnvidoCommmand {
     private state: GameState,
     private player: Player,
     private accepted: boolean,
-  ) {}
+  ) { }
 
   public execute(): GameState {
     if (this.player != this.state.hand.turns.chantEnvidoTurn) {
@@ -26,6 +26,9 @@ export class RespondEnvidoCommmand {
       this.state.hand.phase = GamePhase.Truco;
 
       // TODO: update points...
+
+      this.state.score.add(this.player.opponentTeam(), this.state.hand.envido.totalScorePoints());
+
     }
 
     return this.state;

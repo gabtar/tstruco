@@ -9,7 +9,7 @@ export class Turn {
     public playCardTurn?: Player,
     // Needed to keep track to whom return the original turns
     public firstEnvidoChant?: Player,
-  ) {}
+  ) { }
 
   /*
    * Draws the initial turns for a new hand
@@ -24,14 +24,22 @@ export class Turn {
   }
 
   /*
+   * setTurns
+   * Updates all the current turs to the player passed
+   */
+  setTurns(player: Player) {
+    this.chantEnvidoTurn = player;
+    this.chantTrucoTurn = player;
+    this.playCardTurn = player;
+  }
+
+  /*
    * Advances to next player when a card is played during a hand
    */
   nextTurn(): void {
     const nextPlayerIndex = this.nextPlayCardPlayer();
 
-    this.chantEnvidoTurn = this.players[nextPlayerIndex];
-    this.chantTrucoTurn = this.players[nextPlayerIndex];
-    this.playCardTurn = this.players[nextPlayerIndex];
+    this.setTurns(this.players[nextPlayerIndex]);
   }
 
   /*

@@ -1,13 +1,11 @@
 import { GameRules } from '../types';
 import { Hand } from './hand';
+import { Score } from './score';
 
 export class GameState {
   constructor(
     public hand: Hand,
     public rules: GameRules,
-    public score: Map<string, number> = new Map([
-      ['A', 0],
-      ['B', 0],
-    ]),
-  ) {}
+    public score: Score
+  ) { }
 }

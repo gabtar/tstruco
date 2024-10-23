@@ -1,5 +1,5 @@
 import { GameStateFactory } from '../factories/game-state.factory';
-import { GamePhase } from '../types';
+import { EnvidoLevel, GamePhase } from '../types';
 import { RespondEnvidoCommmand } from './respond-envido-command';
 
 describe('#execute', () => {
@@ -35,6 +35,8 @@ describe('#execute', () => {
   });
 
   test('Should set accepted false and return the original turns when declined', () => {
+    gameState.hand.envido.addChant(EnvidoLevel.Envido);
+
     const responseEnvidoCommmand = new RespondEnvidoCommmand(
       gameState,
       player2,

@@ -7,8 +7,12 @@ export class Envido {
     public cardsPlayed: Map<number, EnvidoPair> = new Map<number, EnvidoPair>(),
     public chanted: EnvidoLevel[] = [],
     public accepted?: boolean,
-  ) {}
+  ) { }
 
+  /*
+   * addChant
+   * Adds the passed chant to the envido
+   */
   addChant(chant: EnvidoLevel) {
     if (this.isValidEnvidoLevel(chant)) {
       throw Error(`Cannot chant ${EnvidoLevel[chant]}!`);
@@ -18,6 +22,7 @@ export class Envido {
   }
 
   /*
+   * playCards
    * Play an envido pair for the player passed
    */
   playCards(playerNumber: number, envidoPair: EnvidoPair) {
@@ -25,6 +30,7 @@ export class Envido {
   }
 
   /*
+   * envidoPlaysCount
    * Returns the number of player who has played envido
    */
   get envidoPlaysCount(): number {
@@ -32,6 +38,7 @@ export class Envido {
   }
 
   /*
+   * winner
    * Returns the id of the winner of the Envido play
    */
   winner(): number {
@@ -56,6 +63,7 @@ export class Envido {
   }
 
   /*
+   * totalScorePoints
    * Returns the total score points for envido based on the chants and if it was accepted or declined
    */
   totalScorePoints(): number {

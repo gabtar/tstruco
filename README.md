@@ -4,6 +4,7 @@
 
 # Game - ideas
 [x] - Game object with public api for play during the game.
+[x] - Refactoring to a Score object and make tests *
 [ ] - Serialize object - JSON? or a string code, eg 0123Player1E2BCards...
 [ ] - Use a PlayerNumber/PlayerList object with a next() method to get next player on the table/hand
 
@@ -14,7 +15,7 @@
 [x] - New Hand command
 [x] - Chant Envido command
 [x] - Respond Envido command - Accept/Decline
-[ ] - Play Envido command
+[x] - Play Envido command
 [ ] - Chant Truco command
 [ ] - Respond Truco command
 [ ] - Chant Flor command

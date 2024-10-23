@@ -9,8 +9,8 @@ describe('Winner', () => {
   const players = PlayerFactory.createPlayers(2);
   const round = new Round(new Map<Player, Card>(), players);
 
-  it('Should return null when rounds is not finished', () => {
-    expect(round.winner()).toBeNull();
+  it('Should return undefined when rounds is not finished', () => {
+    expect(round.winner()).toBeUndefined();
   });
 
   it('Should return the player who won the round', () => {

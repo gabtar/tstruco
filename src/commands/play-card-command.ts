@@ -8,7 +8,7 @@ export class PlayCardCommand implements Command {
     private state: GameState,
     private player: Player,
     private card: Card,
-  ) {}
+  ) { }
 
   public execute(): GameState {
     if (this.state.hand.phase != GamePhase.Truco) {
@@ -31,8 +31,19 @@ export class PlayCardCommand implements Command {
     this.state.hand.turns.nextTurn();
 
     // TODO:
-    // what happens if the card played ends the round/hand?
     // maybe trigger an event to end the hand or advance to next round...?
+
+    if (currentRound.isFinished()) {
+      const roundNumber = this.state.hand.currentRound - 1;
+      const startingPlayerForNextRound = this.state.hand.rounds[roundNumber].winner()!;
+
+      if (startingPlayerForNextRound.length > 1) {
+        this.state.hand.turns.setTurns(startingPlayerForNextRound![startingPlayerForNextRound.length - 1]);
+
+      } else {
+        this.state.hand.turns.setTurns(startingPlayerForNextRound![0]);
+      }
+    }
 
     return this.state;
   }

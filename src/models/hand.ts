@@ -12,7 +12,7 @@ export class Hand {
     public envido: Envido,
     public turns: Turn,
     public phase: string, // FIX: envido - truco or flor, should be a type or enum...
-  ) {}
+  ) { }
 
   /* Returns the current round */
   get currentRound(): number {
@@ -24,10 +24,10 @@ export class Hand {
     return 0;
   }
 
-  /** Returns the winner of the hand or null if not finished */
-  winner(): Player | null {
+  /** Returns the winner of the hand or undefined if not finished */
+  winner(): Player | undefined {
     // TODO: get the winner of the hand...
-    return null;
+    return undefined;
   }
 
   /** Returns the player according to the number passed or throws an error **/

@@ -4,13 +4,22 @@ import { Card } from '../models/card';
 import { GamePhase } from '../types';
 import { PlayCardCommand } from './play-card-command';
 
-describe('execute', () => {
+describe('#execute', () => {
   const card1 = new Card('1', 'E');
   const players = PlayerFactory.createPlayers(2);
-  const state = GameStateFactory.createGame({
+  let state = GameStateFactory.createGame({
     numberOfPlayers: 2,
     flor: false,
     maxPoints: 15,
+  });
+
+  beforeEach(() => {
+    state = GameStateFactory.createGame({
+      numberOfPlayers: 2,
+      flor: false,
+      maxPoints: 15,
+    });
+
   });
 
   it('Should add the card to the current round', () => {
@@ -39,6 +48,17 @@ describe('execute', () => {
 
     expect(() => playCardCommand.execute()).toThrow(
       'Cannot play a card during CHANT_ENVIDO',
+    );
+  });
+
+  it('Should throw an Error if card was already played', () => {
+    const player1 = players[0];
+    state.hand.turns.playCardTurn = players[0];
+    state.hand.rounds[0].playCard(player1, card1);
+    const playCardCommand = new PlayCardCommand(state, player1, card1);
+
+    expect(() => playCardCommand.execute()).toThrow(
+      '1E was already played',
     );
   });
 });

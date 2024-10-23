@@ -1,4 +1,5 @@
 import { GameState } from '../models/game-state';
+import { Score } from '../models/score';
 import { GameRules } from '../types';
 import { HandFactory } from './hand.factory';
 import { PlayerFactory } from './player.factory';
@@ -10,7 +11,8 @@ export class GameStateFactory {
   public static createGame(rules: GameRules): GameState {
     const players = PlayerFactory.createPlayers(rules.numberOfPlayers);
     const hand = HandFactory.createHand(players);
+    const score = new Score();
 
-    return new GameState(hand, rules);
+    return new GameState(hand, rules, score);
   }
 }
