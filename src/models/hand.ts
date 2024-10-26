@@ -13,8 +13,8 @@ export class Hand {
     public envido: Envido,
     public turns: Turn,
     public phase: GamePhase,
-    public trucoLevel: TrucoLevel = TrucoLevel.NotChanted
-  ) { }
+    public trucoLevel: TrucoLevel = TrucoLevel.NotChanted,
+  ) {}
 
   /* Returns the current round */
   get currentRound(): number {

@@ -1,30 +1,37 @@
-# tstruco
+# TSTruco
 
-![Coverage total](./badges/coverage-total.svg)
+<p align="center">
+![Branches](./badges/coverage-branches.svg)
+![Functions](./badges/coverage-functions.svg)
+![Lines](./badges/coverage-lines.svg)
+![Statements](./badges/coverage-statements.svg)
+![Jest coverage](./badges/coverage-jest%20coverage.svg)
+</p>
 
-# TODO:
+# WIP
 
 # Game - ideas
-[x] - Game object with public api for play during the game.
-[x] - Refactoring to a Score object and make tests *
-[ ] - Serialize object - JSON? or a string code, eg 0123Player1E2BCards...
-[ ] - Use a PlayerNumber/PlayerList object with a next() method to get next player on the table/hand
+
+- [x] Game object with public api for play during the game.
+- [x] Refactoring to a Score object and make tests *
+- [ ] Serialize object - JSON? or a string code, eg 0123Player1E2BCards...
 
 # Commands:
-[x] - Play card command
-    [ ] - TODO: play a card that ends the round/hand/game
-[x] - New Game command
-[x] - New Hand command
-[x] - Chant Envido command
-[x] - Respond Envido command - Accept/Decline
-[x] - Play Envido command
-[ ] - Chant Truco command
-[ ] - Respond Truco command
-[ ] - Chant Flor command
-[ ] - Raise Flor command
-[ ] - Response to Flor command
-[ ] - Play Flor command
-[ ] - Go To Deck command
+
+- [x] Play card command
+    - [ ] TODO: play a card that ends the round/hand/game
+- [x] New Game command
+- [x] New Hand command
+- [x] Chant Envido command
+- [x] Respond Envido command - Accept/Decline
+- [x] Play Envido command
+- [x] Chant Truco command
+- [x] Respond Truco command
+- [ ] Chant Flor command
+- [ ] Raise Flor command
+- [ ] Response to Flor command
+- [ ] Play Flor command
+- [ ] Go To Deck command
 
 
 ## Game Api Usage

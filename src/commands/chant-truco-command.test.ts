@@ -1,7 +1,6 @@
-import { GameStateFactory } from "../factories/game-state.factory";
-import { TrucoLevel } from "../types";
-import { ChantTrucoCommmand } from "./chant-truco-command";
-
+import { GameStateFactory } from '../factories/game-state.factory';
+import { GamePhase, TrucoLevel } from '../types';
+import { ChantTrucoCommmand } from './chant-truco-command';
 
 describe('#execute', () => {
   const rules = {
@@ -18,20 +17,43 @@ describe('#execute', () => {
   });
 
   it('Should raise error if not player turn', () => {
-    gameState.hand.turns.responseTrucoChantTurn = player1.team
+    gameState.hand.turns.responseTrucoChantTurn = player1.team;
 
-    const chantTrucoCommand = new ChantTrucoCommmand(gameState, player2, TrucoLevel.Truco);
+    const chantTrucoCommand = new ChantTrucoCommmand(
+      gameState,
+      player2,
+      TrucoLevel.Truco,
+    );
 
     expect(() => chantTrucoCommand.execute()).toThrow('Not your turn!');
   });
 
   it('Should raise error if chanted level is lower or equal to current level', () => {
     gameState.hand.turns.responseTrucoChantTurn = player1.team;
-    gameState.hand.trucoLevel = TrucoLevel.Retruco
+    gameState.hand.trucoLevel = TrucoLevel.Retruco;
 
-    const chantTrucoCommand = new ChantTrucoCommmand(gameState, player1, TrucoLevel.Truco);
+    const chantTrucoCommand = new ChantTrucoCommmand(
+      gameState,
+      player1,
+      TrucoLevel.Truco,
+    );
 
     expect(() => chantTrucoCommand.execute()).toThrow('Invalid Truco Level');
   });
-});
 
+  it('Should add the truco level chanted', () => {
+    const chantTrucoCommand = new ChantTrucoCommmand(
+      gameState,
+      player1,
+      TrucoLevel.Truco,
+    );
+
+    chantTrucoCommand.execute();
+
+    expect(gameState.hand.trucoLevel).toBe(TrucoLevel.Truco);
+    expect(gameState.hand.turns.responseTrucoChantTurn).toBe(
+      player1.opponentTeam(),
+    );
+    expect(gameState.hand.phase).toBe(GamePhase.ChantTruco);
+  });
+});

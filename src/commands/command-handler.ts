@@ -3,11 +3,13 @@ import { EnvidoPairFactory } from '../factories/envido-pair.factory';
 import { GameState } from '../models/game-state';
 import { ActionParams } from '../types';
 import { ChantEnvidoCommmand } from './chant-envido-command';
+import { ChantTrucoCommmand } from './chant-truco-command';
 import { NewGameCommand } from './new-game-command';
 import { NewHandCommand } from './new-hand-command';
 import { PlayCardCommand } from './play-card-command';
 import { PlayEnvidoCommand } from './play-envido-command';
 import { RespondEnvidoCommmand } from './respond-envido-command';
+import { RespondTrucoCommmand } from './respond-truco-command';
 
 export class CommandHandler {
   handle<K extends keyof ActionParams>(
@@ -31,6 +33,10 @@ export class CommandHandler {
         );
       case 'playEnvido':
         return this.playEnvido(state, params as ActionParams['playEnvido']);
+      case 'chantTruco':
+        return this.chantTruco(state, params as ActionParams['chantTruco']);
+      case 'respondTruco':
+        return this.respondTruco(state, params as ActionParams['respondTruco']);
       default:
         throw Error('Invalid action!');
     }
@@ -88,5 +94,23 @@ export class CommandHandler {
     }
 
     return new PlayEnvidoCommand(state, player, cards).execute();
+  }
+
+  private chantTruco(
+    state: GameState,
+    params: ActionParams['chantTruco'],
+  ): GameState {
+    const player = state.hand.getPlayer(params.player);
+
+    return new ChantTrucoCommmand(state, player, params.trucoLevel).execute();
+  }
+
+  private respondTruco(
+    state: GameState,
+    params: ActionParams['respondTruco'],
+  ): GameState {
+    const player = state.hand.getPlayer(params.player);
+
+    return new RespondTrucoCommmand(state, player, params.accepted).execute();
   }
 }

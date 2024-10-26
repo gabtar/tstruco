@@ -10,7 +10,7 @@ export class PlayEnvidoCommand implements Command {
     private state: GameState,
     private player: Player,
     private cards: Card[],
-  ) { }
+  ) {}
 
   public execute(): GameState {
     this.cards.forEach((card) => {

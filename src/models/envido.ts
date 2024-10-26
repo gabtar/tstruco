@@ -7,7 +7,7 @@ export class Envido {
     public cardsPlayed: Map<number, EnvidoPair> = new Map<number, EnvidoPair>(),
     public chanted: EnvidoLevel[] = [],
     public accepted?: boolean,
-  ) { }
+  ) {}
 
   /*
    * addChant

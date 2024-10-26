@@ -19,7 +19,6 @@ describe('#execute', () => {
       flor: false,
       maxPoints: 15,
     });
-
   });
 
   it('Should add the card to the current round', () => {
@@ -57,8 +56,6 @@ describe('#execute', () => {
     state.hand.rounds[0].playCard(player1, card1);
     const playCardCommand = new PlayCardCommand(state, player1, card1);
 
-    expect(() => playCardCommand.execute()).toThrow(
-      '1E was already played',
-    );
+    expect(() => playCardCommand.execute()).toThrow('1E was already played');
   });
 });

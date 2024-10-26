@@ -1,5 +1,5 @@
-import { Team } from "../types";
-import { Score } from "./score";
+import { Team } from '../types';
+import { Score } from './score';
 
 describe('#add', () => {
   const score = new Score();
@@ -9,6 +9,4 @@ describe('#add', () => {
 
     expect(score.getScore(Team.A)).toBe(5);
   });
-
 });
-

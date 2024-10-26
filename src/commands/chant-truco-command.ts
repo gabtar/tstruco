@@ -1,16 +1,18 @@
-import { GameState } from "../models/game-state";
-import { Player } from "../models/player";
-import { GamePhase, TrucoLevel } from "../types";
-import { Command } from "./play-card-command";
+import { GameState } from '../models/game-state';
+import { Player } from '../models/player';
+import { GamePhase, TrucoLevel } from '../types';
+import { Command } from './play-card-command';
 
 export class ChantTrucoCommmand implements Command {
   constructor(
     private state: GameState,
     private player: Player,
     private chant: TrucoLevel,
-  ) { }
+  ) {}
 
   public execute(): GameState {
+    // TODO: check game phase? or can chant truco in any way? check game rules!!!
+
     if (!this.canChantTruco(this.player)) {
       throw Error('Not your turn!');
     }
@@ -19,10 +21,9 @@ export class ChantTrucoCommmand implements Command {
       throw Error('Invalid Truco Level');
     }
 
-    // TODO: update chant truco turns to await response
+    this.state.hand.trucoLevel = this.chant;
     this.state.hand.phase = GamePhase.ChantTruco;
     this.state.hand.turns.responseTrucoChantTurn = this.player.opponentTeam();
-
 
     return this.state;
   }

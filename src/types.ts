@@ -5,12 +5,14 @@ export interface GameRules {
 }
 
 export interface ActionParams {
-  playCard: { player: number; cardCode: string };
+  playCard: { player: PlayerNumber; cardCode: string };
   newGame: { rules: GameRules };
   newHand: {};
-  chantEnvido: { player: number; chant: EnvidoLevel };
-  respondEnvido: { player: number; accepted: boolean };
-  playEnvido: { player: number; cardsCode: string[] };
+  chantEnvido: { player: PlayerNumber; chant: EnvidoLevel };
+  respondEnvido: { player: PlayerNumber; accepted: boolean };
+  playEnvido: { player: PlayerNumber; cardsCode: string[] };
+  chantTruco: { player: PlayerNumber; trucoLevel: TrucoLevel };
+  respondTruco: { player: PlayerNumber; accepted: boolean };
 }
 
 export enum EnvidoLevel {

@@ -8,7 +8,7 @@ export class PlayCardCommand implements Command {
     private state: GameState,
     private player: Player,
     private card: Card,
-  ) { }
+  ) {}
 
   public execute(): GameState {
     if (this.state.hand.phase != GamePhase.Truco) {
@@ -43,10 +43,13 @@ export class PlayCardCommand implements Command {
 
   private advanceToNextRound(): void {
     const roundNumber = this.state.hand.currentRound - 1;
-    const startingPlayerForNextRound = this.state.hand.rounds[roundNumber].winner()!;
+    const startingPlayerForNextRound =
+      this.state.hand.rounds[roundNumber].winner()!;
 
     if (startingPlayerForNextRound.length > 1) {
-      this.state.hand.turns.setTurns(startingPlayerForNextRound![startingPlayerForNextRound.length - 1]);
+      this.state.hand.turns.setTurns(
+        startingPlayerForNextRound![startingPlayerForNextRound.length - 1],
+      );
     } else {
       this.state.hand.turns.setTurns(startingPlayerForNextRound![0]);
     }

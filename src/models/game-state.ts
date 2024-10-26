@@ -6,6 +6,6 @@ export class GameState {
   constructor(
     public hand: Hand,
     public rules: GameRules,
-    public score: Score
-  ) { }
+    public score: Score,
+  ) {}
 }

@@ -20,6 +20,13 @@ export class HandFactory {
 
     const envido = new Envido(turns.handPlayerOrder());
 
-    return new Hand(new Deck(), players, rounds, envido, turns, GamePhase.Truco);
+    return new Hand(
+      new Deck(),
+      players,
+      rounds,
+      envido,
+      turns,
+      GamePhase.Truco,
+    );
   }
 }
