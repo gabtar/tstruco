@@ -4,12 +4,19 @@ jobs:
   bump:
     runs-on: ubuntu-latest
     steps:
-      # Necessary to push the generated badges to the repo
       - name: Check out repository code
         uses: actions/checkout@v3
+      
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
         
-      # Necessary to generate the coverage report.
-      # Make sure to add 'json-summary' to the coverageReporters in jest options
       - name: Tests
         run: pnpm test:coverage
 
