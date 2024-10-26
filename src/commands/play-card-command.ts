@@ -23,26 +23,13 @@ export class PlayCardCommand implements Command {
       throw Error(`${this.card} was already played`);
     }
 
-    // TODO: also validate that the card was dealed to the player...
-
     let currentRound = this.state.hand.rounds[this.state.hand.currentRound];
     currentRound.playCard(this.player, this.card);
 
     this.state.hand.turns.nextTurn();
 
-    // TODO:
-    // maybe trigger an event to end the hand or advance to next round...?
-
     if (currentRound.isFinished()) {
-      const roundNumber = this.state.hand.currentRound - 1;
-      const startingPlayerForNextRound = this.state.hand.rounds[roundNumber].winner()!;
-
-      if (startingPlayerForNextRound.length > 1) {
-        this.state.hand.turns.setTurns(startingPlayerForNextRound![startingPlayerForNextRound.length - 1]);
-
-      } else {
-        this.state.hand.turns.setTurns(startingPlayerForNextRound![0]);
-      }
+      this.advanceToNextRound();
     }
 
     return this.state;
@@ -52,6 +39,17 @@ export class PlayCardCommand implements Command {
     return this.state.hand.rounds.some((round) =>
       Array.from(round.cardsPlayed.values()).includes(card),
     );
+  }
+
+  private advanceToNextRound(): void {
+    const roundNumber = this.state.hand.currentRound - 1;
+    const startingPlayerForNextRound = this.state.hand.rounds[roundNumber].winner()!;
+
+    if (startingPlayerForNextRound.length > 1) {
+      this.state.hand.turns.setTurns(startingPlayerForNextRound![startingPlayerForNextRound.length - 1]);
+    } else {
+      this.state.hand.turns.setTurns(startingPlayerForNextRound![0]);
+    }
   }
 }
 

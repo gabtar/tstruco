@@ -1,3 +1,4 @@
+import { Team } from '../types';
 import { Player } from './player';
 
 export class Turn {
@@ -5,7 +6,7 @@ export class Turn {
     public players: Player[], // should be ordered in sequence of players for each team
     public handPlayer?: Player,
     public chantEnvidoTurn?: Player,
-    public chantTrucoTurn?: Player,
+    public responseTrucoChantTurn?: Team,
     public playCardTurn?: Player,
     // Needed to keep track to whom return the original turns
     public firstEnvidoChant?: Player,
@@ -19,7 +20,6 @@ export class Turn {
 
     this.handPlayer = this.players[randomIndex];
     this.chantEnvidoTurn = this.players[randomIndex];
-    this.chantTrucoTurn = this.players[randomIndex];
     this.playCardTurn = this.players[randomIndex];
   }
 
@@ -29,7 +29,6 @@ export class Turn {
    */
   setTurns(player: Player) {
     this.chantEnvidoTurn = player;
-    this.chantTrucoTurn = player;
     this.playCardTurn = player;
   }
 

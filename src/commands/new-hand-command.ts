@@ -3,7 +3,7 @@ import { GameState } from '../models/game-state';
 import { Command } from './play-card-command';
 
 export class NewHandCommand implements Command {
-  constructor(private state: GameState) {}
+  constructor(private state: GameState) { }
 
   public execute(): GameState {
     const actualHandPlayer = this.state.hand.turns.handPlayer?.id;
@@ -21,7 +21,6 @@ export class NewHandCommand implements Command {
       // TODO: update turns in the hand, extract to method passing the player...
       newHand.turns.handPlayer = newHand.players[nextHandPlayer];
       newHand.turns.playCardTurn = newHand.players[nextHandPlayer];
-      newHand.turns.chantTrucoTurn = newHand.players[nextHandPlayer];
       newHand.turns.chantEnvidoTurn = newHand.players[nextHandPlayer];
     }
 

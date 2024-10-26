@@ -3,6 +3,7 @@ import { Envido } from '../models/envido';
 import { Hand } from '../models/hand';
 import { Player } from '../models/player';
 import { Turn } from '../models/turn';
+import { GamePhase } from '../types';
 import { RoundFactory } from './round.fatory';
 
 export class HandFactory {
@@ -19,6 +20,6 @@ export class HandFactory {
 
     const envido = new Envido(turns.handPlayerOrder());
 
-    return new Hand(new Deck(), players, rounds, envido, turns, 'TRUCO');
+    return new Hand(new Deck(), players, rounds, envido, turns, GamePhase.Truco);
   }
 }

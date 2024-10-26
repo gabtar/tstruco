@@ -1,5 +1,7 @@
 # tstruco
 
+![Coverage total](./badges/coverage-total.svg)
+
 # TODO:
 
 # Game - ideas
@@ -40,4 +42,4 @@ const truco = new Truco();
 | newHand       | truco.action('newHand', {})             |                  |
 | playCard      | truco.action('playCard', parms)         |                  |
 | chantEnvido   | truco.action('chantEnvido', params)     |                  |
-| respondEnvido | truco.action('chantEnvido', params)     |                  |
+| respondEnvido | truco.action('respondEnvido', params)   |                  |

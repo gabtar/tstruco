@@ -2,6 +2,7 @@ import { EnvidoPairFactory } from '../factories/envido-pair.factory';
 import { Card } from '../models/card';
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
+import { Team } from '../types';
 import { Command } from './play-card-command';
 
 export class PlayEnvidoCommand implements Command {
@@ -42,9 +43,11 @@ export class PlayEnvidoCommand implements Command {
       const envidoPoints = this.state.hand.envido.totalScorePoints();
       const winner = this.state.hand.envido.winner();
 
-      const team = winner % 2 == 0 ? 'A' : 'B';
+      const team = winner % 2 == 0 ? Team.A : Team.B;
 
       this.state.score.add(team, envidoPoints);
+
+      // TODO: reset turns...
     }
 
     return this.state;

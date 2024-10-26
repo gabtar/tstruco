@@ -1,9 +1,11 @@
+import { Team } from "../types";
+
 export class Score {
 
   constructor(
-    private score: Map<string, number> = new Map([
-      ['A', 0],
-      ['B', 0],
+    private score: Map<Team, number> = new Map([
+      [Team.A, 0],
+      [Team.B, 0],
     ]),
   ) { }
 
@@ -11,7 +13,7 @@ export class Score {
   * add
   * Increments the score of the team passed in the number of points passed
   */
-  public add(team: string, points: number) {
+  public add(team: Team, points: number) {
     this.score.set(team, this.score.get(team)! + points);
   }
 
@@ -19,7 +21,7 @@ export class Score {
   * getScore
   * Returns the score of the team passed
   */
-  public getScore(team: string) {
+  public getScore(team: Team) {
     return this.score.get(team)
   }
 

@@ -1,3 +1,4 @@
+import { GamePhase, TrucoLevel } from '../types';
 import { Deck } from './deck';
 import { Envido } from './envido';
 import { Player } from './player';
@@ -11,7 +12,8 @@ export class Hand {
     public rounds: Round[],
     public envido: Envido,
     public turns: Turn,
-    public phase: string, // FIX: envido - truco or flor, should be a type or enum...
+    public phase: GamePhase,
+    public trucoLevel: TrucoLevel = TrucoLevel.NotChanted
   ) { }
 
   /* Returns the current round */

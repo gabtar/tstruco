@@ -19,8 +19,20 @@ export enum EnvidoLevel {
   FaltaEnvido = 30, // TODO: check if rival has more or less of 15 score points...
 }
 
+export enum TrucoLevel {
+  NotChanted = 1,
+  Truco,
+  Retruco,
+  ValeCuatro,
+}
+
+export enum Team {
+  A = 0,
+  B,
+}
+
 export enum PlayerNumber {
-  PlayerOne = 1,
+  PlayerOne = 0,
   PlayerTwo,
   PlayerThree,
   PlayerFour,
@@ -34,5 +46,6 @@ export enum GamePhase {
   ChantEnvido = 'CHANT_ENVIDO',
   PlayEnvido = 'PLAY_ENVIDO',
   Flor = 'FLOR',
+  ChantFlor = 'CHANT_FLOR',
   PlayFlor = 'PLAY_FLOR',
 }
