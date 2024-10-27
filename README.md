@@ -45,8 +45,11 @@ const truco = new Truco();
 
 | Action        | Usage                                   | Params           |
 | -----------   | --------------------------------------- | ---------------- |
-| newGame       | truco.action('newGame', params)         | {rules: }        |
-| newHand       | truco.action('newHand', {})             |                  |
-| playCard      | truco.action('playCard', parms)         |                  |
-| chantEnvido   | truco.action('chantEnvido', params)     |                  |
-| respondEnvido | truco.action('respondEnvido', params)   |                  |
+| newGame       | truco.action('newGame', params)         | { rules: { numberOfPlayers: number, maxPoints: number, flor: boolean } }        |
+| newHand       | truco.action('newHand', {})             |        -         |
+| playCard      | truco.action('playCard', parms)         | { player: number, cardCode: string }                 |
+| chantEnvido   | truco.action('chantEnvido', params)     | { player: number, chant: number }                 |
+| respondEnvido | truco.action('respondEnvido', params)   | { player: number, accepted: boolean }                 |
+| playEnvido | truco.action('playEnvido', params)   | { player: number, cardsCode: string }                 |
+| chantTruco | truco.action('chantTruco', params)   | { player: number, trucoLevel: number }                 |
+| respondTruco | truco.action('respondTruco', params)   | { player: number, accepted: boolean }                 |

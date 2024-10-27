@@ -1,4 +1,4 @@
-import { GamePhase, TrucoLevel } from '../types';
+import { GamePhase, Team, TrucoLevel } from '../types';
 import { Deck } from './deck';
 import { Envido } from './envido';
 import { Player } from './player';
@@ -27,8 +27,39 @@ export class Hand {
   }
 
   /** Returns the winner of the hand or undefined if not finished */
-  winner(): Player | undefined {
-    // TODO: get the winner of the hand...
+  winner(): Team | undefined {
+    const roundWinners = this.rounds.map((round) => round.winner());
+
+    const roundsWinnedByTeam = roundWinners.reduce(
+      (prev, winners) => {
+        winners?.forEach((winner) => (prev[winner.team] += 1));
+
+        return prev;
+      },
+      [0, 0],
+    );
+
+    // TODO: refactor ifs????
+    if (
+      roundsWinnedByTeam[Team.A] === roundsWinnedByTeam[Team.B] &&
+      roundsWinnedByTeam[Team.A] === 3
+    ) {
+      return this.turns.handPlayer?.team;
+    }
+
+    if (
+      roundsWinnedByTeam[Team.A] > roundsWinnedByTeam[Team.B] &&
+      roundsWinnedByTeam[Team.A] >= 2
+    ) {
+      return Team.A;
+    }
+    if (
+      roundsWinnedByTeam[Team.B] > roundsWinnedByTeam[Team.A] &&
+      roundsWinnedByTeam[Team.A] >= 2
+    ) {
+      return Team.B;
+    }
+
     return undefined;
   }
 

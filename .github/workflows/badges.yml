@@ -1,5 +1,7 @@
 name: badges
 on: [push]
+permissions:
+  contents: write
 jobs:
   bump:
     runs-on: ubuntu-latest

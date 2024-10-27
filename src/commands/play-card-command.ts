@@ -32,6 +32,8 @@ export class PlayCardCommand implements Command {
       this.advanceToNextRound();
     }
 
+    // TODO: if card ends the hand, add score and create a new hand...
+
     return this.state;
   }
 

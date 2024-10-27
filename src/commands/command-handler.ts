@@ -39,6 +39,8 @@ export class CommandHandler {
         return this.respondTruco(state, params as ActionParams['respondTruco']);
       default:
         throw Error('Invalid action!');
+
+      // TODO: Check if hand/game has been ended by the action
     }
   }
 

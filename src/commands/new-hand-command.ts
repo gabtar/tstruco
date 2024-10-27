@@ -18,10 +18,7 @@ export class NewHandCommand implements Command {
       const nextHandPlayer =
         actualHandPlayer === numberOfPlayers - 1 ? 0 : actualHandPlayer + 1;
 
-      // TODO: update turns in the hand, extract to method passing the player...
-      newHand.turns.handPlayer = newHand.players[nextHandPlayer];
-      newHand.turns.playCardTurn = newHand.players[nextHandPlayer];
-      newHand.turns.chantEnvidoTurn = newHand.players[nextHandPlayer];
+      newHand.turns.setTurns(newHand.players[nextHandPlayer]);
     }
 
     this.state.hand = newHand;
