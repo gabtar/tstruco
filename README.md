@@ -1,12 +1,15 @@
 # TSTruco
 
-<p align="center">
-![Branches](./badges/coverage-branches.svg)
-![Functions](./badges/coverage-functions.svg)
-![Lines](./badges/coverage-lines.svg)
-![Statements](./badges/coverage-statements.svg)
-![Jest coverage](./badges/coverage-jest%20coverage.svg)
-</p>
+<div align="center">
+
+![Jest coverage](badges/coverage-jest%20coverage.svg)
+![Statements](badges/coverage-statements.svg)
+![Branches](badges/coverage-branches.svg)
+![Functions](badges/coverage-functions.svg)
+![Lines](badges/coverage-lines.svg)
+
+
+</div>
 
 # WIP
 
