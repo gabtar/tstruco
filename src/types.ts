@@ -51,3 +51,8 @@ export enum GamePhase {
   ChantFlor = 'CHANT_FLOR',
   PlayFlor = 'PLAY_FLOR',
 }
+
+export enum Status {
+  IN_PROGRESS = 'IN_PROGRESS',
+  ENDED = 'ENDED'
+}

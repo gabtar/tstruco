@@ -19,7 +19,8 @@
 # Commands:
 
 - [x] Play card command
-    - [ ] TODO: play a card that ends the round/hand/game
+    - [x] TODO: play a card that ends the round/hand/game
+    - [ ] Turns of the next. The winner of the previos round starts playing a card.
 - [x] New Game command
 - [x] New Hand command
 - [x] Chant Envido command

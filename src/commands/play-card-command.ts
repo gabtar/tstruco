@@ -8,7 +8,7 @@ export class PlayCardCommand implements Command {
     private state: GameState,
     private player: Player,
     private card: Card,
-  ) {}
+  ) { }
 
   public execute(): GameState {
     if (this.state.hand.phase != GamePhase.Truco) {
@@ -32,7 +32,12 @@ export class PlayCardCommand implements Command {
       this.advanceToNextRound();
     }
 
-    // TODO: if card ends the hand, add score and create a new hand...
+    const winner = this.state.hand.winner();
+
+    if (winner) {
+      const trucoPoints = this.state.hand.trucoLevel;
+      this.state.score.add(winner, trucoPoints);
+    }
 
     return this.state;
   }

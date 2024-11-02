@@ -1,7 +1,6 @@
 import { CardFactory } from '../factories/card.factory';
-import { EnvidoPairFactory } from '../factories/envido-pair.factory';
 import { GameState } from '../models/game-state';
-import { ActionParams } from '../types';
+import { ActionParams, Status } from '../types';
 import { ChantEnvidoCommmand } from './chant-envido-command';
 import { ChantTrucoCommmand } from './chant-truco-command';
 import { NewGameCommand } from './new-game-command';
@@ -17,31 +16,52 @@ export class CommandHandler {
     params: ActionParams[K],
     state: GameState,
   ): GameState {
+
+    if (state.status === Status.ENDED) {
+      throw Error('Game ended');
+    }
+
     switch (actionType) {
       case 'playCard':
-        return this.playCard(state, params as ActionParams['playCard']);
+        state = this.playCard(state, params as ActionParams['playCard']);
+        break;
       case 'newGame':
-        return this.newGame(params as ActionParams['newGame']);
+        state = this.newGame(params as ActionParams['newGame']);
+        break;
       case 'newHand':
-        return this.newHand(state);
+        state = this.newHand(state);
+        break;
       case 'chantEnvido':
-        return this.chantEnvido(state, params as ActionParams['chantEnvido']);
+        state = this.chantEnvido(state, params as ActionParams['chantEnvido']);
+        break;
       case 'respondEnvido':
-        return this.respondEnvido(
+        state = this.respondEnvido(
           state,
           params as ActionParams['respondEnvido'],
         );
+        break;
       case 'playEnvido':
-        return this.playEnvido(state, params as ActionParams['playEnvido']);
+        state = this.playEnvido(state, params as ActionParams['playEnvido']);
+        break;
       case 'chantTruco':
-        return this.chantTruco(state, params as ActionParams['chantTruco']);
+        state = this.chantTruco(state, params as ActionParams['chantTruco']);
+        break;
       case 'respondTruco':
-        return this.respondTruco(state, params as ActionParams['respondTruco']);
+        state = this.respondTruco(state, params as ActionParams['respondTruco']);
+        break;
       default:
         throw Error('Invalid action!');
-
-      // TODO: Check if hand/game has been ended by the action
     }
+
+    if (state.hand.winner()) {
+      state = this.newHand(state);
+    }
+
+    if (state.score.maxScore() >= state.rules.maxPoints) {
+      state.status = Status.ENDED;
+    }
+
+    return state;
   }
 
   private playCard(

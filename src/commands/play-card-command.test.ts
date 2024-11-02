@@ -1,11 +1,11 @@
+import { CardFactory } from '../factories/card.factory';
 import { GameStateFactory } from '../factories/game-state.factory';
 import { PlayerFactory } from '../factories/player.factory';
-import { Card } from '../models/card';
 import { GamePhase } from '../types';
 import { PlayCardCommand } from './play-card-command';
 
 describe('#execute', () => {
-  const card1 = new Card('1', 'E');
+  const card1 = CardFactory.from('1E');
   const players = PlayerFactory.createPlayers(2);
   let state = GameStateFactory.createGame({
     numberOfPlayers: 2,
@@ -57,5 +57,20 @@ describe('#execute', () => {
     const playCardCommand = new PlayCardCommand(state, player1, card1);
 
     expect(() => playCardCommand.execute()).toThrow('1E was already played');
+  });
+
+  it('Should advance to next round when playing a card ends the round', () => {
+    const card2 = CardFactory.from('5O');
+    state.hand.turns.players = players;
+    const player1 = players[0];
+    const player2 = players[1];
+    const playCardCommand1 = new PlayCardCommand(state, player1, card1);
+    const playCardCommand2 = new PlayCardCommand(state, player2, card2);
+
+    state.hand.turns.setTurns(player1);
+    state = playCardCommand1.execute()
+    state = playCardCommand2.execute()
+
+    expect(state.hand.currentRound).toBe(1);
   });
 });

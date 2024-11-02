@@ -14,7 +14,7 @@ export class Hand {
     public turns: Turn,
     public phase: GamePhase,
     public trucoLevel: TrucoLevel = TrucoLevel.NotChanted,
-  ) {}
+  ) { }
 
   /* Returns the current round */
   get currentRound(): number {
@@ -26,7 +26,9 @@ export class Hand {
     return 0;
   }
 
-  /** Returns the winner of the hand or undefined if not finished */
+  /* winner
+   * Returns the winner of the hand or undefined if not finished 
+   * */
   winner(): Team | undefined {
     const roundWinners = this.rounds.map((round) => round.winner());
 

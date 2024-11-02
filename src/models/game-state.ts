@@ -1,4 +1,4 @@
-import { GameRules } from '../types';
+import { GameRules, Status } from '../types';
 import { Hand } from './hand';
 import { Score } from './score';
 
@@ -7,5 +7,8 @@ export class GameState {
     public hand: Hand,
     public rules: GameRules,
     public score: Score,
-  ) {}
+    public status: Status = Status.ENDED,
+  ) { }
 }
+
+

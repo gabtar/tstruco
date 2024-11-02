@@ -6,7 +6,7 @@ export class Score {
       [Team.A, 0],
       [Team.B, 0],
     ]),
-  ) {}
+  ) { }
 
   /*
    * add
@@ -22,5 +22,13 @@ export class Score {
    */
   public getScore(team: Team) {
     return this.score.get(team);
+  }
+
+  /*
+  * maxScore
+  * Returns the maximun score in the game
+  */
+  public maxScore(): number {
+    return Math.max(...Array.from(this.score.values()));
   }
 }
