@@ -3,7 +3,7 @@ import { GameState } from '../models/game-state';
 import { Command } from './play-card-command';
 
 export class NewHandCommand implements Command {
-  constructor(private state: GameState) {}
+  constructor(private state: GameState) { }
 
   public execute(): GameState {
     const actualHandPlayer = this.state.hand.turns.handPlayer?.id;

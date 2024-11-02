@@ -1,4 +1,5 @@
 import { GamePhase, Team, TrucoLevel } from '../types';
+import { Card } from './card';
 import { Deck } from './deck';
 import { Envido } from './envido';
 import { Player } from './player';
@@ -16,7 +17,10 @@ export class Hand {
     public trucoLevel: TrucoLevel = TrucoLevel.NotChanted,
   ) { }
 
-  /* Returns the current round */
+  /*
+   * currentRound
+   * Returns the current round based on the cards played so for
+   */
   get currentRound(): number {
     for (let i = 0; i < 3; i++) {
       if (!this.rounds[i].isFinished()) {
@@ -26,7 +30,24 @@ export class Hand {
     return 0;
   }
 
-  /* winner
+  /* playCard
+   * Plays a card on the current round of the hand
+   */
+  playCard(player: Player, card: Card): void {
+    const currentRound = this.rounds[this.currentRound];
+    currentRound.playCard(player, card);
+    this.turns.nextTurn();
+
+    if (currentRound.isFinished()) {
+      const winner = currentRound.winner()!
+
+      // FIX: returns always the first player when the card goes parda. Need to check the order of the plays to get the last player who ties the hand
+      this.turns.setTurns(winner[0]);
+    }
+  }
+
+  /* 
+   * winner
    * Returns the winner of the hand or undefined if not finished 
    * */
   winner(): Team | undefined {
@@ -65,7 +86,10 @@ export class Hand {
     return undefined;
   }
 
-  /** Returns the player according to the number passed or throws an error **/
+  /*
+   * getPlayer
+   * Returns a player based on the index of the player's array
+   */
   getPlayer(number: number): Player {
     if (number > this.players.length - 1 || number < 0) {
       throw Error('Invalid player');
@@ -74,7 +98,10 @@ export class Hand {
     return this.players[number];
   }
 
-  /** Deals cards to all players in the hand **/
+  /*
+  * dealCards
+  * Deals all cards for the players in the hand
+  */
   dealCards(): void {
     const cards = this.deck.dealCards(this.players.length);
 

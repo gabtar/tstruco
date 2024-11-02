@@ -23,10 +23,8 @@ export class PlayCardCommand implements Command {
       throw Error(`${this.card} was already played`);
     }
 
-    let currentRound = this.state.hand.rounds[this.state.hand.currentRound];
-    currentRound.playCard(this.player, this.card);
-
-    this.state.hand.turns.nextTurn();
+    const currentRound = this.state.hand.rounds[this.state.hand.currentRound];
+    this.state.hand.playCard(this.player, this.card);
 
     if (currentRound.isFinished()) {
       this.advanceToNextRound();

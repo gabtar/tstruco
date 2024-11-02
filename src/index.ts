@@ -5,7 +5,7 @@ export { Truco } from './models/truco';
 
 // pass to next player
 function nextPlayer(playerNumber: number) {
-  return playerNumber > 3 ? 0 : playerNumber + 1;
+  return playerNumber >= 3 ? 0 : playerNumber + 1;
 }
 
 // Integration test / sample game
@@ -22,14 +22,14 @@ const rules = {
 truco.action('newGame', { rules: rules });
 truco.action('newHand', {});
 
-let handPlayer = truco.getState().hand.turns.handPlayer;
+let handPlayer = truco.getState().hand.turns.playCardTurn!;
 const players = truco.getState().hand.players;
-
-
 let currentPlayer = handPlayer?.id;
 
 console.log(handPlayer);
 // Play a Card
-// truco.action('playCard', { player: currentPlayer!, cardCode: handPlayer!.cards[0].toString() })
+truco.action('playCard', { player: currentPlayer!, cardCode: handPlayer!.cards[0].toString() })
 
-console.log(truco.getState());
+currentPlayer = nextPlayer(currentPlayer!);
+
+console.log(currentPlayer);

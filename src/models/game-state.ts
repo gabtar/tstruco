@@ -7,7 +7,7 @@ export class GameState {
     public hand: Hand,
     public rules: GameRules,
     public score: Score,
-    public status: Status = Status.ENDED,
+    public status: Status = Status.IN_PROGRESS,
   ) { }
 }
 
