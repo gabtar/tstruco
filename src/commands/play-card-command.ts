@@ -8,7 +8,7 @@ export class PlayCardCommand implements Command {
     private state: GameState,
     private player: Player,
     private card: Card,
-  ) { }
+  ) {}
 
   public execute(): GameState {
     if (this.state.hand.phase != GamePhase.Truco) {

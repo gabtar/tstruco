@@ -1,10 +1,13 @@
-import { EnvidoLevel } from '../types';
+import { EnvidoLevel, PlayerNumber } from '../types';
 import { EnvidoPair } from './envido-pair';
 
 export class Envido {
   constructor(
     private handPlayerOrder: number[],
-    public cardsPlayed: Map<number, EnvidoPair> = new Map<number, EnvidoPair>(),
+    public cardsPlayed: Map<PlayerNumber, EnvidoPair> = new Map<
+      PlayerNumber,
+      EnvidoPair
+    >(),
     public chanted: EnvidoLevel[] = [],
     public accepted?: boolean,
   ) {}

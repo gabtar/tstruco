@@ -10,7 +10,7 @@ export class GameStateFactory {
    */
   public static createGame(rules: GameRules): GameState {
     const players = PlayerFactory.createPlayers(rules.numberOfPlayers);
-    const hand = HandFactory.createHand(players);
+    const hand = HandFactory.createHand(players, rules.flor);
     const score = new Score();
 
     return new GameState(hand, rules, score);

@@ -68,8 +68,8 @@ describe('#execute', () => {
     const playCardCommand2 = new PlayCardCommand(state, player2, card2);
 
     state.hand.turns.setTurns(player1);
-    state = playCardCommand1.execute()
-    state = playCardCommand2.execute()
+    state = playCardCommand1.execute();
+    state = playCardCommand2.execute();
 
     expect(state.hand.currentRound).toBe(1);
   });

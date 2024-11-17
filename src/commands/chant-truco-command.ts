@@ -11,7 +11,7 @@ export class ChantTrucoCommmand implements Command {
   ) {}
 
   public execute(): GameState {
-    // TODO: check game phase? or can chant truco in any way? check game rules!!!
+    // TODO: check game phase to chant? or can chant truco in any way? check game rules!!!
 
     if (!this.canChantTruco(this.player)) {
       throw Error('Not your turn!');

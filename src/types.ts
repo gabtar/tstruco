@@ -13,6 +13,7 @@ export interface ActionParams {
   playEnvido: { player: PlayerNumber; cardsCode: string[] };
   chantTruco: { player: PlayerNumber; trucoLevel: TrucoLevel };
   respondTruco: { player: PlayerNumber; accepted: boolean };
+  chantFlor: { player: PlayerNumber; florLevel: FlorLevel };
 }
 
 export enum EnvidoLevel {
@@ -26,6 +27,11 @@ export enum TrucoLevel {
   Truco,
   Retruco,
   ValeCuatro,
+}
+
+export enum FlorLevel {
+  Flor = 0,
+  ContraFlorAlResto,
 }
 
 export enum Team {
@@ -54,5 +60,5 @@ export enum GamePhase {
 
 export enum Status {
   IN_PROGRESS = 'IN_PROGRESS',
-  ENDED = 'ENDED'
+  ENDED = 'ENDED',
 }

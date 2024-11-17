@@ -2,6 +2,7 @@ import { CardFactory } from '../factories/card.factory';
 import { GameState } from '../models/game-state';
 import { ActionParams, Status } from '../types';
 import { ChantEnvidoCommmand } from './chant-envido-command';
+import { ChantFlorCommand } from './chant-flor-command';
 import { ChantTrucoCommmand } from './chant-truco-command';
 import { NewGameCommand } from './new-game-command';
 import { NewHandCommand } from './new-hand-command';
@@ -16,7 +17,6 @@ export class CommandHandler {
     params: ActionParams[K],
     state: GameState,
   ): GameState {
-
     if (state.status === Status.ENDED) {
       throw Error('Game ended');
     }
@@ -47,7 +47,13 @@ export class CommandHandler {
         state = this.chantTruco(state, params as ActionParams['chantTruco']);
         break;
       case 'respondTruco':
-        state = this.respondTruco(state, params as ActionParams['respondTruco']);
+        state = this.respondTruco(
+          state,
+          params as ActionParams['respondTruco'],
+        );
+        break;
+      case 'chantFlor':
+        state = this.chantFlor(state, params as ActionParams['chantFlor']);
         break;
       default:
         throw Error('Invalid action!');
@@ -134,5 +140,14 @@ export class CommandHandler {
     const player = state.hand.getPlayer(params.player);
 
     return new RespondTrucoCommmand(state, player, params.accepted).execute();
+  }
+
+  private chantFlor(
+    state: GameState,
+    params: ActionParams['chantFlor'],
+  ): GameState {
+    const player = state.hand.getPlayer(params.player);
+
+    return new ChantFlorCommand(state, player, params.florLevel).execute();
   }
 }

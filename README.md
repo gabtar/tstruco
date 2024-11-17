@@ -32,8 +32,9 @@
 - [x] Chant Truco command
 - [x] Respond Truco command
 - [ ] Chant Flor command
-- [ ] Raise Flor command
+- [ ] Raise Flor command - Maybe just use chant flor with diferent level to simplify
 - [ ] Response to Flor command
+- [ ] When flor is chanted, disable envido chant....
 - [ ] Play Flor command
 - [ ] Go To Deck command
 

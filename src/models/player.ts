@@ -15,4 +15,14 @@ export class Player {
   public opponentTeam(): Team {
     return this.team === 0 ? Team.B : Team.A;
   }
+
+  /*
+   * hasFlor
+   * Returns if the player has Flor
+   */
+  public hasFlor(): boolean {
+    const suit = this.cards[0].suit;
+
+    return this.cards.every((card) => card.suit == suit);
+  }
 }

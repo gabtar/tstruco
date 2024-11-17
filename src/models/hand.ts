@@ -2,6 +2,7 @@ import { GamePhase, Team, TrucoLevel } from '../types';
 import { Card } from './card';
 import { Deck } from './deck';
 import { Envido } from './envido';
+import { Flor } from './flor';
 import { Player } from './player';
 import { Round } from './round';
 import { Turn } from './turn';
@@ -15,7 +16,8 @@ export class Hand {
     public turns: Turn,
     public phase: GamePhase,
     public trucoLevel: TrucoLevel = TrucoLevel.NotChanted,
-  ) { }
+    public flor?: Flor,
+  ) {}
 
   /*
    * currentRound
@@ -39,16 +41,16 @@ export class Hand {
     this.turns.nextTurn();
 
     if (currentRound.isFinished()) {
-      const winner = currentRound.winner()!
+      const winner = currentRound.winner()!;
 
       // FIX: returns always the first player when the card goes parda. Need to check the order of the plays to get the last player who ties the hand
       this.turns.setTurns(winner[0]);
     }
   }
 
-  /* 
+  /*
    * winner
-   * Returns the winner of the hand or undefined if not finished 
+   * Returns the winner of the hand or undefined if not finished
    * */
   winner(): Team | undefined {
     const roundWinners = this.rounds.map((round) => round.winner());
@@ -99,9 +101,9 @@ export class Hand {
   }
 
   /*
-  * dealCards
-  * Deals all cards for the players in the hand
-  */
+   * dealCards
+   * Deals all cards for the players in the hand
+   */
   dealCards(): void {
     const cards = this.deck.dealCards(this.players.length);
 
