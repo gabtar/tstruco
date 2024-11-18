@@ -8,7 +8,7 @@ export class ChantFlorCommand implements Command {
     private state: GameState,
     private player: Player,
     private level: FlorLevel,
-  ) {}
+  ) { }
 
   public execute(): GameState {
     if (!this.state.rules.flor) {
@@ -23,11 +23,19 @@ export class ChantFlorCommand implements Command {
       throw Error('Cannot chant flor!');
     }
 
+    if (this.state.hand.flor!.chanted && this.level <= this.state.hand.flor!.chanted) {
+      throw Error('Invalid flor level');
+    }
+
+    if (!this.state.hand.turns.firstFlorChant) {
+      this.state.hand.turns.firstFlorChant = this.player;
+    }
+
     this.state.hand.flor!.chant(this.level);
     this.state.hand.phase = GamePhase.ChantFlor;
+    this.state.hand.turns.responseFlorChantTurn = this.player.opponentTeam();
 
-    // TODO: disable envido...
-    // TODO: update chant flor turn, should be team response?
+    // TODO: disable envido chant...
 
     return this.state;
   }

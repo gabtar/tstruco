@@ -88,4 +88,16 @@ describe('#execute', () => {
 
     expect(() => chantFlorCommand.execute()).toThrow('Cannot chant flor!');
   });
+
+  it('Should throw error when chanting a lower flor level', () => {
+    state.hand.flor!.chanted = FlorLevel.ContraFlorAlResto;
+
+    const chantFlorCommand = new ChantFlorCommand(
+      state,
+      players[0],
+      FlorLevel.ContraFlor,
+    );
+
+    expect(() => chantFlorCommand.execute()).toThrow('Invalid flor level');
+  });
 });

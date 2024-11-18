@@ -10,7 +10,7 @@ export class Flor {
     >(),
     public chanted?: FlorLevel,
     public accepted?: boolean,
-  ) {}
+  ) { }
 
   /*
    * chant
@@ -34,6 +34,24 @@ export class Flor {
     }
 
     this.cardsPlayed.set(player, cards);
+  }
+
+  /*
+   * totalScorePoints
+   * Returns the total score points in the flor
+   */
+  totalScorePoints(): number {
+    // scores
+    // accepted = flor = 4, contraflor = 6, contrafloralresto = 30
+    // declined = flor = 3, contraflor = 4, contrafloralresto = 6
+
+    const flowerLevels = Object.values(FlorLevel).slice(2) as Array<number>;
+    let score = this.chanted;
+    if (!this.accepted) {
+      score = flowerLevels[this.chanted! - 1];
+    }
+    console.log("SCORE: ", score);
+    return score!;
   }
 
   /*

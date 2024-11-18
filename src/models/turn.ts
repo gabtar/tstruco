@@ -7,10 +7,12 @@ export class Turn {
     public handPlayer?: Player,
     public chantEnvidoTurn?: Player,
     public responseTrucoChantTurn?: Team,
+    public responseFlorChantTurn?: Team,
     public playCardTurn?: Player,
     // Needed to keep track to whom return the original turns
     public firstEnvidoChant?: Player,
-  ) {}
+    public firstFlorChant?: Player,
+  ) { }
 
   /*
    * Draws the initial turns for a new hand

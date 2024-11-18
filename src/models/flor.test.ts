@@ -59,3 +59,25 @@ describe('#playCards', () => {
     );
   });
 });
+
+describe('#totalScorePoints', () => {
+  let flor = new Flor([1, 0]);
+
+  beforeEach(() => (flor = new Flor([1, 0])));
+
+  it('Should return 4 when flower is accepted', () => {
+    flor.chant(FlorLevel.Flor);
+
+    flor.accepted = true;
+
+    expect(flor.totalScorePoints()).toBe(4);
+  });
+
+  it('Should return 4 when contraflor is declined', () => {
+    flor.chant(FlorLevel.ContraFlor);
+
+    flor.accepted = false;
+
+    expect(flor.totalScorePoints()).toBe(4);
+  });
+});

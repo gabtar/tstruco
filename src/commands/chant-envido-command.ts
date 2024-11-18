@@ -8,7 +8,7 @@ export class ChantEnvidoCommmand implements Command {
     private state: GameState,
     private player: Player,
     private chant: EnvidoLevel,
-  ) {}
+  ) { }
 
   public execute(): GameState {
     if (this.state.hand.currentRound > 0) {
@@ -17,6 +17,10 @@ export class ChantEnvidoCommmand implements Command {
 
     if (this.state.hand.turns.chantEnvidoTurn?.id != this.player.id) {
       throw Error('Not your turn!');
+    }
+
+    if (!this.state.hand.turns.firstEnvidoChant) {
+      this.state.hand.turns.firstEnvidoChant = this.player;
     }
 
     this.state.hand.phase = GamePhase.ChantEnvido;

@@ -13,13 +13,15 @@
 
 # WIP
 
-# Game - ideas
+## Game - ideas
 
 - [x] Game object with public api for play during the game.
 - [x] Refactoring to a Score object and make tests *
+- [ ] Improve turn system for envido/flor/truco and chants
 - [ ] Serialize object - JSON? or a string code, eg 0123Player1E2BCards...
 
-# Commands:
+
+## Commands:
 
 - [x] Play card command
     - [x] TODO: play a card that ends the round/hand/game
@@ -31,12 +33,14 @@
 - [x] Play Envido command
 - [x] Chant Truco command
 - [x] Respond Truco command
-- [ ] Chant Flor command
+- [x] Chant Flor command
 - [ ] Raise Flor command - Maybe just use chant flor with diferent level to simplify
 - [ ] Response to Flor command
-- [ ] When flor is chanted, disable envido chant....
 - [ ] Play Flor command
 - [ ] Go To Deck command
+
+## Posible bugfixes
+- [ ] When flor is chanted, disable envido chant....
 
 
 ## Game Api Usage
@@ -48,13 +52,14 @@ const truco = new Truco();
 
 ```
 
-| Action        | Usage                                   | Params           |
-| -----------   | --------------------------------------- | ---------------- |
-| newGame       | truco.action('newGame', params)         | { rules: { numberOfPlayers: number, maxPoints: number, flor: boolean } }        |
-| newHand       | truco.action('newHand', {})             |        -         |
-| playCard      | truco.action('playCard', parms)         | { player: number, cardCode: string }                 |
-| chantEnvido   | truco.action('chantEnvido', params)     | { player: number, chant: number }                 |
-| respondEnvido | truco.action('respondEnvido', params)   | { player: number, accepted: boolean }                 |
-| playEnvido | truco.action('playEnvido', params)   | { player: number, cardsCode: string }                 |
-| chantTruco | truco.action('chantTruco', params)   | { player: number, trucoLevel: number }                 |
-| respondTruco | truco.action('respondTruco', params)   | { player: number, accepted: boolean }                 |
+| Action        | Usage                                   | Params                                                                     |
+| -----------   | --------------------------------------- | -------------------------------------------------------------------------- |
+| newGame       | truco.action('newGame', params)         | { rules: { numberOfPlayers: number, maxPoints: number, flor: boolean } }   |
+| newHand       | truco.action('newHand', {})             |        -                                                                   |
+| playCard      | truco.action('playCard', parms)         | { player: number, cardCode: string }                                       |
+| chantEnvido   | truco.action('chantEnvido', params)     | { player: number, chant: number }                                          |
+| respondEnvido | truco.action('respondEnvido', params)   | { player: number, accepted: boolean }                                      |
+| playEnvido    | truco.action('playEnvido', params)      | { player: number, cardsCode: string }                                      |
+| chantTruco    | truco.action('chantTruco', params)      | { player: number, trucoLevel: number }                                     |
+| respondTruco  | truco.action('respondTruco', params)    | { player: number, accepted: boolean }                                      |
+| chantFlor     | truco.action('chantFlor', params)       | { player: number, florLevel: number }                                      |

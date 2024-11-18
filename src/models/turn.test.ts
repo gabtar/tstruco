@@ -25,6 +25,7 @@ describe('#nextTurn', () => {
       players[3],
       players[3],
       undefined,
+      undefined,
       players[3],
     );
 
