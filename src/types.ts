@@ -30,9 +30,9 @@ export enum TrucoLevel {
 }
 
 export enum FlorLevel {
-  Flor = 4,
-  ContraFlor = 6,
-  ContraFlorAlResto = 30,
+  Flor = 0,
+  ContraFlor,
+  ContraFlorAlResto,
 }
 
 export enum Team {

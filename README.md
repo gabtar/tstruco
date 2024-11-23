@@ -34,8 +34,7 @@
 - [x] Chant Truco command
 - [x] Respond Truco command
 - [x] Chant Flor command
-- [ ] Raise Flor command - Maybe just use chant flor with diferent level to simplify
-- [ ] Response to Flor command
+- [x] Response to Flor command
 - [ ] Play Flor command
 - [ ] Go To Deck command
 

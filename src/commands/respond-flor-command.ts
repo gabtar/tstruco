@@ -15,7 +15,6 @@ export class ResponseFlorCommand implements Command {
       throw Error(`${this.player.id} is not your turn!`);
     }
 
-    // TODO:
     this.state.hand.flor!.accepted = this.accepted
 
     if (this.accepted) {
@@ -29,7 +28,6 @@ export class ResponseFlorCommand implements Command {
         this.player.opponentTeam(),
         this.state.hand.flor!.totalScorePoints(),
       );
-      console.log("FLOWER SCORE", this.state.hand.flor!.totalScorePoints());
     }
 
     return this.state;

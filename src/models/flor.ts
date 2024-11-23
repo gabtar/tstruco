@@ -4,6 +4,7 @@ import { Card } from './card';
 export class Flor {
   constructor(
     private handPlayerOrder: number[],
+    private flowerScore = [4, 6, 30, 3, 4, 6], // Accepted: 4 6 30 Declined: 3 4 6
     public cardsPlayed: Map<PlayerNumber, Card[]> = new Map<
       PlayerNumber,
       Card[]
@@ -41,17 +42,7 @@ export class Flor {
    * Returns the total score points in the flor
    */
   totalScorePoints(): number {
-    // scores
-    // accepted = flor = 4, contraflor = 6, contrafloralresto = 30
-    // declined = flor = 3, contraflor = 4, contrafloralresto = 6
-
-    const flowerLevels = Object.values(FlorLevel).slice(2) as Array<number>;
-    let score = this.chanted;
-    if (!this.accepted) {
-      score = flowerLevels[this.chanted! - 1];
-    }
-    console.log("SCORE: ", score);
-    return score!;
+    return this.accepted ? this.flowerScore[this.chanted!] : this.flowerScore[this.chanted! + 3]
   }
 
   /*
