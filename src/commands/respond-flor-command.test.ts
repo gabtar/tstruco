@@ -1,8 +1,8 @@
-import { on } from "events";
-import { GameStateFactory } from "../factories/game-state.factory";
-import { PlayerFactory } from "../factories/player.factory";
-import { ResponseFlorCommand } from "./respond-flor-command";
-import { FlorLevel, GamePhase } from "../types";
+import { on } from 'events';
+import { GameStateFactory } from '../factories/game-state.factory';
+import { PlayerFactory } from '../factories/player.factory';
+import { RespondFlorCommand } from './respond-flor-command';
+import { FlorLevel, GamePhase } from '../types';
 
 describe('#execute', () => {
   const declinedFlorScore = 3;
@@ -25,7 +25,7 @@ describe('#execute', () => {
 
   it('Should accept the flor and return the turn to the one/team who chanted', () => {
     state.hand.turns.responseFlorChantTurn = players[0].team;
-    const responseFlorCommand = new ResponseFlorCommand(state, players[0], true);
+    const responseFlorCommand = new RespondFlorCommand(state, players[0], true);
 
     state = responseFlorCommand.execute();
 
@@ -35,7 +35,7 @@ describe('#execute', () => {
 
   it('Should decline the flor and set the score to the opponent team', () => {
     state.hand.turns.responseFlorChantTurn = players[0].team;
-    const responseFlorCommand = new ResponseFlorCommand(state, players[0], true);
+    const responseFlorCommand = new RespondFlorCommand(state, players[0], true);
 
     state = responseFlorCommand.execute();
 
@@ -46,7 +46,11 @@ describe('#execute', () => {
   it('Should decline the flor and set the score to the opponent team', () => {
     state.hand.turns.responseFlorChantTurn = players[0].team;
     state.hand.flor!.chanted = FlorLevel.Flor;
-    const responseFlorCommand = new ResponseFlorCommand(state, players[0], false);
+    const responseFlorCommand = new RespondFlorCommand(
+      state,
+      players[0],
+      false,
+    );
 
     state = responseFlorCommand.execute();
 

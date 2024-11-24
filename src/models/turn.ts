@@ -12,7 +12,7 @@ export class Turn {
     // Needed to keep track to whom return the original turns
     public firstEnvidoChant?: Player,
     public firstFlorChant?: Player,
-  ) { }
+  ) {}
 
   /*
    * Draws the initial turns for a new hand

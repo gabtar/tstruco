@@ -7,7 +7,7 @@ export class RespondEnvidoCommmand {
     private state: GameState,
     private player: Player,
     private accepted: boolean,
-  ) { }
+  ) {}
 
   public execute(): GameState {
     if (this.player != this.state.hand.turns.chantEnvidoTurn) {

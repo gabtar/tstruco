@@ -8,7 +8,9 @@ import { NewGameCommand } from './new-game-command';
 import { NewHandCommand } from './new-hand-command';
 import { PlayCardCommand } from './play-card-command';
 import { PlayEnvidoCommand } from './play-envido-command';
+import { PlayFlorCommand } from './play-flor-command';
 import { RespondEnvidoCommmand } from './respond-envido-command';
+import { RespondFlorCommand } from './respond-flor-command';
 import { RespondTrucoCommmand } from './respond-truco-command';
 
 export class CommandHandler {
@@ -54,6 +56,12 @@ export class CommandHandler {
         break;
       case 'chantFlor':
         state = this.chantFlor(state, params as ActionParams['chantFlor']);
+        break;
+      case 'respondFlor':
+        state = this.respondFlor(state, params as ActionParams['respondFlor']);
+        break;
+      case 'playFlor':
+        state = this.playFlor(state, params as ActionParams['playFlor']);
         break;
       default:
         throw Error('Invalid action!');
@@ -115,10 +123,10 @@ export class CommandHandler {
     params: ActionParams['playEnvido'],
   ): GameState {
     const player = state.hand.getPlayer(params.player);
-    const cards = [CardFactory.from(params.cardsCode[0])];
+    const cards = [CardFactory.from(params.cardsCodes[0])];
 
-    if (params.cardsCode.length > 1) {
-      cards.push(CardFactory.from(params.cardsCode[1]));
+    if (params.cardsCodes.length > 1) {
+      cards.push(CardFactory.from(params.cardsCodes[1]));
     }
 
     return new PlayEnvidoCommand(state, player, cards).execute();
@@ -149,5 +157,28 @@ export class CommandHandler {
     const player = state.hand.getPlayer(params.player);
 
     return new ChantFlorCommand(state, player, params.florLevel).execute();
+  }
+
+  private respondFlor(
+    state: GameState,
+    params: ActionParams['respondFlor'],
+  ): GameState {
+    const player = state.hand.getPlayer(params.player);
+
+    return new RespondFlorCommand(state, player, params.accepted).execute();
+  }
+
+  private playFlor(
+    state: GameState,
+    params: ActionParams['playFlor'],
+  ): GameState {
+    const player = state.hand.getPlayer(params.player);
+    const cards = [
+      CardFactory.from(params.cardsCodes[0]),
+      CardFactory.from(params.cardsCodes[1]),
+      CardFactory.from(params.cardsCodes[2]),
+    ];
+
+    return new PlayFlorCommand(state, player, cards).execute();
   }
 }

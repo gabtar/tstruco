@@ -81,3 +81,63 @@ describe('#totalScorePoints', () => {
     expect(flor.totalScorePoints()).toBe(4);
   });
 });
+
+describe('#winner', () => {
+  let flower = new Flor([1, 0]);
+
+  const maxFlowerScoreCards = [
+    CardFactory.from('7E'),
+    CardFactory.from('6E'),
+    CardFactory.from('5E'),
+  ];
+  const lowestFlowerScoreCards = [
+    CardFactory.from('12O'),
+    CardFactory.from('11O'),
+    CardFactory.from('3O'),
+  ];
+  const maxFlowerScoreCardsOtherSuit = [
+    CardFactory.from('7B'),
+    CardFactory.from('6B'),
+    CardFactory.from('5B'),
+  ];
+
+  beforeEach(() => (flower = new Flor([1, 0])));
+
+  it('Should return 1 when player one has a higher flower score', () => {
+    flower.playCards(0, maxFlowerScoreCards);
+    flower.playCards(1, lowestFlowerScoreCards);
+
+    expect(flower.winner()).toBe(0);
+  });
+
+  it('Should return the first player in the hand player order when 4 players have the same flower score', () => {
+    flower = new Flor([2, 3, 0, 1]); // Player 2 is hand
+    const flowerScoreCardsP1 = [
+      CardFactory.from('12O'),
+      CardFactory.from('11O'),
+      CardFactory.from('10O'),
+    ];
+    const flowerScoreCardsP2 = [
+      CardFactory.from('12B'),
+      CardFactory.from('11B'),
+      CardFactory.from('10B'),
+    ];
+    const flowerScoreCardsP3 = [
+      CardFactory.from('12C'),
+      CardFactory.from('11C'),
+      CardFactory.from('10C'),
+    ];
+    const flowerScoreCardsP4 = [
+      CardFactory.from('12E'),
+      CardFactory.from('11E'),
+      CardFactory.from('10E'),
+    ];
+
+    flower.playCards(0, flowerScoreCardsP1);
+    flower.playCards(1, flowerScoreCardsP2);
+    flower.playCards(2, flowerScoreCardsP3);
+    flower.playCards(3, flowerScoreCardsP4);
+
+    expect(flower.winner()).toBe(2);
+  });
+});

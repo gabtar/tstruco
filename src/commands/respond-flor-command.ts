@@ -1,21 +1,21 @@
-import { GameState } from "../models/game-state";
-import { Player } from "../models/player";
-import { GamePhase } from "../types";
-import { Command } from "./play-card-command";
+import { GameState } from '../models/game-state';
+import { Player } from '../models/player';
+import { GamePhase } from '../types';
+import { Command } from './play-card-command';
 
-export class ResponseFlorCommand implements Command {
+export class RespondFlorCommand implements Command {
   constructor(
     private state: GameState,
     private player: Player,
     private accepted: boolean,
-  ) { }
+  ) {}
 
   execute(): GameState {
     if (this.player.team != this.state.hand.turns.responseFlorChantTurn) {
       throw Error(`${this.player.id} is not your turn!`);
     }
 
-    this.state.hand.flor!.accepted = this.accepted
+    this.state.hand.flor!.accepted = this.accepted;
 
     if (this.accepted) {
       this.state.hand.turns.responseFlorChantTurn =

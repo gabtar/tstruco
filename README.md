@@ -35,7 +35,8 @@
 - [x] Respond Truco command
 - [x] Chant Flor command
 - [x] Response to Flor command
-- [ ] Play Flor command
+- [x] Play Flor command
+    - [ ] FIX: Only the players who have a flor should play it
 - [ ] Go To Deck command
 
 ## Posible bugfixes
@@ -55,10 +56,12 @@ const truco = new Truco();
 | -----------   | --------------------------------------- | -------------------------------------------------------------------------- |
 | newGame       | truco.action('newGame', params)         | { rules: { numberOfPlayers: number, maxPoints: number, flor: boolean } }   |
 | newHand       | truco.action('newHand', {})             |        -                                                                   |
-| playCard      | truco.action('playCard', parms)         | { player: number, cardCode: string }                                       |
+| playCard      | truco.action('playCard', parms)         | { player: number, cardsCodes: string[] }                                       |
 | chantEnvido   | truco.action('chantEnvido', params)     | { player: number, chant: number }                                          |
 | respondEnvido | truco.action('respondEnvido', params)   | { player: number, accepted: boolean }                                      |
 | playEnvido    | truco.action('playEnvido', params)      | { player: number, cardsCode: string }                                      |
 | chantTruco    | truco.action('chantTruco', params)      | { player: number, trucoLevel: number }                                     |
 | respondTruco  | truco.action('respondTruco', params)    | { player: number, accepted: boolean }                                      |
 | chantFlor     | truco.action('chantFlor', params)       | { player: number, florLevel: number }                                      |
+| respondFlor   | truco.action('respondFlor', params)     | { player: number, accepted: boolean }                                      |
+| playFlor      | truco.action('playFlor', params)        | { player: number, cardsCodes: string[] }                                      |

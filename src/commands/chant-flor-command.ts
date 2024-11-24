@@ -8,7 +8,7 @@ export class ChantFlorCommand implements Command {
     private state: GameState,
     private player: Player,
     private level: FlorLevel,
-  ) { }
+  ) {}
 
   public execute(): GameState {
     if (!this.state.rules.flor) {
@@ -23,7 +23,10 @@ export class ChantFlorCommand implements Command {
       throw Error('Cannot chant flor!');
     }
 
-    if (this.state.hand.flor!.chanted && this.level <= this.state.hand.flor!.chanted) {
+    if (
+      this.state.hand.flor!.chanted &&
+      this.level <= this.state.hand.flor!.chanted
+    ) {
       throw Error('Invalid flor level');
     }
 

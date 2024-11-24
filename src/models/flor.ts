@@ -11,7 +11,7 @@ export class Flor {
     >(),
     public chanted?: FlorLevel,
     public accepted?: boolean,
-  ) { }
+  ) {}
 
   /*
    * chant
@@ -23,6 +23,14 @@ export class Flor {
     }
 
     this.chanted = chant;
+  }
+
+  /*
+   * florPlaysCount
+   * Returns the number of player who has played flower
+   */
+  get florPlaysCount(): number {
+    return this.cardsPlayed.size;
   }
 
   /*
@@ -42,7 +50,9 @@ export class Flor {
    * Returns the total score points in the flor
    */
   totalScorePoints(): number {
-    return this.accepted ? this.flowerScore[this.chanted!] : this.flowerScore[this.chanted! + 3]
+    return this.accepted
+      ? this.flowerScore[this.chanted!]
+      : this.flowerScore[this.chanted! + 3];
   }
 
   /*
@@ -50,6 +60,43 @@ export class Flor {
    * returns the winner of the flor
    */
   winner(): number {
-    return 0;
+    let maxScoreCount = 0,
+      maxScore = 0;
+    let winners: PlayerNumber[] = [];
+    const flowerScores = new Map<PlayerNumber, number>();
+
+    // TODO: extract to private method maybe calculateFlowerScores(?) and return the flowerScores Map
+    [...this.cardsPlayed.keys()].forEach((player) => {
+      const score = this.score(player);
+      if (score >= maxScore) {
+        const equalScore = score == maxScore;
+        maxScoreCount = equalScore ? maxScoreCount + 1 : 1;
+        winners = equalScore ? [...winners, player] : [player];
+        maxScore = score;
+      }
+      flowerScores.set(player, score);
+    });
+
+    if (maxScoreCount > 1) {
+      for (let i = 0; i <= this.handPlayerOrder.length; i++) {
+        if (flowerScores.get(this.handPlayerOrder[i]) == maxScore) {
+          winners[0] = this.handPlayerOrder[i];
+          break;
+        }
+      }
+    }
+
+    return winners[0];
+  }
+
+  /*
+   * score
+   * Returns the flor score of the player passed
+   */
+  private score(player: PlayerNumber): number {
+    return this.cardsPlayed.get(player)!.reduce((total, current) => {
+      const cardScore = +current.rank > 7 ? 0 : +current.rank;
+      return total + cardScore;
+    }, 20);
   }
 }

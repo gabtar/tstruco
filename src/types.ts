@@ -10,10 +10,12 @@ export interface ActionParams {
   newHand: {};
   chantEnvido: { player: PlayerNumber; chant: EnvidoLevel };
   respondEnvido: { player: PlayerNumber; accepted: boolean };
-  playEnvido: { player: PlayerNumber; cardsCode: string[] };
+  playEnvido: { player: PlayerNumber; cardsCodes: string[] };
   chantTruco: { player: PlayerNumber; trucoLevel: TrucoLevel };
   respondTruco: { player: PlayerNumber; accepted: boolean };
   chantFlor: { player: PlayerNumber; florLevel: FlorLevel };
+  respondFlor: { player: PlayerNumber; accepted: boolean };
+  playFlor: { player: PlayerNumber; cardsCodes: string[] };
 }
 
 export enum EnvidoLevel {
