@@ -1,4 +1,4 @@
-import { Team } from '../types';
+import { PlayerNumber, Team } from '../types';
 import { Player } from './player';
 
 export class Turn {
@@ -12,7 +12,8 @@ export class Turn {
     // Needed to keep track to whom return the original turns
     public firstEnvidoChant?: Player,
     public firstFlorChant?: Player,
-  ) {}
+    public atDeck: Player[] = [], // players already resigned to current hand
+  ) { }
 
   /*
    * Draws the initial turns for a new hand
@@ -54,6 +55,33 @@ export class Turn {
       { length: totalPlayers - initialPlayerNumber },
       (_, i) => initialPlayerNumber + i,
     ).concat(...Array(initialPlayerNumber).keys());
+  }
+
+  /*
+   * goToDeck
+   * Removes a player from the player's list and sends him to deck
+   */
+  goToDeck(playerNumber: PlayerNumber) {
+    // TODO: check already at deck?
+
+    const playerToDeck = this.players.find(p => p.id === playerNumber);
+
+    this.atDeck.push(playerToDeck!);
+    this.players = this.players.filter(p => p.id !== playerNumber);
+  }
+
+  /*
+   * teamAtDeck
+   * Returns whenever a team is at deck or undefined
+   */
+  teamAtDeck(): Team | undefined {
+    const team = this.players[0].team;
+
+    if (this.players.every(player => player.team === team)) {
+      return team === Team.A ? Team.B : Team.A;
+    }
+
+    return undefined;
   }
 
   /*

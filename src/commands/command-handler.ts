@@ -4,6 +4,7 @@ import { ActionParams, Status } from '../types';
 import { ChantEnvidoCommmand } from './chant-envido-command';
 import { ChantFlorCommand } from './chant-flor-command';
 import { ChantTrucoCommmand } from './chant-truco-command';
+import { GoToDeckCommand } from './go-to-deck-command';
 import { NewGameCommand } from './new-game-command';
 import { NewHandCommand } from './new-hand-command';
 import { PlayCardCommand } from './play-card-command';
@@ -63,10 +64,15 @@ export class CommandHandler {
       case 'playFlor':
         state = this.playFlor(state, params as ActionParams['playFlor']);
         break;
+      case 'goToDeck':
+        state = this.goToDeck(state, params as ActionParams['goToDeck']);
+        break;
       default:
         throw Error('Invalid action!');
     }
 
+    // TODO: check if all players go to deck, so need to deal a new hand...
+    // Set an status on Hand object to deal a new hand...
     if (state.hand.winner()) {
       state = this.newHand(state);
     }
@@ -180,5 +186,13 @@ export class CommandHandler {
     ];
 
     return new PlayFlorCommand(state, player, cards).execute();
+  }
+
+  private goToDeck(
+    state: GameState,
+    params: ActionParams['goToDeck'],
+  ): GameState {
+    const player = state.hand.getPlayer(params.player);
+    return new GoToDeckCommand(state, player).execute();
   }
 }

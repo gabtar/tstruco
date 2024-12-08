@@ -1,4 +1,5 @@
 import { PlayerFactory } from '../factories/player.factory';
+import { Team } from '../types';
 import { Turn } from './turn';
 
 describe('#drawInitialTurns', () => {
@@ -55,5 +56,40 @@ describe('#handPlayerOrder', () => {
     const turn = new Turn(players, players[3], players[3]);
 
     expect(turn.handPlayerOrder()).toEqual([3, 4, 5, 0, 1, 2]);
+  });
+});
+
+describe('#goToDeck', () => {
+  it('Should send a player to deck and remove from active player\'s list', () => {
+    const players = PlayerFactory.createPlayers(6);
+    const playerFive = players[4];
+    const turn = new Turn(players, players[3], players[3]);
+
+    turn.goToDeck(playerFive.id);
+
+    expect(turn.players).not.toContain(playerFive);
+    expect(turn.atDeck).toContain(playerFive);
+  });
+});
+
+describe('#teamAtDeck', () => {
+  it('Should retrun A when all Team A players are at deck', () => {
+    const players = PlayerFactory.createPlayers(4);
+    const turn = new Turn(players, players[3], players[3]);
+
+    turn.goToDeck(players[0].id);
+    turn.goToDeck(players[2].id);
+
+    expect(turn.teamAtDeck()).toBe(Team.A);
+  });
+
+  it('Should retrun undefined when not all Team A players are at deck', () => {
+    const players = PlayerFactory.createPlayers(6);
+    const turn = new Turn(players, players[3], players[3]);
+
+    turn.goToDeck(players[0].id);
+    turn.goToDeck(players[2].id);
+
+    expect(turn.teamAtDeck()).toBeUndefined();
   });
 });

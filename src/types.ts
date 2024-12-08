@@ -16,6 +16,7 @@ export interface ActionParams {
   chantFlor: { player: PlayerNumber; florLevel: FlorLevel };
   respondFlor: { player: PlayerNumber; accepted: boolean };
   playFlor: { player: PlayerNumber; cardsCodes: string[] };
+  goToDeck: { player: PlayerNumber };
 }
 
 export enum EnvidoLevel {

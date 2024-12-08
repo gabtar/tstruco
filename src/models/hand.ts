@@ -17,7 +17,7 @@ export class Hand {
     public phase: GamePhase,
     public trucoLevel: TrucoLevel = TrucoLevel.NotChanted,
     public flor?: Flor,
-  ) {}
+  ) { }
 
   /*
    * currentRound

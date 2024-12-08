@@ -1,15 +1,27 @@
-import { NewGameCommand } from './new-game-command';
+import { GameStateFactory } from "../factories/game-state.factory";
+import { GoToDeckCommand } from "./go-to-deck-command";
 
 describe('execute', () => {
-  it('Should create a new game with the rules passed', () => {
-    const rules = {
-      numberOfPlayers: 6,
+  let state = GameStateFactory.createGame({
+    numberOfPlayers: 4,
+    flor: false,
+    maxPoints: 15,
+  });
+
+  beforeEach(() => {
+    state = GameStateFactory.createGame({
+      numberOfPlayers: 4,
       flor: false,
       maxPoints: 15,
-    };
-    const newGameCommand = new NewGameCommand(rules);
-    const gameState = newGameCommand.execute();
+    });
+  });
 
-    expect(gameState.hand.players.length).toBe(6);
+  it('Should send a player to deck and remove from players list', () => {
+    const player = state.hand.getPlayer(3);
+
+    const goToDeckCommand = new GoToDeckCommand(state, player);
+    state = goToDeckCommand.execute();
+
+    expect(state.hand.turns.atDeck).toContain(player);
   });
 });
