@@ -6,15 +6,15 @@ export class Round {
     // cardsPlayed is a map that holds the card that a player has been played
     public cardsPlayed: Map<Player, Card>,
     public players: Player[],
-  ) {}
+  ) { }
 
   /* Returns if the round is already finished */
-  isFinished(): boolean {
+  public isFinished(): boolean {
     return this.cardsPlayed.size === this.players.length;
   }
 
   /* Plays a card in the round */
-  playCard(player: Player, card: Card): void {
+  public playCard(player: Player, card: Card): void {
     if (this.cardsPlayed.get(player)) {
       throw Error('Player already played a card in this round!');
     }
@@ -22,7 +22,7 @@ export class Round {
   }
 
   /* Returns the winner of the round */
-  winner(): Player[] | undefined {
+  public winner(): Player[] | undefined {
     if (!this.isFinished()) {
       return undefined;
     }
@@ -34,5 +34,22 @@ export class Round {
     return Array.from(this.cardsPlayed.keys()).filter(
       (player) => this.cardsPlayed.get(player)?.value() == highestValue,
     );
+  }
+
+  /*
+   * serialize
+   * Returns the encoded string with the cards played during the round by each player
+   */
+  public serialize(): string {
+    let s = "";
+    for (let i = 0; i < this.players.length; i++) {
+      const player = this.players[i];
+      if (this.cardsPlayed.has(player)) {
+        s += this.cardsPlayed.get(player)!.toString();
+      } else {
+        s += "0";
+      }
+    }
+    return s;
   }
 }

@@ -1,7 +1,7 @@
 import { GameStateFactory } from "../factories/game-state.factory";
-import { NewGameCommand } from "./new-game-command";
+import { GoToDeckCommand } from "./go-to-deck-command";
 
-describe('execute', () => {
+describe('#execute', () => {
   let state = GameStateFactory.createGame({
     numberOfPlayers: 4,
     flor: false,
@@ -17,15 +17,11 @@ describe('execute', () => {
   });
 
   it('Should send a player to deck and remove from players list', () => {
-    const newRules = {
-      numberOfPlayers: 6,
-      flor: true,
-      maxPoints: 30
-    }
+    const player = state.hand.getPlayer(3);
 
-    const newGameCommand = new NewGameCommand(newRules);
-    state = newGameCommand.execute();
+    const goToDeckCommand = new GoToDeckCommand(state, player);
+    state = goToDeckCommand.execute();
 
-    expect(state.rules).toBe(newRules);
+    expect(state.hand.turns.atDeck).toContain(player);
   });
 });

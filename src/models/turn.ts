@@ -18,7 +18,7 @@ export class Turn {
   /*
    * Draws the initial turns for a new hand
    */
-  drawInitialTurns(): void {
+  public drawInitialTurns(): void {
     const randomIndex = Math.floor(Math.random() * this.players.length);
 
     this.handPlayer = this.players[randomIndex];
@@ -30,7 +30,7 @@ export class Turn {
    * setTurns
    * Updates all the current turs to the player passed
    */
-  setTurns(player: Player) {
+  public setTurns(player: Player) {
     this.chantEnvidoTurn = player;
     this.playCardTurn = player;
   }
@@ -38,7 +38,7 @@ export class Turn {
   /*
    * Advances to next player when a card is played during a hand
    */
-  nextTurn(): void {
+  public nextTurn(): void {
     const nextPlayerIndex = this.nextPlayCardPlayer();
 
     this.setTurns(this.players[nextPlayerIndex]);
@@ -47,7 +47,7 @@ export class Turn {
   /*
    * Returns an array with the order of the handPlayer to the rest for envido
    */
-  handPlayerOrder(): number[] {
+  public handPlayerOrder(): number[] {
     const totalPlayers = this.players.length;
     const initialPlayerNumber = this.handPlayer!.id;
 
@@ -61,7 +61,7 @@ export class Turn {
    * goToDeck
    * Removes a player from the player's list and sends him to deck
    */
-  goToDeck(playerNumber: PlayerNumber) {
+  public goToDeck(playerNumber: PlayerNumber) {
     // TODO: check already at deck?
 
     const playerToDeck = this.players.find(p => p.id === playerNumber);
@@ -74,7 +74,7 @@ export class Turn {
    * teamAtDeck
    * Returns whenever a team is at deck or undefined
    */
-  teamAtDeck(): Team | undefined {
+  public teamAtDeck(): Team | undefined {
     const team = this.players[0].team;
 
     if (this.players.every(player => player.team === team)) {
@@ -87,8 +87,26 @@ export class Turn {
   /*
    * Updates chant envido turn to next player
    */
-  updateChantEnvidoTurn() {
+  public updateChantEnvidoTurn(): void {
     this.chantEnvidoTurn = this.players[this.nextChantEnvidoPlayer()];
+  }
+
+  /*
+  * serialize
+  * Returns the encoded string of the current turns in the hand
+  */
+  public serialize(): string {
+    let s = "";
+    s += this.handPlayer ? ("H" + this.handPlayer.id) : "-";
+    s += this.chantEnvidoTurn ? ("C" + this.chantEnvidoTurn.id) : "-";
+    s += this.responseTrucoChantTurn ? ("T" + this.responseTrucoChantTurn) : "-";
+    s += this.responseFlorChantTurn ? ("F" + this.responseFlorChantTurn) : "-";
+    s += this.playCardTurn ? ("P" + this.playCardTurn.id) : "-";
+    s += this.firstEnvidoChant ? ("Y" + this.firstEnvidoChant.id) : "-";
+    s += this.firstFlorChant ? ("Z" + this.firstFlorChant.id) : "-";
+    s += this.atDeck.length > 0 ? "D" + this.atDeck.map(p => p.id).join("") : "-";
+
+    return s;
   }
 
   private nextPlayCardPlayer(): number {

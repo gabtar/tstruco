@@ -141,3 +141,30 @@ describe('#winner', () => {
     expect(flower.winner()).toBe(2);
   });
 });
+
+describe('#serialize', () => {
+  let flower = new Flor([0, 1]);
+
+  it('Should return an empty string when no envido was chanted', () => {
+    expect(flower.serialize()).toBe("");
+  });
+
+  it('Should return an CD when flor, and contraflor was chanted and declined', () => {
+    flower.chant(FlorLevel.Flor);
+    flower.chant(FlorLevel.ContraFlor);
+    flower.accepted = false;
+
+    expect(flower.serialize()).toBe("CD");
+  });
+
+  it('Should return an FA07E6E1E12B3B7B when flor was chanted, accepted and player 0 played 7E,6E, and 1E, and player 1 played 2B, 3B and 7B', () => {
+    flower = new Flor([0, 1]);
+    flower.chant(FlorLevel.Flor);
+    flower.accepted = true;
+
+    flower.playCards(0, [CardFactory.from("7E"), CardFactory.from("6E"), CardFactory.from("1E")]);
+    flower.playCards(1, [CardFactory.from("2B"), CardFactory.from("3B"), CardFactory.from("7B")]);
+
+    expect(flower.serialize()).toBe("FA07E6E1E12B3B7B");
+  });
+});

@@ -10,7 +10,7 @@ export class Envido {
     >(),
     public chanted: EnvidoLevel[] = [],
     public accepted?: boolean,
-  ) {}
+  ) { }
 
   /*
    * addChant
@@ -76,6 +76,27 @@ export class Envido {
       score += 1;
     }
     return score;
+  }
+
+  /*
+  * serialize
+  * Returns the string code representing the status of the envido
+  */
+  public serialize(): string {
+    // Envido Level enum maps to letter
+    const chantedCode = {
+      2: "E",
+      3: "R",
+      30: "F",
+    }
+    const chanted = this.chanted.reduce((chanted, chant) => chanted + chantedCode[chant], "")
+    const accepted = this.accepted !== undefined ? (this.accepted ? "A" : "D") : ""
+    let cardsPlayed = "";
+    this.cardsPlayed.forEach(
+      (ep, p) => cardsPlayed = cardsPlayed.concat(p + ep.serialize())
+    );
+
+    return chanted + accepted + cardsPlayed;
   }
 
   private isValidEnvidoLevel(chant: EnvidoLevel): boolean {

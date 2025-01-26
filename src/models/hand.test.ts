@@ -123,3 +123,30 @@ describe('#winner', () => {
     expect(hand.winner()).toBe(hand.turns.handPlayer?.team);
   });
 });
+
+describe("#serialize", () => {
+  const players = PlayerFactory.createPlayers(2);
+  let hand = HandFactory.createHand(players);
+  const player1 = players[0];
+  const player2 = players[1];
+
+  it('Should return 00-00-00 when no card was played', () => {
+    expect(hand.serialize()).toBe("00-00-00");
+  });
+
+  it('Should return 01E4C0-0000-0000 when player 2 played 1E and player 3 4C', () => {
+    let fourPlayers = PlayerFactory.createPlayers(4);
+    hand = HandFactory.createHand(fourPlayers);
+
+    const card1E = CardFactory.from('1E');
+    const card4C = CardFactory.from('4C');
+
+    fourPlayers[1].cards[0] = card1E;
+    fourPlayers[2].cards[0] = card4C;
+
+    hand.playCard(fourPlayers[1], card1E);
+    hand.playCard(fourPlayers[2], card4C);
+
+    expect(hand.serialize()).toBe("01E4C0-0000-0000");
+  });
+});

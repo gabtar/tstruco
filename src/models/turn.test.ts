@@ -93,3 +93,27 @@ describe('#teamAtDeck', () => {
     expect(turn.teamAtDeck()).toBeUndefined();
   });
 });
+
+describe('#serilize', () => {
+  const players = PlayerFactory.createPlayers(4);
+  const turn = new Turn(players);
+
+  it('Should return -------- when no turns assigned', () => {
+    expect(turn.serialize()).toBe('--------');
+  });
+
+  it('Should return H2C2------- when player 3 has hand and chant envido turn', () => {
+    turn.handPlayer = players[2];
+    turn.chantEnvidoTurn = players[2];
+
+    expect(turn.serialize()).toBe('H2C2------');
+  });
+
+  it('Should return H2C2------D01 when player 3 has hand and chant envido turn, and player 0 and 1 are at deck', () => {
+    turn.handPlayer = players[2];
+    turn.chantEnvidoTurn = players[2];
+    turn.atDeck = [players[0], players[1]]
+
+    expect(turn.serialize()).toBe('H2C2-----D01');
+  });
+});

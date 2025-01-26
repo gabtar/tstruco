@@ -19,6 +19,19 @@ export interface ActionParams {
   goToDeck: { player: PlayerNumber };
 }
 
+export interface GameStatus {
+  rules: string
+  players: string
+  cardsDealt: string
+  envido: string
+  flor: string
+  truco: string
+  cardsPlayed: string
+  turns: string
+  score: string
+  gamePhase: string
+}
+
 export enum EnvidoLevel {
   Envido = 2,
   RealEnvido = 3,
@@ -57,7 +70,6 @@ export enum GamePhase {
   ChantTruco = 'CHANT_TRUCO',
   ChantEnvido = 'CHANT_ENVIDO',
   PlayEnvido = 'PLAY_ENVIDO',
-  Flor = 'FLOR',
   ChantFlor = 'CHANT_FLOR',
   PlayFlor = 'PLAY_FLOR',
 }

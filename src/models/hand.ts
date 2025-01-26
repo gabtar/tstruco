@@ -111,4 +111,17 @@ export class Hand {
       this.players[i].cards = cards.splice(0, 3);
     }
   }
+
+  /*
+   * serialize
+   * Returns the encoded string of the cards played during all the rounds in the hand
+   */
+  public serialize(): string {
+    const cards = this.rounds.reduce(
+      (handCards, round) => handCards + round.serialize() + "-"
+      , ""
+    );
+
+    return cards.slice(0, cards.length - 1);
+  }
 }

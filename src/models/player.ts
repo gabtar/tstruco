@@ -6,7 +6,7 @@ export class Player {
     public id: PlayerNumber,
     public team: Team,
     public cards: Card[],
-  ) {}
+  ) { }
 
   /*
    * opponentTeam
@@ -24,5 +24,13 @@ export class Player {
     const suit = this.cards[0].suit;
 
     return this.cards.every((card) => card.suit == suit);
+  }
+
+  /*
+  * serializeCards
+  * Returns an string of the cards codes dealt to the player
+  */
+  public serializeCards(): string {
+    return this.cards.reduce((cards, card) => cards + card.toString(), "");
   }
 }

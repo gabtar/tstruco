@@ -21,3 +21,18 @@ describe('#maxScore', () => {
     expect(score.maxScore()).toBe(15);
   });
 });
+
+describe('#serilize', () => {
+  const score = new Score();
+
+  it('Should return A0B0 when no team has score', () => {
+    expect(score.serialize()).toBe("A0B0");
+  });
+
+  it('Should return A5B17 when Team A has 5 points and Team B has 17 points in the game', () => {
+    score.add(Team.A, 5);
+    score.add(Team.B, 17);
+
+    expect(score.serialize()).toBe("A5B17");
+  });
+});

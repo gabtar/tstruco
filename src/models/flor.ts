@@ -11,7 +11,7 @@ export class Flor {
     >(),
     public chanted?: FlorLevel,
     public accepted?: boolean,
-  ) {}
+  ) { }
 
   /*
    * chant
@@ -87,6 +87,26 @@ export class Flor {
     }
 
     return winners[0];
+  }
+
+  /*
+   * serialize
+   * Returns the encoded string for the current flor
+   */
+  public serialize(): string {
+    const chantedCode = {
+      0: "F",
+      1: "C",
+      2: "R",
+    }
+    const chanted = this.chanted !== undefined ? chantedCode[this.chanted] : "";
+    const accepted = this.accepted !== undefined ? (this.accepted ? "A" : "D") : ""
+    let cardsPlayed = "";
+    this.cardsPlayed.forEach(
+      (c, p) => cardsPlayed = cardsPlayed.concat(p + c.map(c => c.toString()).join(""))
+    );
+
+    return chanted + accepted + cardsPlayed;
   }
 
   /*

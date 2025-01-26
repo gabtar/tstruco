@@ -1,5 +1,4 @@
 import { CardFactory } from '../factories/card.factory';
-import { HandFactory } from '../factories/hand.factory';
 import { PlayerFactory } from '../factories/player.factory';
 
 describe('#opponentTeam', () => {
@@ -37,5 +36,25 @@ describe('#hasFlor', () => {
     players[0].cards = nonFlorHand;
 
     expect(players[0].hasFlor()).toBeFalsy();
+  });
+});
+
+describe('#serializeCards', () => {
+  let players = PlayerFactory.createPlayers(2);
+
+  const cards = [
+    CardFactory.from('1E'),
+    CardFactory.from('3O'),
+    CardFactory.from('7B'),
+  ];
+
+  it('Should return an empty string when the cards has not been dealt', () => {
+    expect(players[0].serializeCards()).toBe("");
+  });
+
+  it('Should the cards code of the cards dealt to the player', () => {
+    players[0].cards = cards;
+
+    expect(players[0].serializeCards()).toBe("1E3O7B");
   });
 });

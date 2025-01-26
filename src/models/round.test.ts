@@ -1,9 +1,10 @@
+import { CardFactory } from '../factories/card.factory';
 import { PlayerFactory } from '../factories/player.factory';
 import { Card } from './card';
 import { Player } from './player';
 import { Round } from './round';
 
-describe('Winner', () => {
+describe('#winner', () => {
   const card1 = new Card('1', 'E');
   const card2 = new Card('1', 'B');
   const players = PlayerFactory.createPlayers(2);
@@ -22,7 +23,7 @@ describe('Winner', () => {
   });
 });
 
-describe('Play card', () => {
+describe('#playCard', () => {
   const card1 = new Card('1', 'E');
   const players = PlayerFactory.createPlayers(2);
   const round = new Round(new Map<Player, Card>(), players);
@@ -41,4 +42,19 @@ describe('Play card', () => {
       'Player already played a card in this round!',
     );
   });
+});
+
+describe('#serialize', () => {
+  const players = PlayerFactory.createPlayers(2);
+  const round = new Round(new Map<Player, Card>(), players);
+
+  it('Should return 00 when no player has played a card', () => {
+    expect(round.serialize()).toBe("00");
+  });
+
+  it('Should return 1E0 when player 0 has played 1E and player 1 has not play a card yet', () => {
+    round.playCard(players[0], CardFactory.from("1E"));
+    expect(round.serialize()).toBe("1E0");
+  });
+
 });
