@@ -109,8 +109,8 @@ describe('#totalScorePoints', () => {
 describe('#serialize', () => {
   const envido = new Envido([1, 0]);
 
-  it('Should return an empty string when no envido was chanted', () => {
-    expect(envido.serialize()).toBe("");
+  it('Should return a nothing when no envido was chanted', () => {
+    expect(envido.serialize()).toBe('');
   });
 
   it('Should return an EERD when envido, envido, real envido was chanted and declined', () => {
@@ -119,17 +119,20 @@ describe('#serialize', () => {
     envido.addChant(EnvidoLevel.RealEnvido);
     envido.accepted = false;
 
-    expect(envido.serialize()).toBe("EERD");
+    expect(envido.serialize()).toBe('EERD');
   });
 
-  it('Should return an EEA07E6E when envido, envido, was chanted, accepted and player 0 played 7E and 6E', () => {
+  it('Should return an EEA-07E6E-N when envido, envido, was chanted, accepted and player 0 played 7E and 6E', () => {
     envido.chanted = [];
 
     envido.addChant(EnvidoLevel.Envido);
     envido.addChant(EnvidoLevel.Envido);
     envido.accepted = true;
-    envido.playCards(0, new EnvidoPair(CardFactory.from("7E"), CardFactory.from("6E")));
+    envido.playCards(
+      0,
+      new EnvidoPair(CardFactory.from('7E'), CardFactory.from('6E')),
+    );
 
-    expect(envido.serialize()).toBe("EEA07E6E");
+    expect(envido.serialize()).toBe('EEA-07E6E-N');
   });
 });

@@ -16,7 +16,7 @@ Here we will encode the cards dealt to the players. The cards will be represente
 
 As for each player 3 cards are dealt, we will have a multiple of 3 depending on the number of players.
 An example of the cards dealt in a hand, for example if we have a 2 player game, and player 1 has "7 Basto", "1 Basto" and "3 Oro" cards, and player 2 has "5 Espada", "3 Oro" and "4 Copa" cards the encoded string of cards dealt will be **"7B1B3O5E3O4C"**.
- 
+
 #### Envido
 We will encode the chants so far, with the following letters:
 
@@ -26,13 +26,15 @@ We will encode the chants so far, with the following letters:
 | **R**  | Real Envido  |
 | **F**  | Falta Envido |
 
-The string could be composed of different levels of envido chanted so far, so for example if in a game we chant "Envido" and the opponent responses with another chant, like "Real Envido" the string code will be **"ER"**. 
+The string could be composed of different levels of envido chanted so far, so for example if in a game we chant "Envido" and the opponent responses with another chant, like "Real Envido" the string code will be **"ER"**.
 A final letter will be indicated if the envido was accepted **A** or declined **D**. And when no letter is at the end will mean that the envido is still open or awaiting a response of a player.
 
-If cards were played during the envido, we will encode them with the number of the player(from 0 to 5, in case of 6 players) followed with the codes of the cards played. So we will have, if it was chanted Envido an accepted by the opponent. Player 0 played "3 de Espada" and "7 de espada", and player 1 played  "2 de Basto" and "5 de Basto", we will have the following code:
+If cards were played during the envido, we will encode them with the number of the player(from 0 to 5, in case of 6 players) followed with the codes of the cards played. So we will have, if it was chanted Envido an accepted by the opponent. Player 0 played "3 de Espada" and "7 de espada", and player 1 played  "2 de Basto" and "5 de Basto", we will have the following code(a dash will separate each envido play by a player):
+
+At the end of the cards played by player, we will have a number indicating the winner of the envido play. If no winner yet, we will indicate with an 'N'.
 
 ```
-EA03E7E12B5B
+EA-03E7E-12B5B-0
 ```
 
 #### Flor
@@ -69,7 +71,7 @@ For example in a 4 player game we will have the following code knowing that the 
 (1st round cards - 2nd round cards - 3rd round cards) / **"0"** means no card played yet
 
 #### Turns
-Here we need to encode all information regarding to the status of the turns in the hand. We will use the following codes for the turns section. When the turn is not defined yet, we will use a dash instead of the letter. 
+Here we need to encode all information regarding to the status of the turns in the hand. We will use the following codes for the turns section. When the turn is not defined yet, we will use a dash instead of the letter.
 
 | Order | Letter |         Turn         |
 | :---: | :----: | :------------------: |
@@ -123,4 +125,3 @@ We will encode the previos sections defined and join them by using an special ch
 So we will have the following structure for the encoded string of the game:
 
 { RULES} # { PLAYERS } # { CARDS DEALT } # { ENVIDO } # { FLOR } # { TRUCO } # { CARDS PLAYED } # { TURNS } ll# { SCORE } # { GAME PHASE }
-

@@ -10,7 +10,7 @@ export class Envido {
     >(),
     public chanted: EnvidoLevel[] = [],
     public accepted?: boolean,
-  ) { }
+  ) {}
 
   /*
    * addChant
@@ -33,11 +33,11 @@ export class Envido {
   }
 
   /*
-   * envidoPlaysCount
-   * Returns the number of player who has played envido
+   * allPlayersPlayed
+   * Returns if all the players have played the envido play
    */
-  get envidoPlaysCount(): number {
-    return this.cardsPlayed.size;
+  get allPlayersPlayed(): boolean {
+    return this.cardsPlayed.size === this.handPlayerOrder.length;
   }
 
   /*
@@ -79,24 +79,37 @@ export class Envido {
   }
 
   /*
-  * serialize
-  * Returns the string code representing the status of the envido
-  */
+   * serialize
+   * Returns the string code representing the status of the envido
+   */
   public serialize(): string {
-    // Envido Level enum maps to letter
     const chantedCode = {
-      2: "E",
-      3: "R",
-      30: "F",
-    }
-    const chanted = this.chanted.reduce((chanted, chant) => chanted + chantedCode[chant], "")
-    const accepted = this.accepted !== undefined ? (this.accepted ? "A" : "D") : ""
-    let cardsPlayed = "";
-    this.cardsPlayed.forEach(
-      (ep, p) => cardsPlayed = cardsPlayed.concat(p + ep.serialize())
+      2: 'E',
+      3: 'R',
+      30: 'F',
+    };
+    const chanted = this.chanted.reduce(
+      (chanted, chant) => chanted + chantedCode[chant],
+      '',
     );
+    const accepted =
+      this.accepted !== undefined ? (this.accepted ? 'A' : 'D') : '';
 
-    return chanted + accepted + cardsPlayed;
+    if (!accepted) {
+      return chanted;
+    }
+
+    let cardsPlayed = '';
+    this.cardsPlayed.forEach(
+      (ep, p) => (cardsPlayed = cardsPlayed.concat(p + ep.serialize() + '-')),
+    );
+    const winner = this.allPlayersPlayed ? this.winner() : 'N';
+
+    if (!cardsPlayed) {
+      return chanted + accepted;
+    }
+
+    return chanted + accepted + '-' + cardsPlayed.slice(0, -1) + '-' + winner;
   }
 
   private isValidEnvidoLevel(chant: EnvidoLevel): boolean {

@@ -6,7 +6,6 @@ jest.mock('../commands/command-handler.ts'); // command-handler mock
 const CommandHandlerMock = CommandHandler as jest.MockedClass<typeof CommandHandler>;
 
 beforeEach(() => {
-  // Clear all instances and calls to constructor and all methods:
   CommandHandlerMock.mockClear();
 });
 

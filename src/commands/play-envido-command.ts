@@ -36,10 +36,7 @@ export class PlayEnvidoCommand implements Command {
     );
     this.state.hand.turns.updateChantEnvidoTurn();
 
-    if (
-      this.state.hand.envido.envidoPlaysCount ==
-      this.state.rules.numberOfPlayers
-    ) {
+    if (this.state.hand.envido.allPlayersPlayed) {
       const envidoPoints = this.state.hand.envido.totalScorePoints();
       const winner = this.state.hand.envido.winner();
 

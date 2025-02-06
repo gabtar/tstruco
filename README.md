@@ -18,23 +18,10 @@
 - [x] Game object with public api for play during the game.
 - [x] Refactoring to a Score object and make tests *
 - [ ] Improve turn system for envido/flor/truco and chants
-- [ ] Serialize object - JSON? or a string code, eg 0123Player1E2BCards...
 
 
 ## Commands:
 
-- [x] Play card command
-    - [x] TODO: play a card that ends the round/hand/game
-    - [x] Update turns of the next round. The winner of the previous round should start playing a card.
-- [x] New Game command
-- [x] New Hand command
-- [x] Chant Envido command
-- [x] Respond Envido command - Accept/Decline
-- [x] Play Envido command
-- [x] Chant Truco command
-- [x] Respond Truco command
-- [x] Chant Flor command
-- [x] Response to Flor command
 - [x] Play Flor command
     - [ ] FIX: Only the players who have a flor should play it
 - [x] Go To Deck command
@@ -42,6 +29,8 @@
 
 ## Posible bugfixes
 - [ ] When flor is chanted, disable envido chant....
+- [ ] When no card is played in envido by a player we will asume that the player pass by saying "son buenas" / pass the envido play. So either cards of the envido pair should be optionals
+- [x] New Hand action/command sets wrong turns
 
 
 ## Game Api Usage
@@ -57,7 +46,7 @@ const truco = new Truco();
 | -----------   | --------------------------------------- | -------------------------------------------------------------------------- |
 | newGame       | truco.action('newGame', params)         | { rules: { numberOfPlayers: number, maxPoints: number, flor: boolean } }   |
 | newHand       | truco.action('newHand', {})             |        -                                                                   |
-| playCard      | truco.action('playCard', parms)         | { player: number, cardsCodes: string[] }                                   |
+| playCard      | truco.action('playCard', parms)         | { player: number, cardCode: string }                                       |
 | chantEnvido   | truco.action('chantEnvido', params)     | { player: number, chant: number }                                          |
 | respondEnvido | truco.action('respondEnvido', params)   | { player: number, accepted: boolean }                                      |
 | playEnvido    | truco.action('playEnvido', params)      | { player: number, cardsCode: string }                                      |
@@ -65,5 +54,5 @@ const truco = new Truco();
 | respondTruco  | truco.action('respondTruco', params)    | { player: number, accepted: boolean }                                      |
 | chantFlor     | truco.action('chantFlor', params)       | { player: number, florLevel: number }                                      |
 | respondFlor   | truco.action('respondFlor', params)     | { player: number, accepted: boolean }                                      |
-| playFlor      | truco.action('playFlor', params)        | { player: number, cardsCodes: string[] }                                   |
+| playFlor      | truco.action('playFlor', params)        | { player: number, cardsCodes: string }                                     |
 | goToDeck      | truco.action('goToDeck', params)        | { player: number }                                                         |
