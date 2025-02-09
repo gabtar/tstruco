@@ -6,7 +6,7 @@ export class Player {
     public id: PlayerNumber,
     public team: Team,
     public cards: Card[],
-  ) { }
+  ) {}
 
   /*
    * opponentTeam
@@ -27,10 +27,10 @@ export class Player {
   }
 
   /*
-  * serializeCards
-  * Returns an string of the cards codes dealt to the player
-  */
+   * serializeCards
+   * Returns an string of the cards codes dealt to the player
+   */
   public serializeCards(): string {
-    return this.cards.reduce((cards, card) => cards + card.toString(), "");
+    return this.cards.reduce((cards, card) => cards + card.toString(), '');
   }
 }

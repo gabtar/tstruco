@@ -8,5 +8,5 @@ export class GameState {
     public rules: GameRules,
     public score: Score,
     public status: Status = Status.IN_PROGRESS,
-  ) { }
+  ) {}
 }

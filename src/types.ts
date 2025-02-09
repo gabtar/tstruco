@@ -20,16 +20,16 @@ export interface ActionParams {
 }
 
 export interface GameStatus {
-  rules: string
-  players: string
-  cardsDealt: string
-  envido: string
-  flor: string
-  truco: string
-  cardsPlayed: string
-  turns: string
-  score: string
-  gamePhase: string
+  rules: string;
+  players: string;
+  cardsDealt: string;
+  envido: string;
+  flor: string;
+  truco: string;
+  cardsPlayed: string;
+  turns: string;
+  score: string;
+  gamePhase: string;
 }
 
 export enum EnvidoLevel {

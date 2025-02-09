@@ -6,7 +6,7 @@ export class Round {
     // cardsPlayed is a map that holds the card that a player has been played
     public cardsPlayed: Map<Player, Card>,
     public players: Player[],
-  ) { }
+  ) {}
 
   /* Returns if the round is already finished */
   public isFinished(): boolean {
@@ -41,13 +41,13 @@ export class Round {
    * Returns the encoded string with the cards played during the round by each player
    */
   public serialize(): string {
-    let s = "";
+    let s = '';
     for (let i = 0; i < this.players.length; i++) {
       const player = this.players[i];
       if (this.cardsPlayed.has(player)) {
         s += this.cardsPlayed.get(player)!.toString();
       } else {
-        s += "0";
+        s += '0';
       }
     }
     return s;

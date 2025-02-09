@@ -49,12 +49,11 @@ describe('#serialize', () => {
   const round = new Round(new Map<Player, Card>(), players);
 
   it('Should return 00 when no player has played a card', () => {
-    expect(round.serialize()).toBe("00");
+    expect(round.serialize()).toBe('00');
   });
 
   it('Should return 1E0 when player 0 has played 1E and player 1 has not play a card yet', () => {
-    round.playCard(players[0], CardFactory.from("1E"));
-    expect(round.serialize()).toBe("1E0");
+    round.playCard(players[0], CardFactory.from('1E'));
+    expect(round.serialize()).toBe('1E0');
   });
-
 });

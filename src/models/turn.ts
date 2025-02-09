@@ -13,7 +13,7 @@ export class Turn {
     public firstEnvidoChant?: Player,
     public firstFlorChant?: Player,
     public atDeck: Player[] = [], // players already resigned to current hand
-  ) { }
+  ) {}
 
   /*
    * Draws the initial turns for a new hand
@@ -64,10 +64,10 @@ export class Turn {
   public goToDeck(playerNumber: PlayerNumber) {
     // TODO: check already at deck?
 
-    const playerToDeck = this.players.find(p => p.id === playerNumber);
+    const playerToDeck = this.players.find((p) => p.id === playerNumber);
 
     this.atDeck.push(playerToDeck!);
-    this.players = this.players.filter(p => p.id !== playerNumber);
+    this.players = this.players.filter((p) => p.id !== playerNumber);
   }
 
   /*
@@ -77,7 +77,7 @@ export class Turn {
   public teamAtDeck(): Team | undefined {
     const team = this.players[0].team;
 
-    if (this.players.every(player => player.team === team)) {
+    if (this.players.every((player) => player.team === team)) {
       return team === Team.A ? Team.B : Team.A;
     }
 
@@ -92,19 +92,22 @@ export class Turn {
   }
 
   /*
-  * serialize
-  * Returns the encoded string of the current turns in the hand
-  */
+   * serialize
+   * Returns the encoded string of the current turns in the hand
+   */
   public serialize(): string {
-    let s = "";
-    s += this.handPlayer ? ("H" + this.handPlayer.id) : "-";
-    s += this.chantEnvidoTurn ? ("C" + this.chantEnvidoTurn.id) : "-";
-    s += this.responseTrucoChantTurn ? ("T" + this.responseTrucoChantTurn) : "-";
-    s += this.responseFlorChantTurn ? ("F" + this.responseFlorChantTurn) : "-";
-    s += this.playCardTurn ? ("P" + this.playCardTurn.id) : "-";
-    s += this.firstEnvidoChant ? ("Y" + this.firstEnvidoChant.id) : "-";
-    s += this.firstFlorChant ? ("Z" + this.firstFlorChant.id) : "-";
-    s += this.atDeck.length > 0 ? "D" + this.atDeck.map(p => p.id).join("") : "-";
+    let s = '';
+    s += this.handPlayer ? 'H' + this.handPlayer.id : '-';
+    s += this.chantEnvidoTurn ? 'C' + this.chantEnvidoTurn.id : '-';
+    s += this.responseTrucoChantTurn ? 'T' + this.responseTrucoChantTurn : '-';
+    s += this.responseFlorChantTurn ? 'F' + this.responseFlorChantTurn : '-';
+    s += this.playCardTurn ? 'P' + this.playCardTurn.id : '-';
+    s += this.firstEnvidoChant ? 'Y' + this.firstEnvidoChant.id : '-';
+    s += this.firstFlorChant ? 'Z' + this.firstFlorChant.id : '-';
+    s +=
+      this.atDeck.length > 0
+        ? 'D' + this.atDeck.map((p) => p.id).join('')
+        : '-';
 
     return s;
   }

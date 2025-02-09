@@ -4,7 +4,7 @@ export class EnvidoPair {
   constructor(
     public cardOne: Card,
     public cardTwo?: Card,
-  ) { }
+  ) {}
 
   /**
    * score
@@ -24,6 +24,8 @@ export class EnvidoPair {
    * Returns the string of the cards code
    */
   public serialize(): string {
-    return this.cardOne.toString() + (this.cardTwo ? this.cardTwo.toString() : "");
+    return (
+      this.cardOne.toString() + (this.cardTwo ? this.cardTwo.toString() : '')
+    );
   }
 }

@@ -1,5 +1,5 @@
-import { GameStateFactory } from "../factories/game-state.factory";
-import { NewGameCommand } from "./new-game-command";
+import { GameStateFactory } from '../factories/game-state.factory';
+import { NewGameCommand } from './new-game-command';
 
 describe('execute', () => {
   let state = GameStateFactory.createGame({
@@ -20,8 +20,8 @@ describe('execute', () => {
     const newRules = {
       numberOfPlayers: 6,
       flor: true,
-      maxPoints: 30
-    }
+      maxPoints: 30,
+    };
 
     const newGameCommand = new NewGameCommand(newRules);
     state = newGameCommand.execute();

@@ -9,7 +9,7 @@ export class Card {
   }
 
   get envidoScore(): number {
-    let rankNumber = Number(this.rank);
+    const rankNumber = Number(this.rank);
     return rankNumber >= 10 ? 0 : rankNumber;
   }
 

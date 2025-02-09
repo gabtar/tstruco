@@ -1,4 +1,3 @@
-import { on } from 'events';
 import { GameStateFactory } from '../factories/game-state.factory';
 import { PlayerFactory } from '../factories/player.factory';
 import { RespondFlorCommand } from './respond-flor-command';

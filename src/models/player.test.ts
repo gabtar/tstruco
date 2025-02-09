@@ -12,7 +12,7 @@ describe('#opponentTeam', () => {
 });
 
 describe('#hasFlor', () => {
-  let players = PlayerFactory.createPlayers(2);
+  const players = PlayerFactory.createPlayers(2);
 
   const florHand = [
     CardFactory.from('1E'),
@@ -40,7 +40,7 @@ describe('#hasFlor', () => {
 });
 
 describe('#serializeCards', () => {
-  let players = PlayerFactory.createPlayers(2);
+  const players = PlayerFactory.createPlayers(2);
 
   const cards = [
     CardFactory.from('1E'),
@@ -49,12 +49,12 @@ describe('#serializeCards', () => {
   ];
 
   it('Should return an empty string when the cards has not been dealt', () => {
-    expect(players[0].serializeCards()).toBe("");
+    expect(players[0].serializeCards()).toBe('');
   });
 
   it('Should the cards code of the cards dealt to the player', () => {
     players[0].cards = cards;
 
-    expect(players[0].serializeCards()).toBe("1E3O7B");
+    expect(players[0].serializeCards()).toBe('1E3O7B');
   });
 });

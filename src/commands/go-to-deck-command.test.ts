@@ -1,5 +1,5 @@
-import { GameStateFactory } from "../factories/game-state.factory";
-import { GoToDeckCommand } from "./go-to-deck-command";
+import { GameStateFactory } from '../factories/game-state.factory';
+import { GoToDeckCommand } from './go-to-deck-command';
 
 describe('#execute', () => {
   let state = GameStateFactory.createGame({

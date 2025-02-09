@@ -10,7 +10,7 @@ export class NewHandCommand implements Command {
     const actualHandPlayer = this.state.hand.turns.handPlayer?.id;
     const numberOfPlayers = this.state.rules.numberOfPlayers;
 
-    let newHand = HandFactory.createHand(this.state.hand.players);
+    const newHand = HandFactory.createHand(this.state.hand.players);
     newHand.dealCards();
 
     if (actualHandPlayer === undefined) {

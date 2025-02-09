@@ -17,7 +17,7 @@ export class Hand {
     public phase: GamePhase,
     public trucoLevel: TrucoLevel = TrucoLevel.NotChanted,
     public flor?: Flor,
-  ) { }
+  ) {}
 
   /*
    * currentRound
@@ -118,8 +118,8 @@ export class Hand {
    */
   public serialize(): string {
     const cards = this.rounds.reduce(
-      (handCards, round) => handCards + round.serialize() + "-"
-      , ""
+      (handCards, round) => handCards + round.serialize() + '-',
+      '',
     );
 
     return cards.slice(0, cards.length - 1);

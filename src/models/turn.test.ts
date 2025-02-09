@@ -60,7 +60,7 @@ describe('#handPlayerOrder', () => {
 });
 
 describe('#goToDeck', () => {
-  it('Should send a player to deck and remove from active player\'s list', () => {
+  it("Should send a player to deck and remove from active player's list", () => {
     const players = PlayerFactory.createPlayers(6);
     const playerFive = players[4];
     const turn = new Turn(players, players[3], players[3]);
@@ -112,7 +112,7 @@ describe('#serilize', () => {
   it('Should return H2C2------D01 when player 3 has hand and chant envido turn, and player 0 and 1 are at deck', () => {
     turn.handPlayer = players[2];
     turn.chantEnvidoTurn = players[2];
-    turn.atDeck = [players[0], players[1]]
+    turn.atDeck = [players[0], players[1]];
 
     expect(turn.serialize()).toBe('H2C2-----D01');
   });

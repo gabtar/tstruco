@@ -6,7 +6,7 @@ export class Score {
       [Team.A, 0],
       [Team.B, 0],
     ]),
-  ) { }
+  ) {}
 
   /*
    * add
@@ -39,11 +39,10 @@ export class Score {
   }
 
   /*
-  * serialize
-  * Returns the encoded string of the current score
-  */
+   * serialize
+   * Returns the encoded string of the current score
+   */
   public serialize(): string {
-    return "A" + this.getScore(Team.A) + "B" + this.getScore(Team.B);
+    return 'A' + this.getScore(Team.A) + 'B' + this.getScore(Team.B);
   }
-
 }

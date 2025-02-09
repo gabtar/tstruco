@@ -1,12 +1,12 @@
-import { GameState } from "../models/game-state";
-import { Player } from "../models/player";
-import { Command } from "./play-card-command";
+import { GameState } from '../models/game-state';
+import { Player } from '../models/player';
+import { Command } from './play-card-command';
 
 export class GoToDeckCommand implements Command {
   constructor(
     private state: GameState,
     private player: Player,
-  ) { }
+  ) {}
 
   public execute(): GameState {
     this.state.hand.turns.goToDeck(this.player.id);
