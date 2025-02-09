@@ -2,10 +2,10 @@
 
 <div align="center">
 
-![Statements](badges/coverage-statements.svg)
-![Branches](badges/coverage-branches.svg)
-![Functions](badges/coverage-functions.svg)
-![Lines](badges/coverage-lines.svg)
+![Statements](badges/badge-statements.svg)
+![Branches](badges/badge-branches.svg)
+![Functions](badges/badge-functions.svg)
+![Lines](badges/badge-lines.svg)
 
 
 </div>
