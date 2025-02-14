@@ -36,7 +36,6 @@ describe('execute', () => {
     const secondHandGame = new NewHandCommand(gameState);
     gameState = secondHandGame.execute();
 
-    console.log('New hand turns: ', gameState.hand.turns);
     const gotSecondHandPlayer = gameState.hand.turns.handPlayer?.id;
 
     expect(gotSecondHandPlayer).toBe(expectedSecondHandPlayer);

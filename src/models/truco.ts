@@ -49,7 +49,7 @@ export class Truco {
       '#' +
       flor +
       '#' +
-      trucoChantCode[this.state.hand.trucoLevel] +
+      trucoChantCode[this.state.hand.trucoLevel - 1] +
       '#' +
       this.state.hand.serialize() +
       '#' +
@@ -59,6 +59,10 @@ export class Truco {
       '#' +
       gamePhaseCode[this.state.hand.phase]
     );
+  }
+
+  public static from(serializedGame: string) {
+    return new Truco(GameStateFactory.from(serializedGame));
   }
 
   status(): GameStatus {

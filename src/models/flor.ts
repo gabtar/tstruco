@@ -103,14 +103,18 @@ export class Flor {
     const accepted =
       this.accepted !== undefined ? (this.accepted ? 'A' : 'D') : '';
     let cardsPlayed = '';
+
     this.cardsPlayed.forEach(
       (c, p) =>
         (cardsPlayed = cardsPlayed.concat(
-          p + c.map((c) => c.toString()).join(''),
+          '-' + p + c.map((c) => c.toString()).join(''),
         )),
     );
 
-    return chanted + accepted + cardsPlayed;
+    const isFinished = this.handPlayerOrder.length === this.cardsPlayed.size;
+    const winner = chanted ? '-' + (isFinished ? this.winner() : 'N') : 'N';
+
+    return chanted + accepted + cardsPlayed + winner;
   }
 
   /*

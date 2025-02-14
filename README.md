@@ -31,6 +31,9 @@
 - [ ] When no card is played in envido by a player we will asume that the player pass by saying "son buenas" / pass the envido play. So either cards of the envido pair should be optionals
 - [x] New Hand action/command sets wrong turns
 
+## Serialization
+
+**tstruco** uses a custom serialization system to encode game status into one single string. The system is described [here](SERIALIZATION.md)
 
 ## Game Api Usage
 

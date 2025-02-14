@@ -40,3 +40,12 @@ describe('#serialize', () => {
     expect(10).toBe(truco.serialize().split('#').length);
   });
 });
+
+describe('#from', () => {
+  it('Should return the same serialization string when deserializing', () => {
+    const truco = new Truco();
+    const deserialized = Truco.from(truco.serialize());
+
+    expect(deserialized.serialize()).toBe(truco.serialize());
+  });
+});

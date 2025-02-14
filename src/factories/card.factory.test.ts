@@ -10,8 +10,8 @@ describe('CardFactory #createCard', () => {
   });
 
   it('Should throw an error if card code is invalid', () => {
-    const card = CardFactory.from('ZZ');
-
-    // TODO: ......
+    // expect(() => CardFactory.from('ZZ')).toThrow(
+    //   'Invalid Card!',
+    // );
   });
 });

@@ -1,7 +1,7 @@
 
 ### Introduction
 
-The idea is to serialize a Game of Argentinian Truco into an encoded string. The string should have all necessary data of an state the game, so we can reconstruct the game with their current values/status/turns/etc from that string. The idea is to have a final structure similar to a FEN notation string for a game of chess.
+The idea is to serialize a Game of Argentinian Truco into an encoded string. The string must have all necessary data of a game, so we can reconstruct the game with their current values/status/turns/etc from that string. The approach is based on the FEN notation for a game of chess.
 
 ### Serialization in strings of each parts of a Truco game
 
@@ -46,9 +46,11 @@ As in envido we will encode the level(s) chanted and the status if it was accept
 | **C**  |     Contra Flor      |
 | **R**  | Contra Flor al Resto |
 
-So, an example of this encode will be **"FCD"** for a *flor* chant, responded with a *contra flor*, and then *declined* by the original player who chanted.
+So, an example of this encode will be **"CD"** for *contra flor*, and then *declined* by the original player who chanted.
 
-Similarly as with envido, if cards were played during the flor, we will encode them with the player number following the cards code played.
+Similarly as with envido, if cards were played during the flor, we will encode them with the player number following the cards code played. Each player play will be separated by a dash "-" as in envido serialization. 
+
+We will indicate if there is a winner of the flor with a final number indicating the player who won or with "N" if its still being played or no winner yet.
 
 #### Truco
 As in the other 2 previous cases we will encode the level chanted so far with letters. So we will have:

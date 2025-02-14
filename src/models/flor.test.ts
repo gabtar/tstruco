@@ -140,19 +140,19 @@ describe('#winner', () => {
 describe('#serialize', () => {
   let flower = new Flor([0, 1]);
 
-  it('Should return an empty string when no envido was chanted', () => {
-    expect(flower.serialize()).toBe('');
+  it('Should return an "N"(no winner) when no flor was chanted yet', () => {
+    expect(flower.serialize()).toBe('N');
   });
 
-  it('Should return an CD when flor, and contraflor was chanted and declined', () => {
+  it('Should return an CD-N when flor, and contraflor was chanted and declined', () => {
     flower.chant(FlorLevel.Flor);
     flower.chant(FlorLevel.ContraFlor);
     flower.accepted = false;
 
-    expect(flower.serialize()).toBe('CD');
+    expect(flower.serialize()).toBe('CD-N');
   });
 
-  it('Should return an FA07E6E1E12B3B7B when flor was chanted, accepted and player 0 played 7E,6E, and 1E, and player 1 played 2B, 3B and 7B', () => {
+  it('Should return an FA-07E6E1E-12B3B7B-0 when flor was chanted, accepted and player 0 played 7E,6E, and 1E, and player 1 played 2B, 3B and 7B', () => {
     flower = new Flor([0, 1]);
     flower.chant(FlorLevel.Flor);
     flower.accepted = true;
@@ -168,6 +168,8 @@ describe('#serialize', () => {
       CardFactory.from('7B'),
     ]);
 
-    expect(flower.serialize()).toBe('FA07E6E1E12B3B7B');
+    const expectedSerialization = 'FA-07E6E1E-12B3B7B-0';
+
+    expect(flower.serialize()).toBe(expectedSerialization);
   });
 });
