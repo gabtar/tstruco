@@ -1,6 +1,6 @@
 import { CardFactory } from './card.factory';
 
-describe('CardFactory #createCard', () => {
+describe('#createCard', () => {
   it('Should create an 1 of spades', () => {
     const card = CardFactory.from('1E');
 

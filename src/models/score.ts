@@ -32,8 +32,6 @@ export class Score {
     return Math.max(...Array.from(this.score.values()));
   }
 
-  // TODO: returns the remaining score to win the game
-  // useful for falta envido and contraflor al resto
   public remainingScore(team: Team): number {
     return 0;
   }

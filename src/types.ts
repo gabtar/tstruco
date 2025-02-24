@@ -35,7 +35,7 @@ export interface GameStatus {
 export enum EnvidoLevel {
   Envido = 2,
   RealEnvido = 3,
-  FaltaEnvido = 30, // TODO: check if rival has more or less of 15 score points...
+  FaltaEnvido = 30,
 }
 
 export enum TrucoLevel {

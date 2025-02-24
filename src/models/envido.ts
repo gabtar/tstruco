@@ -52,7 +52,7 @@ export class Envido {
     );
 
     const winners = [...this.cardsPlayed.entries()]
-      .filter(([k, v]) => v.score() == higestEnvidoPair.score())
+      .filter(([_, v]) => v.score() == higestEnvidoPair.score())
       .map(([k]) => k);
 
     if (winners.length > 0) {

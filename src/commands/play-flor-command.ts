@@ -12,10 +12,7 @@ export class PlayFlorCommand implements Command {
   ) {}
 
   public execute(): GameState {
-    // TODO: validations turns/cards/etc... player has the cards, etc
     this.state.hand.flor!.playCards(this.player.id, this.cards);
-
-    // TODO: for now all players needs to play a flor to end the flor stage. This need to be fixed to only players who have a flower in his hand
 
     if (
       this.state.hand.flor!.florPlaysCount == this.state.rules.numberOfPlayers

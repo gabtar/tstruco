@@ -1,6 +1,13 @@
 import { CardFactory } from '../factories/card.factory';
 import { GameStateFactory } from '../factories/game-state.factory';
-import { EnvidoLevel, FlorLevel, GamePhase, Status } from '../types';
+import {
+  EnvidoLevel,
+  FlorLevel,
+  GamePhase,
+  Status,
+  Team,
+  TrucoLevel,
+} from '../types';
 import { CommandHandler } from './command-handler';
 
 describe('#handle', () => {
@@ -92,7 +99,7 @@ describe('#handle', () => {
     ];
     state.hand.players[0].cards = flor;
 
-    const newEnvidoState = handler.handle(
+    const newFlorState = handler.handle(
       'chantFlor',
       {
         player: 0,
@@ -101,6 +108,56 @@ describe('#handle', () => {
       state,
     );
 
-    expect(newEnvidoState.hand.flor!.chanted).toBe(FlorLevel.Flor);
+    expect(newFlorState.hand.flor!.chanted).toBe(FlorLevel.Flor);
+  });
+
+  it('Should chant truco', () => {
+    const newTrucoState = handler.handle(
+      'chantTruco',
+      {
+        player: 0,
+        trucoLevel: TrucoLevel.ValeCuatro,
+      },
+      state,
+    );
+
+    expect(newTrucoState.hand.trucoLevel).toBe(TrucoLevel.ValeCuatro);
+  });
+
+  it('Should respond truco', () => {
+    handler.handle(
+      'chantTruco',
+      {
+        player: 0,
+        trucoLevel: TrucoLevel.ValeCuatro,
+      },
+      state,
+    );
+    const respondTrucoState = handler.handle(
+      'respondTruco',
+      {
+        player: 1,
+        accepted: false,
+      },
+      state,
+    );
+
+    expect(respondTrucoState.score.getScore(Team.A)).toBe(
+      TrucoLevel.ValeCuatro - 1,
+    );
+  });
+
+  it('Should send player 0 to deck', () => {
+    const newGoToDeckState = handler.handle(
+      'goToDeck',
+      {
+        player: 0,
+      },
+      state,
+    );
+
+    expect(newGoToDeckState.hand.turns.atDeck).toContain(
+      newGoToDeckState.hand.players[0],
+    );
   });
 });

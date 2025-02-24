@@ -65,7 +65,6 @@ export class Flor {
     let winners: PlayerNumber[] = [];
     const flowerScores = new Map<PlayerNumber, number>();
 
-    // TODO: extract to private method maybe calculateFlowerScores(?) and return the flowerScores Map
     [...this.cardsPlayed.keys()].forEach((player) => {
       const score = this.score(player);
       if (score >= maxScore) {

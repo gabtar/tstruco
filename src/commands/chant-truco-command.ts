@@ -11,9 +11,7 @@ export class ChantTrucoCommmand implements Command {
   ) {}
 
   public execute(): GameState {
-    // TODO: check game phase to chant? or can chant truco in any way? check game rules!!!
-
-    if (!this.canChantTruco(this.player)) {
+    if (!this.canChantTruco()) {
       throw Error('Not your turn!');
     }
 
@@ -28,7 +26,7 @@ export class ChantTrucoCommmand implements Command {
     return this.state;
   }
 
-  private canChantTruco(player: Player): boolean {
+  private canChantTruco(): boolean {
     const responseTrucoChantTurn = this.state.hand.turns.responseTrucoChantTurn;
 
     if (responseTrucoChantTurn === undefined) {

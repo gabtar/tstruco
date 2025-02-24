@@ -1,6 +1,5 @@
 import { GameStateFactory } from '../factories/game-state.factory';
-import { EnvidoLevel, GamePhase, TrucoLevel } from '../types';
-import { RespondEnvidoCommmand } from './respond-envido-command';
+import { TrucoLevel } from '../types';
 import { RespondTrucoCommmand } from './respond-truco-command';
 
 describe('#execute', () => {

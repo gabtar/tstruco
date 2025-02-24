@@ -71,9 +71,7 @@ export class CommandHandler {
         throw Error('Invalid action!');
     }
 
-    // TODO: check if all players go to deck, so need to deal a new hand...
-    // Set an status on Hand object to deal a new hand...
-    if (state.hand.winner()) {
+    if (state.hand.winner() != undefined) {
       state = this.newHand(state);
     }
 

@@ -82,7 +82,6 @@ describe('#execute', () => {
       FlorLevel.Flor,
     );
 
-    // TODO: mock hand/rounds
     state.hand.playCard(players[0], players[0].cards[1]);
     state.hand.playCard(players[1], players[1].cards[1]);
 

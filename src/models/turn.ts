@@ -62,8 +62,6 @@ export class Turn {
    * Removes a player from the player's list and sends him to deck
    */
   public goToDeck(playerNumber: PlayerNumber) {
-    // TODO: check already at deck?
-
     const playerToDeck = this.players.find((p) => p.id === playerNumber);
 
     this.atDeck.push(playerToDeck!);
@@ -113,13 +111,11 @@ export class Turn {
   }
 
   private nextPlayCardPlayer(): number {
-    // TODO: fix this!...
     const currentIndex = this.playCardTurn?.id ?? 0;
     return currentIndex === this.players.length - 1 ? 0 : currentIndex + 1;
   }
 
   private nextChantEnvidoPlayer(): number {
-    // TODO: fix this idem!...
     const currentIndex = this.chantEnvidoTurn?.id ?? 0;
     return currentIndex === this.players.length - 1 ? 0 : currentIndex + 1;
   }

@@ -29,7 +29,7 @@ export class Hand {
         return i;
       }
     }
-    return 0;
+    return 2; // if all finished return last round...
   }
 
   /* playCard
@@ -42,8 +42,6 @@ export class Hand {
 
     if (currentRound.isFinished()) {
       const winner = currentRound.winner()!;
-
-      // FIX: returns always the first player when the card goes parda. Need to check the order of the plays to get the last player who ties the hand
       this.turns.setTurns(winner[0]);
     }
   }
@@ -56,15 +54,13 @@ export class Hand {
     const roundWinners = this.rounds.map((round) => round.winner());
 
     const roundsWinnedByTeam = roundWinners.reduce(
-      (prev, winners) => {
-        winners?.forEach((winner) => (prev[winner.team] += 1));
-
-        return prev;
+      (score, winners) => {
+        winners?.forEach((winner) => (score[winner.team] += 1));
+        return score;
       },
       [0, 0],
     );
 
-    // TODO: refactor ifs????
     if (
       roundsWinnedByTeam[Team.A] === roundsWinnedByTeam[Team.B] &&
       roundsWinnedByTeam[Team.A] === 3
@@ -80,7 +76,7 @@ export class Hand {
     }
     if (
       roundsWinnedByTeam[Team.B] > roundsWinnedByTeam[Team.A] &&
-      roundsWinnedByTeam[Team.A] >= 2
+      roundsWinnedByTeam[Team.B] >= 2
     ) {
       return Team.B;
     }

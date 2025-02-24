@@ -3,7 +3,7 @@ import { GameStateFactory } from '../factories/game-state.factory';
 import { EnvidoLevel } from '../types';
 import { ChantEnvidoCommmand } from './chant-envido-command';
 
-describe('execute', () => {
+describe('#execute', () => {
   const rules = {
     numberOfPlayers: 2,
     flor: false,

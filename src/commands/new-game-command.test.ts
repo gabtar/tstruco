@@ -1,7 +1,7 @@
 import { GameStateFactory } from '../factories/game-state.factory';
 import { NewGameCommand } from './new-game-command';
 
-describe('execute', () => {
+describe('#execute', () => {
   let state = GameStateFactory.createGame({
     numberOfPlayers: 4,
     flor: false,

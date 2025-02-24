@@ -1,7 +1,7 @@
 import { PlayerFactory } from './player.factory';
 import { TurnFactory } from './turn.factory';
 
-describe('from', () => {
+describe('#from', () => {
   test('Should return a turn with handplayer, envido chant turn and play card when H2C2--P2--- is deserialized', () => {
     const players = PlayerFactory.createPlayers(6);
     const turns = TurnFactory.from('H2C2--P2---', players);

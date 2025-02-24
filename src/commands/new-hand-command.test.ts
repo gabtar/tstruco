@@ -1,7 +1,7 @@
 import { GameStateFactory } from '../factories/game-state.factory';
 import { NewHandCommand } from './new-hand-command';
 
-describe('execute', () => {
+describe('#execute', () => {
   it('Should deal the cards for the players in the new hand', () => {
     const rules = {
       numberOfPlayers: 6,

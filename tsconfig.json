@@ -1,9 +1,14 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2015",
-    "declaration": true,
+    "module": "ES2020",
+    "esModuleInterop": true,
+    "target": "es2020",
+    "moduleResolution": "node",
+    "sourceMap": true,
     "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "declaration": true,
     "strictNullChecks": true,
     "noImplicitAny": true
   },

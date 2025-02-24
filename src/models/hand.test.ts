@@ -122,6 +122,16 @@ describe('#winner', () => {
 
     expect(hand.winner()).toBe(hand.turns.handPlayer?.team);
   });
+
+  it('Should return player 1 when first card goes parda and second card is winned by player 1', () => {
+    hand.rounds[0].playCard(player1, CardFactory.from('4C'));
+    hand.rounds[0].playCard(player2, CardFactory.from('4O'));
+
+    hand.rounds[1].playCard(player1, CardFactory.from('11O'));
+    hand.rounds[1].playCard(player2, CardFactory.from('1C'));
+
+    expect(hand.winner()).toBe(player2.team);
+  });
 });
 
 describe('#serialize', () => {

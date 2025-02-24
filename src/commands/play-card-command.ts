@@ -26,13 +26,13 @@ export class PlayCardCommand implements Command {
     const currentRound = this.state.hand.rounds[this.state.hand.currentRound];
     this.state.hand.playCard(this.player, this.card);
 
-    if (currentRound.isFinished()) {
+    if (currentRound.isFinished() && this.state.hand.currentRound < 2) {
       this.advanceToNextRound();
     }
 
     const winner = this.state.hand.winner();
 
-    if (winner) {
+    if (winner != undefined) {
       const trucoPoints = this.state.hand.trucoLevel;
       this.state.score.add(winner, trucoPoints);
     }

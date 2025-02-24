@@ -43,8 +43,6 @@ export class PlayEnvidoCommand implements Command {
       const team = winner % 2 == 0 ? Team.A : Team.B;
 
       this.state.score.add(team, envidoPoints);
-
-      // TODO: reset turns...
     }
 
     return this.state;

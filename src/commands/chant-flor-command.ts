@@ -38,8 +38,6 @@ export class ChantFlorCommand implements Command {
     this.state.hand.phase = GamePhase.ChantFlor;
     this.state.hand.turns.responseFlorChantTurn = this.player.opponentTeam();
 
-    // TODO: disable envido chant...
-
     return this.state;
   }
 }

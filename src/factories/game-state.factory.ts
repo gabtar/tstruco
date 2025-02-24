@@ -1,7 +1,6 @@
 import { GameState } from '../models/game-state';
 import { Score } from '../models/score';
 import { GameRules } from '../types';
-import { CardFactory } from './card.factory';
 import { HandFactory } from './hand.factory';
 import { PlayerFactory } from './player.factory';
 import { RulesFactory } from './rules.factory';

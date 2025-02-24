@@ -1,4 +1,4 @@
-import { Card, Ranks, Suits } from '../models/card';
+import { Card } from '../models/card';
 
 export class CardFactory {
   /*

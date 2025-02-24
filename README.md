@@ -12,24 +12,22 @@
 
 # WIP
 
-## Game - ideas
-
-- [x] Game object with public api for play during the game.
-- [x] Refactoring to a Score object and make tests *
-- [ ] Improve turn system for envido/flor/truco and chants
-
+## TODO: 
+- [ ] Use remaining score when playing falta envido and more than 15 points
+- [ ] Validate the card has been dealt to player when he plays a card
+- [ ] FIX: Only the players who have a flor should play it
+- [ ] FIX: Add envido score if wasnt chanted when going to deck
+- [ ] If all players go to deck, end and reset the hand
+- [ ] When flor is chanted, disable envido chant....
+- [ ] Check how to implement when one player dont play a flor or an envido and he says 'son buenas'(maybe play w/ empty/no cards)
+- [ ] When no card is played in envido by a player we will asume that the player pass by saying "son buenas" / pass the envido play. So either cards of the envido pair should be optionals
+- [ ] Chant envido during a truco chant, if envido is available
+- [ ] Error handling w/ custom exceptions
 
 ## Commands:
 
 - [x] Play Flor command
-    - [ ] FIX: Only the players who have a flor should play it
 - [x] Go To Deck command
-    - [ ] FIX: Add envido score if wasnt chanted...
-
-## Posible bugfixes
-- [ ] When flor is chanted, disable envido chant....
-- [ ] When no card is played in envido by a player we will asume that the player pass by saying "son buenas" / pass the envido play. So either cards of the envido pair should be optionals
-- [x] New Hand action/command sets wrong turns
 
 ## Serialization
 
