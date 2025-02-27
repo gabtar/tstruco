@@ -1,6 +1,6 @@
 {
   "name": "tstruco",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",

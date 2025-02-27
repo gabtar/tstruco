@@ -92,11 +92,16 @@ export class Envido {
       (chanted, chant) => chanted + chantedCode[chant],
       '',
     );
+
+    if (!chanted) {
+      return 'N';
+    }
+
     const accepted =
       this.accepted !== undefined ? (this.accepted ? 'A' : 'D') : '';
 
     if (!accepted) {
-      return chanted;
+      return chanted + '-N';
     }
 
     let cardsPlayed = '';
@@ -106,7 +111,7 @@ export class Envido {
     const winner = this.allPlayersPlayed ? this.winner() : 'N';
 
     if (!cardsPlayed) {
-      return chanted + accepted;
+      return chanted + accepted + '-N';
     }
 
     return chanted + accepted + '-' + cardsPlayed.slice(0, -1) + '-' + winner;

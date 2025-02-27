@@ -110,16 +110,16 @@ describe('#serialize', () => {
   const envido = new Envido([1, 0]);
 
   it('Should return a nothing when no envido was chanted', () => {
-    expect(envido.serialize()).toBe('');
+    expect(envido.serialize()).toBe('N');
   });
 
-  it('Should return an EERD when envido, envido, real envido was chanted and declined', () => {
+  it('Should return an EERD-N when envido, envido, real envido was chanted and declined', () => {
     envido.addChant(EnvidoLevel.Envido);
     envido.addChant(EnvidoLevel.Envido);
     envido.addChant(EnvidoLevel.RealEnvido);
     envido.accepted = false;
 
-    expect(envido.serialize()).toBe('EERD');
+    expect(envido.serialize()).toBe('EERD-N');
   });
 
   it('Should return an EEA-07E6E-N when envido, envido, was chanted, accepted and player 0 played 7E and 6E', () => {

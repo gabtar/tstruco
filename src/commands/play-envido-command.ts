@@ -2,7 +2,7 @@ import { EnvidoPairFactory } from '../factories/envido-pair.factory';
 import { Card } from '../models/card';
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
-import { Team } from '../types';
+import { GamePhase, Team } from '../types';
 import { Command } from './play-card-command';
 
 export class PlayEnvidoCommand implements Command {
@@ -14,7 +14,11 @@ export class PlayEnvidoCommand implements Command {
 
   public execute(): GameState {
     this.cards.forEach((card) => {
-      if (!this.player.cards.includes(card)) {
+      if (
+        !this.player.cards.find(
+          (c) => c.rank === card.rank && c.suit === c.suit,
+        )
+      ) {
         throw new Error(`You dont have a ${card} card`);
       }
     });
@@ -43,6 +47,7 @@ export class PlayEnvidoCommand implements Command {
       const team = winner % 2 == 0 ? Team.A : Team.B;
 
       this.state.score.add(team, envidoPoints);
+      this.state.hand.phase = GamePhase.Truco;
     }
 
     return this.state;
