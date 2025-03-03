@@ -91,6 +91,27 @@ describe('#handle', () => {
     );
   });
 
+  it('Should accept envido', () => {
+    const envidoChantPlayer = state.hand.turns.chantEnvidoTurn!.id;
+
+    handler.handle('chantEnvido',
+      {
+        player: envidoChantPlayer,
+        chant: EnvidoLevel.FaltaEnvido,
+      },
+      state,
+    );
+    const respondEnvidoState = handler.handle('respondEnvido',
+      {
+        player: state.hand.turns.chantEnvidoTurn!.id,
+        accepted: true
+      },
+      state
+    );
+
+    expect(respondEnvidoState.hand.envido.accepted).toBeTruthy();
+  });
+
   it('Should chant flor', () => {
     const flor = [
       CardFactory.from('1E'),
@@ -109,6 +130,33 @@ describe('#handle', () => {
     );
 
     expect(newFlorState.hand.flor!.chanted).toBe(FlorLevel.Flor);
+  });
+
+  it('Should accept flor', () => {
+    const flor = [
+      CardFactory.from('1E'),
+      CardFactory.from('7E'),
+      CardFactory.from('4E'),
+    ];
+    state.hand.players[0].cards = flor;
+
+    handler.handle('chantFlor',
+      {
+        player: 0,
+        florLevel: FlorLevel.Flor,
+      },
+      state,
+    );
+
+    const acceptedFlorState = handler.handle('respondFlor',
+      {
+        player: 1,
+        accepted: true
+      },
+      state,
+    );
+
+    expect(acceptedFlorState.hand.flor!.accepted).toBeTruthy();
   });
 
   it('Should chant truco', () => {

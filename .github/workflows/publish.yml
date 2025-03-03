@@ -25,18 +25,21 @@ jobs:
         run: pnpm install
 
       - name: Build the package
-        run: pnpm build  # Adjust if needed
+        run: pnpm build
 
       - name: Publish to npm
         run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Extract version from package.json
-        id: package_version
-        run: echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
-
+      - name: Get version from package.json
+        id: package-version
+        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+      
       - name: Create Git tag
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          git tag v${{ env.VERSION }}
-          git push origin v${{ env.VERSION }}
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git tag -a v${{ steps.package-version.outputs.VERSION }} -m "v${{ steps.package-version.outputs.VERSION }}"
+          git push origin v${{ steps.package-version.outputs.VERSION }}

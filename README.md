@@ -1,4 +1,6 @@
-# TSTruco
+# tstruco
+
+tstruco is a typescript library for playing games of [Truco](https://en.wikipedia.org/wiki/Truco). It's a popular card game on South America and particulary in Argetina. 
 
 <div align="center">
 
@@ -7,32 +9,72 @@
 ![Functions](badges/badge-functions.svg)
 ![Lines](badges/badge-lines.svg)
 
-
 </div>
 
 # WIP
 
-## TODO: 
-- [ ] Use remaining score when playing falta envido and more than 15 points
-- [ ] Validate the card has been dealt to player when he plays a card
-- [ ] FIX: Only the players who have a flor should play it
-- [ ] FIX: Add envido score if wasnt chanted when going to deck
-- [ ] If all players go to deck, end and reset the hand
-- [ ] When flor is chanted, disable envido chant....
-- [ ] Check how to implement when one player dont play a flor or an envido and he says 'son buenas'(maybe play w/ empty/no cards)
-- [ ] Chant envido during a truco chant, if envido is available
-- [ ] Error handling w/ custom exceptions
+## Setup, instalation and sample usage
+
+Create a new javascript/typescript project and install the library from the npm registry.
+
+```
+npm install tstruco
+```
+ 
+Sample code to play a game
+
+```
+import { Truco } from 'tstruco';
+// or use: "const { Truco } = require('tstruco');" to import as a CommonJS module in javascript
+
+const truco = new Truco();
+
+truco.action('newGame', { rules: { numberOfPlayers: 2, flor: false, maxPoints: 15 } }); // starts a new game with the rules passed
+truco.action('newHand', {}); // starts a new hand and deals the cards for all players 
+
+console.log(truco.serialize());  // displays the serialized game string w/ current game state
+// eg. Outputs: 15#2#10O3C11C12E2E6C#N##N#00-00-00#H0C0--P0---#A0B0#T 
+// '1E3C11C12E2E6C' this is the serialized cards dealt section. As we see, player 0 has recived the 1E(Ace of Spades in spanish deck) card
+
+truco.action('playCard', { player: 0, card: '1E' }); // player 0 plays el 'Ancho de Espadas'(1E) in the first round of the hand
+
+console.log(truco.serialize());  // the new serialized game string displays the that the first player played 1E card on the first round
+// Outputs: 15#2#10O3C11C12E2E6C#N##N#1E0-00-00#H0C0--P0---#A0B0#T
+// '1E0-00-00' this is the cards played section. It now shows that player 0 has played the '1E' card during the first round
+
+```
 
 ## Serialization
 
 **tstruco** uses a custom serialization system to encode game status into one single string. The system is described [here](SERIALIZATION.md)
 
-## Game Api Usage
+tstruco can load saved games via the serialized string. The following snippet shows how to restore a game from previosly a serialized one:
 
 ```
-import { Truco } from './models/truco';
+import { Truco } from 'tstruco';
+
+const truco = Truco.from('...................');
+
+```
+
+
+## Game Api
+
+All the posible methods/actions available in a game of truco are described below and how to use them within the library. Via the action method of the main 'Truco' object, you can interact with the game.
+
+In tstruco player's numbers goes from 0 to 5, depending on the number of players of the current game. A game of Truco supports players in pairs/teams, so the only posible numbers of players are 2, 4 or 6 according to the rules of the game.
+As a convenion, in tstruco, even player numbers(eg 0,2,4) are of team A, and odd player(eg 1,3,5) numbers are of team B.
+
+For cards, as Truco utilizes the spanish deck, we encode each card with the rank of the card(a number) and the suit(a letter). In Truco only ranks from 1 to 7 and 10 to 12 from the spanish deck are used.
+Rank codes are E for 'Espada', B for 'BASTO', O for 'ORO' and C for 'COPA'. 
+For example a card with rank 7 and suit 'ESPADA' is encoded with the string **'7E'**.
+
+```
+import { Truco } from 'tstruco';
 
 const truco = new Truco();
+
+truco.action('action type', params);
 
 ```
 
@@ -50,3 +92,20 @@ const truco = new Truco();
 | respondFlor   | truco.action('respondFlor', params)     | { player: number, accepted: boolean }                                      |
 | playFlor      | truco.action('playFlor', params)        | { player: number, cardsCodes: string[] }                                   |
 | goToDeck      | truco.action('goToDeck', params)        | { player: number }                                                         |
+
+
+## Roadmap v1.0.0
+- [ ] FIX: Validate the card has been dealt to player when he plays a card
+- [ ] FIX: Only the players who have a flor should play it
+- [ ] FIX: Add envido score, if envido wasnt chanted so far, when a hand ends by going to deck/decline truco
+- [ ] Use remaining score when playing 'falta envido' and the current score is more than 15 points
+- [ ] If all players go to deck, end and reset the hand
+- [ ] When flor is chanted, disable envido chant during the hand
+- [ ] Improve documentation
+
+## Roadmap v1.1.0
+- [ ] Players can play a face down card(not showing the card value to the opponent)
+- [ ] Resign/Accept the opponent cards during a chant play. Like saying 'son buenas' during envido or flor(maybe by playing w/ empty/no cards)
+- [ ] Chant over Chant feature. Eg. chant envido during a truco chant, if envido is still available
+- [ ] Error handling system w/ custom exceptions
+- [ ] Add a GameDetails interface to display the game status in a JSON object, in a more redeable/friendly way than serialization
