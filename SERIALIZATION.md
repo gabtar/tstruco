@@ -1,7 +1,7 @@
 
 ### Introduction
 
-The idea is to serialize a Game of Argentinian Truco into an encoded string. The string must have all necessary data of a game, so we can reconstruct the game with their current values/status/turns/etc from that string. The approach is based on the FEN notation for a game of chess.
+The idea is to serialize a Game of Argentinian Truco into an encoded string. The string must have all necessary data of a game, so we can reconstruct the game with their current values/status/turns/etc from that string. The approach is based on the [FEN](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation) notation for a game of chess.
 
 ### Serialization in strings of each parts of a Truco game
 
@@ -88,7 +88,7 @@ Here we need to encode all information regarding to the status of the turns in t
 
 (\*) Not necessary as we can reconstruct from the cards played section, but for simplification purposes we will use as it here.
 
-Following each letter code for the turn, we will add the number of the player who has the turn(from 0 to 5 on a 6 player game). In the case of players at deck more than one number can follow the letter.
+Following each letter code for the turn, we will add the number of the player/team who has the turn(from 0 to 5 on a 6 player game and 0 to 1 for teams). In the case of players at deck more than one number can follow the letter.
 
 So, for example, if in a hand we have the following string:
 
@@ -97,6 +97,8 @@ H2C2--P2---
 ```
 
 This means that Player 3 (on a 4 player game) is the hand player, he has the turn to chant envido and the turn to play a card. The rest of the turns of the table are not defined yet.
+
+**NOTE: ** For Response Truco Chant and Response Flor Chant we are using the Team number code. Either 0 (if its team A) or 1 (if its team B). 
 
 #### Score
 

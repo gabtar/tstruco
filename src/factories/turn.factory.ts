@@ -32,13 +32,13 @@ export class TurnFactory {
     if (serializedTurns.includes(turnsCodes.chantTruco)) {
       const chantTrucoCode =
         serializedTurns[serializedTurns.indexOf(turnsCodes.chantTruco) + 1];
-      turn.responseTrucoChantTurn = chantTrucoCode === 'A' ? Team.A : Team.B;
+      turn.responseTrucoChantTurn = +chantTrucoCode === 0 ? Team.A : Team.B;
     }
 
     if (serializedTurns.includes(turnsCodes.chantFlor)) {
       const chantFlorCode =
         serializedTurns[serializedTurns.indexOf(turnsCodes.chantFlor) + 1];
-      turn.responseFlorChantTurn = chantFlorCode === 'A' ? Team.A : Team.B;
+      turn.responseFlorChantTurn = +chantFlorCode === 0 ? Team.A : Team.B;
     }
 
     if (serializedTurns.includes(turnsCodes.playCard)) {
@@ -50,7 +50,7 @@ export class TurnFactory {
     if (serializedTurns.includes(turnsCodes.firstEnvidoChant)) {
       const firstEnvidoChantIndex =
         +serializedTurns[
-          serializedTurns.indexOf(turnsCodes.firstEnvidoChant) + 1
+        serializedTurns.indexOf(turnsCodes.firstEnvidoChant) + 1
         ];
       turn.firstEnvidoChant = players[firstEnvidoChantIndex];
     }
@@ -58,7 +58,7 @@ export class TurnFactory {
     if (serializedTurns.includes(turnsCodes.firstFlorChant)) {
       const firstFlorChantIndex =
         +serializedTurns[
-          serializedTurns.indexOf(turnsCodes.firstFlorChant) + 1
+        serializedTurns.indexOf(turnsCodes.firstFlorChant) + 1
         ];
       turn.firstFlorChant = players[firstFlorChantIndex];
     }

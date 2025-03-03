@@ -13,7 +13,7 @@ export class Turn {
     public firstEnvidoChant?: Player,
     public firstFlorChant?: Player,
     public atDeck: Player[] = [], // players already resigned to current hand
-  ) {}
+  ) { }
 
   /*
    * Draws the initial turns for a new hand
@@ -95,13 +95,13 @@ export class Turn {
    */
   public serialize(): string {
     let s = '';
-    s += this.handPlayer ? 'H' + this.handPlayer.id : '-';
-    s += this.chantEnvidoTurn ? 'C' + this.chantEnvidoTurn.id : '-';
-    s += this.responseTrucoChantTurn ? 'T' + this.responseTrucoChantTurn : '-';
-    s += this.responseFlorChantTurn ? 'F' + this.responseFlorChantTurn : '-';
-    s += this.playCardTurn ? 'P' + this.playCardTurn.id : '-';
-    s += this.firstEnvidoChant ? 'Y' + this.firstEnvidoChant.id : '-';
-    s += this.firstFlorChant ? 'Z' + this.firstFlorChant.id : '-';
+    s += this.handPlayer !== undefined ? 'H' + this.handPlayer.id : '-';
+    s += this.chantEnvidoTurn !== undefined ? 'C' + this.chantEnvidoTurn.id : '-';
+    s += this.responseTrucoChantTurn !== undefined ? 'T' + this.responseTrucoChantTurn : '-';
+    s += this.responseFlorChantTurn !== undefined ? 'F' + this.responseFlorChantTurn : '-';
+    s += this.playCardTurn !== undefined ? 'P' + this.playCardTurn.id : '-';
+    s += this.firstEnvidoChant !== undefined ? 'Y' + this.firstEnvidoChant.id : '-';
+    s += this.firstFlorChant !== undefined ? 'Z' + this.firstFlorChant.id : '-';
     s +=
       this.atDeck.length > 0
         ? 'D' + this.atDeck.map((p) => p.id).join('')

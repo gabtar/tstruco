@@ -17,7 +17,7 @@ export class Hand {
     public phase: GamePhase,
     public trucoLevel: TrucoLevel = TrucoLevel.NotChanted,
     public flor?: Flor,
-  ) {}
+  ) { }
 
   /*
    * currentRound
@@ -29,7 +29,7 @@ export class Hand {
         return i;
       }
     }
-    return 2; // if all finished return last round...
+    return 2;
   }
 
   /* playCard
