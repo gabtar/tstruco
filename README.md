@@ -23,7 +23,7 @@ npm install tstruco
  
 Sample code to play a game
 
-```
+```javascript
 import { Truco } from 'tstruco';
 // or use: "const { Truco } = require('tstruco');" to import as a CommonJS module in javascript
 
@@ -50,10 +50,10 @@ console.log(truco.serialize());  // the new serialized game string displays the 
 
 tstruco can load saved games via the serialized string. The following snippet shows how to restore a game from previosly a serialized one:
 
-```
+```javascript
 import { Truco } from 'tstruco';
 
-const truco = Truco.from('...................');
+const truco = Truco.from('15#2#10O3C11C12E2E6C#N##N#00-00-00#H0C0--P0---#A0B0#T');
 
 ```
 
@@ -69,7 +69,7 @@ For cards, as Truco utilizes the spanish deck, we encode each card with the rank
 Rank codes are E for 'Espada', B for 'BASTO', O for 'ORO' and C for 'COPA'. 
 For example a card with rank 7 and suit 'ESPADA' is encoded with the string **'7E'**.
 
-```
+```javascript
 import { Truco } from 'tstruco';
 
 const truco = new Truco();
