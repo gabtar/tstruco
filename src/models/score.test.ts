@@ -2,7 +2,7 @@ import { Team } from '../types';
 import { Score } from './score';
 
 describe('#add', () => {
-  const score = new Score();
+  const score = new Score(30);
 
   it('Should add 5 points to A team', () => {
     score.add(Team.A, 5);
@@ -12,7 +12,7 @@ describe('#add', () => {
 });
 
 describe('#maxScore', () => {
-  const score = new Score();
+  const score = new Score(30);
 
   it('Return the score of Team B if it has more points than A team', () => {
     score.add(Team.A, 5);
@@ -22,8 +22,19 @@ describe('#maxScore', () => {
   });
 });
 
+describe('#remainingScore', () => {
+  const score = new Score(30);
+
+  it('Return 3, the remaining score of Team B to win the game', () => {
+    score.add(Team.A, 21);
+    score.add(Team.B, 27);
+
+    expect(score.remainingScore(Team.B)).toBe(3);
+  });
+});
+
 describe('#serilize', () => {
-  const score = new Score();
+  const score = new Score(30);
 
   it('Should return A0B0 when no team has score', () => {
     expect(score.serialize()).toBe('A0B0');

@@ -18,9 +18,14 @@ export class RespondTrucoCommmand {
     if (this.accepted) {
       this.state.hand.turns.responseTrucoChantTurn = this.player.opponentTeam();
     } else {
+      let score = this.state.hand.trucoLevel - 1;
+      if (this.state.hand.currentRound === 0 && this.state.hand.envido.chanted.length === 0) {
+        score += 1;
+      }
+
       this.state.score.add(
         this.player.opponentTeam(),
-        this.state.hand.trucoLevel - 1,
+        score
       );
 
       return new NewHandCommand(this.state).execute();

@@ -8,10 +8,10 @@ export class ChantEnvidoCommmand implements Command {
     private state: GameState,
     private player: Player,
     private chant: EnvidoLevel,
-  ) {}
+  ) { }
 
   public execute(): GameState {
-    if (this.state.hand.currentRound > 0) {
+    if (this.state.hand.currentRound > 0 || this.state.hand.envido.accepted !== undefined) {
       throw Error('Cannot chant envido!');
     }
 

@@ -46,7 +46,7 @@ export class Hand {
     }
   }
 
-  /*
+  /*negar
    * winner
    * Returns the winner of the hand or undefined if not finished
    * */

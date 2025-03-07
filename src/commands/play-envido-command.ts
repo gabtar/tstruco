@@ -10,18 +10,22 @@ export class PlayEnvidoCommand implements Command {
     private state: GameState,
     private player: Player,
     private cards: Card[],
-  ) {}
+  ) { }
 
   public execute(): GameState {
     this.cards.forEach((card) => {
       if (
         !this.player.cards.find(
-          (c) => c.rank === card.rank && c.suit === c.suit,
+          (c) => card.equals(c),
         )
       ) {
         throw new Error(`You dont have a ${card} card`);
       }
     });
+
+    if (this.state.hand.envido.allPlayersPlayed || this.state.hand.currentRound > 0) {
+      throw new Error('Envido ended');
+    }
 
     if (this.state.hand.turns.chantEnvidoTurn != this.player) {
       throw new Error(`${this.player.id} is not your turn!`);

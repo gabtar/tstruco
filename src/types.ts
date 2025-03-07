@@ -78,3 +78,6 @@ export enum Status {
   IN_PROGRESS = 'IN_PROGRESS',
   ENDED = 'ENDED',
 }
+
+export const Suits = ['B', 'E', 'C', 'O'];
+export const Ranks = ['1', '2', '3', '4', '5', '6', '7', '10', '11', '12'];

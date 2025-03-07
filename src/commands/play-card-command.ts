@@ -8,9 +8,13 @@ export class PlayCardCommand implements Command {
     private state: GameState,
     private player: Player,
     private card: Card,
-  ) {}
+  ) { }
 
   public execute(): GameState {
+    if (!this.player.hasCard(this.card)) {
+      throw new Error(`You dont have a ${this.card} card`);
+    }
+
     if (this.state.hand.phase != GamePhase.Truco) {
       throw Error(`Cannot play a card during ${this.state.hand.phase}!`);
     }

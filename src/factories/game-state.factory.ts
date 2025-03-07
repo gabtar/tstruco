@@ -13,7 +13,7 @@ export class GameStateFactory {
   public static createGame(rules: GameRules): GameState {
     const players = PlayerFactory.createPlayers(rules.numberOfPlayers);
     const hand = HandFactory.createHand(players, rules.flor);
-    const score = new Score();
+    const score = new Score(rules.maxPoints);
 
     return new GameState(hand, rules, score);
   }
@@ -36,7 +36,7 @@ export class GameStateFactory {
       players,
       rules.flor,
     );
-    const score = ScoreFactory.from(serializedParts[8]);
+    const score = ScoreFactory.from(serializedParts[8], rules.maxPoints);
 
     return new GameState(hand, rules, score);
   }

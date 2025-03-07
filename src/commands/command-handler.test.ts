@@ -173,6 +173,7 @@ describe('#handle', () => {
   });
 
   it('Should respond truco', () => {
+    state.hand.envido.addChant(EnvidoLevel.Envido);
     handler.handle(
       'chantTruco',
       {
@@ -196,6 +197,11 @@ describe('#handle', () => {
   });
 
   it('Should send player 0 to deck', () => {
+    state = GameStateFactory.createGame({
+      numberOfPlayers: 6,
+      flor: true,
+      maxPoints: 15,
+    });
     const newGoToDeckState = handler.handle(
       'goToDeck',
       {
