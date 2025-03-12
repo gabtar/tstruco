@@ -1,5 +1,6 @@
 import { GameStateFactory } from '../factories/game-state.factory';
 import { Card } from '../models/card';
+import { EnvidoPair } from '../models/envido-pair';
 import { PlayEnvidoCommand } from './play-envido-command';
 
 describe('#execute', () => {
@@ -19,6 +20,7 @@ describe('#execute', () => {
     gameState = GameStateFactory.createGame(rules);
     gameState.hand.turns.chantEnvidoTurn = player1;
     gameState.hand.players[0].cards = [card1, card2];
+    player1.cards = [card1, card2];
   });
 
   it('Should set the envido score for the player', () => {
@@ -50,5 +52,17 @@ describe('#execute', () => {
     expect(() => playEnvidoCommand.execute()).toThrow(
       'You dont have a 1E card',
     );
+  });
+
+  it('Should throw Error when envido has already ended', () => {
+    gameState.hand.envido.playCards(0, new EnvidoPair(card1, card2));
+    gameState.hand.envido.playCards(1, new EnvidoPair(card1, card2));
+
+    const playEnvidoCommand = new PlayEnvidoCommand(gameState, player1, [
+      card1,
+      card2,
+    ]);
+
+    expect(() => playEnvidoCommand.execute()).toThrow('Envido ended');
   });
 });

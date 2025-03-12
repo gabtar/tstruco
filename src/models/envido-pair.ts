@@ -2,12 +2,11 @@ import { Card } from './card';
 
 /**
  * Represents the cards to be played during an envido play
- * 
+ *
  * @class EnvidoPair
  * @description A class for handling plays during the envido on a hand
  */
 export class EnvidoPair {
-
   /**
    * Creates a new instance of an EnvidoPair
    *
@@ -17,7 +16,7 @@ export class EnvidoPair {
   constructor(
     public cardOne: Card,
     public cardTwo?: Card,
-  ) { }
+  ) {}
 
   /**
    * Returns the score of the envido pair

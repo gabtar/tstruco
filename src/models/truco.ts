@@ -1,6 +1,6 @@
 import { CommandHandler } from '../commands/command-handler';
 import { GameStateFactory } from '../factories/game-state.factory';
-import { ActionParams, GameStatus } from '../types';
+import { ActionParams } from '../types';
 import { GameState } from './game-state';
 
 export class Truco {
@@ -11,7 +11,7 @@ export class Truco {
       maxPoints: 15,
     }),
     private handler: CommandHandler = new CommandHandler(),
-  ) { }
+  ) {}
 
   action<K extends keyof ActionParams>(
     actionType: K,
@@ -30,7 +30,7 @@ export class Truco {
     const flor = this.state.hand.flor ? this.state.hand.flor.serialize() : '';
     const trucoChantCode = ['N', 'T', 'R', 'V'];
     const gamePhaseCode = {
-      TRUCO: 'T',
+      PLAY_TRUCO: 'T',
       CHANT_TRUCO: 'CT',
       CHANT_ENVIDO: 'CE',
       PLAY_ENVIDO: 'PE',

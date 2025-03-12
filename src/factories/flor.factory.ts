@@ -37,7 +37,8 @@ export class FlorFactory {
     chantSegment.split('').forEach((code) => {
       if (code === 'A') flor.accepted = true;
       else if (code === 'D') flor.accepted = false;
-      else if (florLevelsCode[code]) flor.chanted = florLevelsCode[code];
+      else if (florLevelsCode[code] !== undefined)
+        flor.chanted = florLevelsCode[code];
     });
   }
 

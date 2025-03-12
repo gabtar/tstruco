@@ -1,6 +1,6 @@
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
-import { GamePhase } from '../types';
+import { HandPhase } from '../types';
 import { NewHandCommand } from './new-hand-command';
 
 export class RespondTrucoCommmand {
@@ -8,7 +8,7 @@ export class RespondTrucoCommmand {
     private state: GameState,
     private player: Player,
     private accepted: boolean,
-  ) { }
+  ) {}
 
   public execute(): GameState {
     if (this.player.team != this.state.hand.turns.responseTrucoChantTurn) {
@@ -19,19 +19,19 @@ export class RespondTrucoCommmand {
       this.state.hand.turns.responseTrucoChantTurn = this.player.opponentTeam();
     } else {
       let score = this.state.hand.trucoLevel - 1;
-      if (this.state.hand.currentRound === 0 && this.state.hand.envido.chanted.length === 0) {
+      if (
+        this.state.hand.currentRound === 0 &&
+        this.state.hand.envido.chanted.length === 0
+      ) {
         score += 1;
       }
 
-      this.state.score.add(
-        this.player.opponentTeam(),
-        score
-      );
+      this.state.score.add(this.player.opponentTeam(), score);
 
       return new NewHandCommand(this.state).execute();
     }
 
-    this.state.hand.phase = GamePhase.Truco;
+    this.state.hand.phase = HandPhase.PlayTruco;
 
     return this.state;
   }

@@ -1,6 +1,6 @@
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
-import { GamePhase } from '../types';
+import { HandPhase } from '../types';
 import { Command } from './play-card-command';
 
 export class RespondFlorCommand implements Command {
@@ -20,9 +20,9 @@ export class RespondFlorCommand implements Command {
     if (this.accepted) {
       this.state.hand.turns.responseFlorChantTurn =
         this.state.hand.turns.firstFlorChant?.team;
-      this.state.hand.phase = GamePhase.PlayFlor;
+      this.state.hand.phase = HandPhase.PlayFlor;
     } else {
-      this.state.hand.phase = GamePhase.Truco;
+      this.state.hand.phase = HandPhase.PlayTruco;
 
       this.state.score.add(
         this.player.opponentTeam(),

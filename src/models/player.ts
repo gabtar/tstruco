@@ -3,12 +3,11 @@ import { Card } from './card';
 
 /**
  * Represents a player in a game of truco.
- * 
+ *
  * @class Player
  * @description A class that manages the player during a game of Truco
  */
 export class Player {
-
   /*
    * Creates a new Player instance
    *
@@ -20,7 +19,7 @@ export class Player {
     public id: PlayerNumber,
     public team: Team,
     public cards: Card[],
-  ) { }
+  ) {}
 
   /*
    * Returns the opponent Team of the player
@@ -49,15 +48,15 @@ export class Player {
    * @returns {boolean} - True if the card has been dealt to the player during the hand
    */
   public hasCard(card: Card): boolean {
-    if (this.cards.find(c => card.equals(c))) {
-      return true
-    };
+    if (this.cards.find((c) => card.equals(c))) {
+      return true;
+    }
     return false;
   }
 
   /*
    * Returns an string of the cards codes dealt to the player
-   * 
+   *
    * @returns {string} - The cards codes of the cards dealt
    */
   public serializeCards(): string {

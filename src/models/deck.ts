@@ -3,7 +3,7 @@ import { Card } from './card';
 
 /**
  * Represents a Deck of spanish cards
- * 
+ *
  * @class Deck
  * @description A class that for storing and setting the cards during a game
  */

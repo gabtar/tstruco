@@ -1,7 +1,7 @@
 import { Card } from '../models/card';
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
-import { GamePhase } from '../types';
+import { HandPhase } from '../types';
 import { Command } from './play-card-command';
 
 export class PlayFlorCommand implements Command {
@@ -24,7 +24,7 @@ export class PlayFlorCommand implements Command {
         flowerPoints,
       );
 
-      this.state.hand.phase = GamePhase.Truco;
+      this.state.hand.phase = HandPhase.PlayTruco;
     }
 
     return this.state;

@@ -8,14 +8,13 @@ import { EnvidoPair } from './envido-pair';
  * @description A class to manage the envido play during a hand of Truco
  */
 export class Envido {
-
   /**
    * Creates a new instance of Envido
    *
    * @param {number[]} handPlayerOrder - The order of the players during the hand starting from the hand player
    * @param {Map<PlayerNumber, EnvidoPair>} cardsPlayed - Holds the plays of envido by the players during the hand
    * @param {EnvidoLevel[]} chanted - The level(s) of envido chanted so far during the hand
-   * @param {boolean} accepted - Optional 
+   * @param {boolean} accepted - Optional
    */
   constructor(
     private handPlayerOrder: number[],
@@ -25,7 +24,7 @@ export class Envido {
     >(),
     public chanted: EnvidoLevel[] = [],
     public accepted?: boolean,
-  ) { }
+  ) {}
 
   /**
    * Adds the passed chant level to the ones chanted so far
@@ -33,7 +32,7 @@ export class Envido {
    * @param {EnvidoLevel} chant - The level of envido to chant
    * @throws {Error} - It the chant level is invalid
    */
-  addChant(chant: EnvidoLevel) {
+  public addChant(chant: EnvidoLevel) {
     if (this.isValidEnvidoLevel(chant)) {
       throw Error(`Cannot chant ${EnvidoLevel[chant]}!`);
     }
@@ -47,7 +46,7 @@ export class Envido {
    * @param {PlayerNumber} player - The number of the player who plays the envido pair
    * @param {EvidoPair} envidoPair - The envido pair with the card(s) to be played
    */
-  playCards(player: PlayerNumber, envidoPair: EnvidoPair) {
+  public playCards(player: PlayerNumber, envidoPair: EnvidoPair) {
     this.cardsPlayed.set(player, envidoPair);
   }
 
@@ -66,7 +65,7 @@ export class Envido {
    *
    * @returns {number} - The number of the player who won the envido
    */
-  winner(): number {
+  public winner(): number {
     const higestEnvidoPair = [...this.cardsPlayed.values()].reduce(
       (pair, current) => {
         return pair.score() > current.score() ? pair : current;
@@ -92,7 +91,7 @@ export class Envido {
    *
    * @returns {number} - The score points to be earned by the player who won the envido
    */
-  totalScorePoints(): number {
+  public totalScorePoints(): number {
     let score = this.chanted.reduce((total, current) => total + current);
     if (!this.accepted) {
       score -= this.chanted[this.chanted.length - 1];
@@ -146,7 +145,7 @@ export class Envido {
    *
    * @param {EnvidoLevel} chant - The envido level to evaluate if its valid
    * @returns {boolean} - If the chant is valid in the current envido state of the hand
-  */
+   */
   private isValidEnvidoLevel(chant: EnvidoLevel): boolean {
     return (
       this.chanted[this.chanted.length - 1] != EnvidoLevel.Envido &&

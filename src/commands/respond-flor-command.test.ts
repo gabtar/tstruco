@@ -1,7 +1,7 @@
 import { GameStateFactory } from '../factories/game-state.factory';
 import { PlayerFactory } from '../factories/player.factory';
 import { RespondFlorCommand } from './respond-flor-command';
-import { FlorLevel, GamePhase } from '../types';
+import { FlorLevel, HandPhase } from '../types';
 
 describe('#execute', () => {
   const declinedFlorScore = 3;
@@ -29,7 +29,7 @@ describe('#execute', () => {
     state = responseFlorCommand.execute();
 
     expect(state.hand.flor!.accepted).toBeTruthy();
-    expect(state.hand.phase).toBe(GamePhase.PlayFlor);
+    expect(state.hand.phase).toBe(HandPhase.PlayFlor);
   });
 
   it('Should decline the flor and set the score to the opponent team', () => {
@@ -39,7 +39,7 @@ describe('#execute', () => {
     state = responseFlorCommand.execute();
 
     expect(state.hand.flor!.accepted).toBeTruthy();
-    expect(state.hand.phase).toBe(GamePhase.PlayFlor);
+    expect(state.hand.phase).toBe(HandPhase.PlayFlor);
   });
 
   it('Should decline the flor and set the score to the opponent team', () => {

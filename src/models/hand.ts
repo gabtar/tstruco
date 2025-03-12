@@ -1,4 +1,4 @@
-import { GamePhase, Team, TrucoLevel } from '../types';
+import { HandPhase, Team, TrucoLevel } from '../types';
 import { Card } from './card';
 import { Deck } from './deck';
 import { Envido } from './envido';
@@ -14,10 +14,10 @@ export class Hand {
     public rounds: Round[],
     public envido: Envido,
     public turns: Turn,
-    public phase: GamePhase,
+    public phase: HandPhase,
     public trucoLevel: TrucoLevel = TrucoLevel.NotChanted,
     public flor?: Flor,
-  ) { }
+  ) {}
 
   /*
    * currentRound
@@ -35,7 +35,7 @@ export class Hand {
   /* playCard
    * Plays a card on the current round of the hand
    */
-  playCard(player: Player, card: Card): void {
+  public playCard(player: Player, card: Card): void {
     const currentRound = this.rounds[this.currentRound];
     currentRound.playCard(player, card);
     this.turns.nextTurn();
@@ -50,7 +50,7 @@ export class Hand {
    * winner
    * Returns the winner of the hand or undefined if not finished
    * */
-  winner(): Team | undefined {
+  public winner(): Team | undefined {
     const roundWinners = this.rounds.map((round) => round.winner());
 
     const roundsWinnedByTeam = roundWinners.reduce(
@@ -88,7 +88,7 @@ export class Hand {
    * getPlayer
    * Returns a player based on the index of the player's array
    */
-  getPlayer(number: number): Player {
+  public getPlayer(number: number): Player {
     if (number > this.players.length - 1 || number < 0) {
       throw Error('Invalid player');
     }
@@ -100,7 +100,7 @@ export class Hand {
    * dealCards
    * Deals all cards for the players in the hand
    */
-  dealCards(): void {
+  public dealCards(): void {
     const cards = this.deck.dealCards(this.players.length);
 
     for (let i = 0; i < this.players.length; i++) {

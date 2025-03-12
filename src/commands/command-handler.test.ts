@@ -3,7 +3,7 @@ import { GameStateFactory } from '../factories/game-state.factory';
 import {
   EnvidoLevel,
   FlorLevel,
-  GamePhase,
+  HandPhase,
   Status,
   Team,
   TrucoLevel,
@@ -51,11 +51,11 @@ describe('#handle', () => {
   });
 
   it('Should create a new hand', () => {
-    state.hand.phase = GamePhase.ChantEnvido;
+    state.hand.phase = HandPhase.ChantEnvido;
 
     const newHandGame = handler.handle('newHand', {}, state);
 
-    expect(newHandGame.hand.phase).toBe(GamePhase.Truco);
+    expect(newHandGame.hand.phase).toBe(HandPhase.PlayTruco);
   });
 
   it('Should play a card', () => {
@@ -94,19 +94,21 @@ describe('#handle', () => {
   it('Should accept envido', () => {
     const envidoChantPlayer = state.hand.turns.chantEnvidoTurn!.id;
 
-    handler.handle('chantEnvido',
+    handler.handle(
+      'chantEnvido',
       {
         player: envidoChantPlayer,
         chant: EnvidoLevel.FaltaEnvido,
       },
       state,
     );
-    const respondEnvidoState = handler.handle('respondEnvido',
+    const respondEnvidoState = handler.handle(
+      'respondEnvido',
       {
         player: state.hand.turns.chantEnvidoTurn!.id,
-        accepted: true
+        accepted: true,
       },
-      state
+      state,
     );
 
     expect(respondEnvidoState.hand.envido.accepted).toBeTruthy();
@@ -140,7 +142,8 @@ describe('#handle', () => {
     ];
     state.hand.players[0].cards = flor;
 
-    handler.handle('chantFlor',
+    handler.handle(
+      'chantFlor',
       {
         player: 0,
         florLevel: FlorLevel.Flor,
@@ -148,10 +151,11 @@ describe('#handle', () => {
       state,
     );
 
-    const acceptedFlorState = handler.handle('respondFlor',
+    const acceptedFlorState = handler.handle(
+      'respondFlor',
       {
         player: 1,
-        accepted: true
+        accepted: true,
       },
       state,
     );

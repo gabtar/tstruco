@@ -1,6 +1,6 @@
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
-import { EnvidoLevel, GamePhase } from '../types';
+import { EnvidoLevel, HandPhase } from '../types';
 import { Command } from './play-card-command';
 
 export class ChantEnvidoCommmand implements Command {
@@ -8,10 +8,13 @@ export class ChantEnvidoCommmand implements Command {
     private state: GameState,
     private player: Player,
     private chant: EnvidoLevel,
-  ) { }
+  ) {}
 
   public execute(): GameState {
-    if (this.state.hand.currentRound > 0 || this.state.hand.envido.accepted !== undefined) {
+    if (
+      this.state.hand.currentRound > 0 ||
+      this.state.hand.envido.accepted !== undefined
+    ) {
       throw Error('Cannot chant envido!');
     }
 
@@ -23,7 +26,7 @@ export class ChantEnvidoCommmand implements Command {
       this.state.hand.turns.firstEnvidoChant = this.player;
     }
 
-    this.state.hand.phase = GamePhase.ChantEnvido;
+    this.state.hand.phase = HandPhase.ChantEnvido;
 
     this.state.hand.envido.addChant(this.chant);
     this.state.hand.turns.updateChantEnvidoTurn();

@@ -1,6 +1,6 @@
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
-import { GamePhase, TrucoLevel } from '../types';
+import { HandPhase, TrucoLevel } from '../types';
 import { Command } from './play-card-command';
 
 export class ChantTrucoCommmand implements Command {
@@ -20,7 +20,7 @@ export class ChantTrucoCommmand implements Command {
     }
 
     this.state.hand.trucoLevel = this.chant;
-    this.state.hand.phase = GamePhase.ChantTruco;
+    this.state.hand.phase = HandPhase.ChantTruco;
     this.state.hand.turns.responseTrucoChantTurn = this.player.opponentTeam();
 
     return this.state;

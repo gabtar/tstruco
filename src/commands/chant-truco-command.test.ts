@@ -1,5 +1,5 @@
 import { GameStateFactory } from '../factories/game-state.factory';
-import { GamePhase, TrucoLevel } from '../types';
+import { HandPhase, TrucoLevel } from '../types';
 import { ChantTrucoCommmand } from './chant-truco-command';
 
 describe('#execute', () => {
@@ -54,6 +54,6 @@ describe('#execute', () => {
     expect(gameState.hand.turns.responseTrucoChantTurn).toBe(
       player1.opponentTeam(),
     );
-    expect(gameState.hand.phase).toBe(GamePhase.ChantTruco);
+    expect(gameState.hand.phase).toBe(HandPhase.ChantTruco);
   });
 });

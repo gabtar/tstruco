@@ -50,7 +50,7 @@ export class TurnFactory {
     if (serializedTurns.includes(turnsCodes.firstEnvidoChant)) {
       const firstEnvidoChantIndex =
         +serializedTurns[
-        serializedTurns.indexOf(turnsCodes.firstEnvidoChant) + 1
+          serializedTurns.indexOf(turnsCodes.firstEnvidoChant) + 1
         ];
       turn.firstEnvidoChant = players[firstEnvidoChantIndex];
     }
@@ -58,7 +58,7 @@ export class TurnFactory {
     if (serializedTurns.includes(turnsCodes.firstFlorChant)) {
       const firstFlorChantIndex =
         +serializedTurns[
-        serializedTurns.indexOf(turnsCodes.firstFlorChant) + 1
+          serializedTurns.indexOf(turnsCodes.firstFlorChant) + 1
         ];
       turn.firstFlorChant = players[firstFlorChantIndex];
     }

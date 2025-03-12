@@ -1,7 +1,7 @@
 import { CardFactory } from '../factories/card.factory';
 import { GameStateFactory } from '../factories/game-state.factory';
 import { PlayerFactory } from '../factories/player.factory';
-import { GamePhase } from '../types';
+import { HandPhase } from '../types';
 import { PlayCardCommand } from './play-card-command';
 
 describe('#execute', () => {
@@ -36,7 +36,11 @@ describe('#execute', () => {
   it('Should add the card to the current round', () => {
     const player1 = players[0];
     state.hand.turns.playCardTurn = player1;
-    const playCardCommand = new PlayCardCommand(state, player1, cardsPlayer0[0]);
+    const playCardCommand = new PlayCardCommand(
+      state,
+      player1,
+      cardsPlayer0[0],
+    );
 
     playCardCommand.execute();
 
@@ -46,7 +50,11 @@ describe('#execute', () => {
   it('Should throw an Error if its not player turn', () => {
     const player1 = players[0];
     state.hand.turns.playCardTurn = players[1];
-    const playCardCommand = new PlayCardCommand(state, player1, cardsPlayer0[0]);
+    const playCardCommand = new PlayCardCommand(
+      state,
+      player1,
+      cardsPlayer0[0],
+    );
 
     expect(() => playCardCommand.execute()).toThrow('0 is not your turn!');
   });
@@ -54,8 +62,12 @@ describe('#execute', () => {
   it('Should throw an Error if is not Truco phase', () => {
     const player1 = players[0];
     state.hand.turns.playCardTurn = players[0];
-    state.hand.phase = GamePhase.ChantEnvido;
-    const playCardCommand = new PlayCardCommand(state, player1, cardsPlayer0[0]);
+    state.hand.phase = HandPhase.ChantEnvido;
+    const playCardCommand = new PlayCardCommand(
+      state,
+      player1,
+      cardsPlayer0[0],
+    );
 
     expect(() => playCardCommand.execute()).toThrow(
       'Cannot play a card during CHANT_ENVIDO',
@@ -66,7 +78,11 @@ describe('#execute', () => {
     const player1 = players[0];
     state.hand.turns.playCardTurn = players[0];
     state.hand.rounds[0].playCard(player1, cardsPlayer0[0]);
-    const playCardCommand = new PlayCardCommand(state, player1, cardsPlayer0[0]);
+    const playCardCommand = new PlayCardCommand(
+      state,
+      player1,
+      cardsPlayer0[0],
+    );
 
     expect(() => playCardCommand.execute()).toThrow('1E was already played');
   });
@@ -76,8 +92,16 @@ describe('#execute', () => {
     state.hand.turns.players = players;
     const player1 = players[0];
     const player2 = players[1];
-    const playCardCommand1 = new PlayCardCommand(state, player1, cardsPlayer0[0]);
-    const playCardCommand2 = new PlayCardCommand(state, player2, cardsPlayer1[1]);
+    const playCardCommand1 = new PlayCardCommand(
+      state,
+      player1,
+      cardsPlayer0[0],
+    );
+    const playCardCommand2 = new PlayCardCommand(
+      state,
+      player2,
+      cardsPlayer1[1],
+    );
 
     state.hand.turns.setTurns(player1);
     state = playCardCommand1.execute();

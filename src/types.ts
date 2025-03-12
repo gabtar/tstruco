@@ -5,9 +5,9 @@ export interface GameRules {
 }
 
 export interface ActionParams {
-  playCard: { player: PlayerNumber; cardCode: string };
   newGame: { rules: GameRules };
   newHand: {};
+  playCard: { player: PlayerNumber; cardCode: string };
   chantEnvido: { player: PlayerNumber; chant: EnvidoLevel };
   respondEnvido: { player: PlayerNumber; accepted: boolean };
   playEnvido: { player: PlayerNumber; cardsCodes: string[] };
@@ -17,19 +17,6 @@ export interface ActionParams {
   respondFlor: { player: PlayerNumber; accepted: boolean };
   playFlor: { player: PlayerNumber; cardsCodes: string[] };
   goToDeck: { player: PlayerNumber };
-}
-
-export interface GameStatus {
-  rules: string;
-  players: string;
-  cardsDealt: string;
-  envido: string;
-  flor: string;
-  truco: string;
-  cardsPlayed: string;
-  turns: string;
-  score: string;
-  gamePhase: string;
 }
 
 export enum EnvidoLevel {
@@ -65,13 +52,13 @@ export enum PlayerNumber {
   PlayerSix,
 }
 
-export enum GamePhase {
-  Truco = 'TRUCO', // Default phase. Play a card according to player turns
+export enum HandPhase {
+  PlayTruco = 'PLAY_TRUCO', // Default phase. Play a card according to player turns
   ChantTruco = 'CHANT_TRUCO',
-  ChantEnvido = 'CHANT_ENVIDO',
   PlayEnvido = 'PLAY_ENVIDO',
-  ChantFlor = 'CHANT_FLOR',
+  ChantEnvido = 'CHANT_ENVIDO',
   PlayFlor = 'PLAY_FLOR',
+  ChantFlor = 'CHANT_FLOR',
 }
 
 export enum Status {

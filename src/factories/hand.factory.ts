@@ -4,20 +4,20 @@ import { Flor } from '../models/flor';
 import { Hand } from '../models/hand';
 import { Player } from '../models/player';
 import { Turn } from '../models/turn';
-import { GamePhase, TrucoLevel } from '../types';
+import { HandPhase, TrucoLevel } from '../types';
 import { EnvidoFactory } from './envido.factory';
 import { FlorFactory } from './flor.factory';
 import { RoundFactory } from './round.fatory';
 import { TurnFactory } from './turn.factory';
 
 export class HandFactory {
-  public static gamePhaseCode: Record<string, GamePhase> = {
-    T: GamePhase.Truco,
-    CT: GamePhase.ChantTruco,
-    CE: GamePhase.ChantEnvido,
-    PE: GamePhase.PlayEnvido,
-    CF: GamePhase.ChantFlor,
-    PF: GamePhase.PlayFlor,
+  public static gamePhaseCode: Record<string, HandPhase> = {
+    T: HandPhase.PlayTruco,
+    CT: HandPhase.ChantTruco,
+    CE: HandPhase.ChantEnvido,
+    PE: HandPhase.PlayEnvido,
+    CF: HandPhase.ChantFlor,
+    PF: HandPhase.PlayFlor,
   };
 
   /*
@@ -38,7 +38,7 @@ export class HandFactory {
       rounds,
       envido,
       turns,
-      GamePhase.Truco,
+      HandPhase.PlayTruco,
       TrucoLevel.NotChanted,
       flor,
     );

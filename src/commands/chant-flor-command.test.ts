@@ -1,7 +1,7 @@
 import { CardFactory } from '../factories/card.factory';
 import { GameStateFactory } from '../factories/game-state.factory';
 import { PlayerFactory } from '../factories/player.factory';
-import { FlorLevel, GamePhase } from '../types';
+import { FlorLevel, HandPhase } from '../types';
 import { ChantFlorCommand } from './chant-flor-command';
 
 describe('#execute', () => {
@@ -44,7 +44,7 @@ describe('#execute', () => {
     state = chantFlorCommand.execute();
 
     expect(state.hand.flor!.chanted).toBe(FlorLevel.Flor);
-    expect(state.hand.phase).toBe(GamePhase.ChantFlor);
+    expect(state.hand.phase).toBe(HandPhase.ChantFlor);
   });
 
   it('Should throw error if when flor is not available on the game', () => {

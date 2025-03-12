@@ -7,7 +7,6 @@ import { Team } from '../types';
  * @description A class for handling the score during the game
  */
 export class Score {
-
   /**
    * Creates a new Score instance
    *
@@ -20,7 +19,7 @@ export class Score {
       [Team.A, 0],
       [Team.B, 0],
     ]),
-  ) { }
+  ) {}
 
   /**
    * Increments the score of the team passed in the number of points passed

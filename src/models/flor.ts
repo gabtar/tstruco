@@ -3,15 +3,14 @@ import { Card } from './card';
 
 /**
  * Represents a play of Flor during a hand
- * 
+ *
  * @class Flor
  * @description A class that handles the Flor stage of a hand of Truco
  */
 export class Flor {
-
   /**
    * An array containing the Flor level score based on the level chanted
-   * 
+   *
    * @readonly
    * @type {numer[]}
    */
@@ -22,7 +21,7 @@ export class Flor {
    *
    * @param {number[]} handPlayerOrder - The order of the players in the hand starting from the hand player
    * @param {Map<PlayerNumber, Card[]>} cardsPlayed - A map with the cards played by each player during the flor
-   * @param {FlorLevel} chanted - Optional chanted flor level in the hand 
+   * @param {FlorLevel} chanted - Optional chanted flor level in the hand
    * @param {boolean} accepted - If the flor was accepted or not by the opponent
    */
   constructor(
@@ -33,7 +32,7 @@ export class Flor {
     >(),
     public chanted?: FlorLevel,
     public accepted?: boolean,
-  ) { }
+  ) {}
 
   /**
    * Chants a flor level in the hand
@@ -86,7 +85,7 @@ export class Flor {
 
   /**
    * Returns the winner of the flor
-   * 
+   *
    * @returns {number} - The number of the player who won the flor
    */
   winner(): number {
@@ -136,9 +135,9 @@ export class Flor {
 
     this.cardsPlayed.forEach(
       (c, p) =>
-      (cardsPlayed = cardsPlayed.concat(
-        '-' + p + c.map((c) => c.toString()).join(''),
-      )),
+        (cardsPlayed = cardsPlayed.concat(
+          '-' + p + c.map((c) => c.toString()).join(''),
+        )),
     );
 
     const isFinished = this.handPlayerOrder.length === this.cardsPlayed.size;

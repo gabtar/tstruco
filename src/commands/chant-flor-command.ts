@@ -1,6 +1,6 @@
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
-import { FlorLevel, GamePhase } from '../types';
+import { FlorLevel, HandPhase } from '../types';
 import { Command } from './play-card-command';
 
 export class ChantFlorCommand implements Command {
@@ -35,7 +35,7 @@ export class ChantFlorCommand implements Command {
     }
 
     this.state.hand.flor!.chant(this.level);
-    this.state.hand.phase = GamePhase.ChantFlor;
+    this.state.hand.phase = HandPhase.ChantFlor;
     this.state.hand.turns.responseFlorChantTurn = this.player.opponentTeam();
 
     return this.state;

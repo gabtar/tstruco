@@ -1,5 +1,5 @@
 import { GameStateFactory } from '../factories/game-state.factory';
-import { EnvidoLevel, GamePhase } from '../types';
+import { EnvidoLevel, HandPhase } from '../types';
 import { RespondEnvidoCommmand } from './respond-envido-command';
 
 describe('#execute', () => {
@@ -29,7 +29,7 @@ describe('#execute', () => {
 
     gameState = responseEnvidoCommmand.execute();
 
-    expect(gameState.hand.phase).toBe(GamePhase.PlayEnvido);
+    expect(gameState.hand.phase).toBe(HandPhase.PlayEnvido);
     expect(gameState.hand.turns.chantEnvidoTurn).toBe(player1);
     expect(gameState.hand.envido.accepted).toBeTruthy();
   });
@@ -45,7 +45,7 @@ describe('#execute', () => {
 
     gameState = responseEnvidoCommmand.execute();
 
-    expect(gameState.hand.phase).toBe(GamePhase.Truco);
+    expect(gameState.hand.phase).toBe(HandPhase.PlayTruco);
     expect(gameState.hand.turns.chantEnvidoTurn).toBe(player1);
     expect(gameState.hand.envido.accepted).toBeFalsy();
   });

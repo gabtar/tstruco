@@ -1,6 +1,6 @@
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
-import { GamePhase } from '../types';
+import { HandPhase } from '../types';
 
 export class RespondEnvidoCommmand {
   constructor(
@@ -19,11 +19,11 @@ export class RespondEnvidoCommmand {
     if (this.accepted) {
       this.state.hand.turns.chantEnvidoTurn =
         this.state.hand.turns.firstEnvidoChant;
-      this.state.hand.phase = GamePhase.PlayEnvido;
+      this.state.hand.phase = HandPhase.PlayEnvido;
     } else {
       this.state.hand.turns.chantEnvidoTurn =
         this.state.hand.turns.playCardTurn;
-      this.state.hand.phase = GamePhase.Truco;
+      this.state.hand.phase = HandPhase.PlayTruco;
 
       this.state.score.add(
         this.player.opponentTeam(),
