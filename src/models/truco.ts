@@ -3,7 +3,19 @@ import { GameStateFactory } from '../factories/game-state.factory';
 import { ActionParams } from '../types';
 import { GameState } from './game-state';
 
+/**
+ * Represents a game of Truco
+ *
+ * @class Truco
+ * @description A class to interact with the whole game of Truco with all its phases, according to the rules of the game
+ */
 export class Truco {
+  /**
+   * Creates a new instance of Truco with a default 2 player game
+   *
+   * @param {GameState} state - A GameState object that holds the state of the game
+   * @param {CommandHandler} handler - A command handler to perform actions during the game
+   */
   constructor(
     private state: GameState = GameStateFactory.createGame({
       numberOfPlayers: 2,
@@ -13,6 +25,12 @@ export class Truco {
     private handler: CommandHandler = new CommandHandler(),
   ) {}
 
+  /**
+   * Perfroms an action/command during a game of Truco
+   *
+   * @param {keyof ActionParams} actionType - The type of action to be performed
+   * @param {ActionParams} params - The params needed to perform the action on the game
+   */
   action<K extends keyof ActionParams>(
     actionType: K,
     params: ActionParams[K],
@@ -20,6 +38,11 @@ export class Truco {
     this.state = this.handler.handle(actionType, params, this.state);
   }
 
+  /**
+   * Returns the encoded string of the full game of Truco
+   *
+   * @returns {string} - The string representing the actual game
+   */
   serialize(): string {
     const rules =
       (this.state.rules.flor ? 'F' : '') + this.state.rules.maxPoints;
@@ -61,6 +84,12 @@ export class Truco {
     );
   }
 
+  /**
+   * Creates a new Truco instance from the encoded string passed
+   *
+   * @param {string} serializedGame - The encoded string of a previously serialized game of Truco
+   * @returns {Truco} - The game instance
+   */
   public static from(serializedGame: string) {
     return new Truco(GameStateFactory.from(serializedGame));
   }

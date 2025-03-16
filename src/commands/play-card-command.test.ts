@@ -15,7 +15,7 @@ describe('#execute', () => {
     CardFactory.from('4B'),
     CardFactory.from('4O'),
   ];
-  let players = PlayerFactory.createPlayers(2);
+  const players = PlayerFactory.createPlayers(2);
   players[0].cards = cardsPlayer0;
   players[1].cards = cardsPlayer1;
 
@@ -88,7 +88,6 @@ describe('#execute', () => {
   });
 
   it('Should advance to next round when playing a card ends the round', () => {
-    const card2 = CardFactory.from('5O');
     state.hand.turns.players = players;
     const player1 = players[0];
     const player2 = players[1];

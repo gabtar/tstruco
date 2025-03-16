@@ -23,20 +23,27 @@ export class ChantFlorCommand implements Command {
       throw Error('Cannot chant flor!');
     }
 
-    if (
-      this.state.hand.flor!.chanted &&
-      this.level <= this.state.hand.flor!.chanted
-    ) {
-      throw Error('Invalid flor level');
-    }
-
     if (!this.state.hand.turns.firstFlorChant) {
       this.state.hand.turns.firstFlorChant = this.player;
     }
 
-    this.state.hand.flor!.chant(this.level);
-    this.state.hand.phase = HandPhase.ChantFlor;
-    this.state.hand.turns.responseFlorChantTurn = this.player.opponentTeam();
+    const opponentTeamHasFlor =
+      this.state.hand.players.filter(
+        (p) => p.hasFlor() && p.team !== this.player.team,
+      ).length > 0;
+
+    if (opponentTeamHasFlor) {
+      // NOTE:  For now is mandatory to respond a flor if the opponent has one
+      this.state.hand.flor!.chant(this.level);
+      this.state.hand.phase = HandPhase.ChantFlor;
+      this.state.hand.turns.responseFlorChantTurn = this.player.opponentTeam();
+
+      this.state.hand.phase = HandPhase.ChantFlor;
+    } else {
+      this.state.hand.flor!.chant(this.level);
+      this.state.score.add(this.player.team, 3);
+      this.state.hand.phase = HandPhase.PlayTruco;
+    }
 
     return this.state;
   }

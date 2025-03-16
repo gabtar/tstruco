@@ -115,12 +115,16 @@ describe('#handle', () => {
   });
 
   it('Should chant flor', () => {
-    const flor = [
+    state.hand.players[0].cards = [
       CardFactory.from('1E'),
       CardFactory.from('7E'),
       CardFactory.from('4E'),
     ];
-    state.hand.players[0].cards = flor;
+    state.hand.players[1].cards = [
+      CardFactory.from('1O'),
+      CardFactory.from('12E'),
+      CardFactory.from('4C'),
+    ];
 
     const newFlorState = handler.handle(
       'chantFlor',
@@ -135,12 +139,16 @@ describe('#handle', () => {
   });
 
   it('Should accept flor', () => {
-    const flor = [
+    state.hand.players[0].cards = [
       CardFactory.from('1E'),
       CardFactory.from('7E'),
       CardFactory.from('4E'),
     ];
-    state.hand.players[0].cards = flor;
+    state.hand.players[1].cards = [
+      CardFactory.from('1O'),
+      CardFactory.from('7O'),
+      CardFactory.from('6O'),
+    ];
 
     handler.handle(
       'chantFlor',

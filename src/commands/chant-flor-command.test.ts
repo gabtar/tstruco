@@ -1,7 +1,7 @@
 import { CardFactory } from '../factories/card.factory';
 import { GameStateFactory } from '../factories/game-state.factory';
 import { PlayerFactory } from '../factories/player.factory';
-import { FlorLevel, HandPhase } from '../types';
+import { FlorLevel } from '../types';
 import { ChantFlorCommand } from './chant-flor-command';
 
 describe('#execute', () => {
@@ -32,9 +32,10 @@ describe('#execute', () => {
       flor: true,
       maxPoints: 15,
     });
+    state.hand.players = players;
   });
 
-  it('Should chant flor', () => {
+  it('Should chant flor when no opponent has a flor', () => {
     const chantFlorCommand = new ChantFlorCommand(
       state,
       players[0],
@@ -44,7 +45,6 @@ describe('#execute', () => {
     state = chantFlorCommand.execute();
 
     expect(state.hand.flor!.chanted).toBe(FlorLevel.Flor);
-    expect(state.hand.phase).toBe(HandPhase.ChantFlor);
   });
 
   it('Should throw error if when flor is not available on the game', () => {
@@ -88,15 +88,15 @@ describe('#execute', () => {
     expect(() => chantFlorCommand.execute()).toThrow('Cannot chant flor!');
   });
 
-  it('Should throw error when chanting a lower flor level', () => {
-    state.hand.flor!.chanted = FlorLevel.ContraFlorAlResto;
-
+  it("Should add directly 3 points to the player's team if no one of opponent team has a flor", () => {
     const chantFlorCommand = new ChantFlorCommand(
       state,
       players[0],
-      FlorLevel.ContraFlor,
+      FlorLevel.Flor,
     );
 
-    expect(() => chantFlorCommand.execute()).toThrow('Invalid flor level');
+    state = chantFlorCommand.execute();
+
+    expect(state.score.getScore(players[0].team)).toBe(3);
   });
 });
