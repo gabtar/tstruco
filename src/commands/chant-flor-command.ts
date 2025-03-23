@@ -1,15 +1,36 @@
 import { GameState } from '../models/game-state';
 import { Player } from '../models/player';
 import { FlorLevel, HandPhase } from '../types';
-import { Command } from './play-card-command';
+import { Command } from './command.interface';
 
+/**
+ * A command to modify the state of the game by chanting Flor
+ *
+ * @class ChantFlorCommand
+ * @description A class to perform a Flor chant during a game of Truco
+ */
 export class ChantFlorCommand implements Command {
+  /**
+   * Creates a new ChantFlorCommand instance
+   *
+   * @param {GameState} state - The current state of the game
+   * @param {Player} player - The player who is chanting the Flor
+   * @param {EnvidoLevel} level - The level of Flor to chant in the game
+   */
   constructor(
     private state: GameState,
     private player: Player,
     private level: FlorLevel,
   ) {}
 
+  /**
+   * Chants a Flor Level and returns the new state of the game
+   *
+   * @returns {GameState} - The new state of the game
+   * @throws {Error} - If game rules does not allow Flor
+   * @throws {Error} - If the player has not been dealt a flor
+   * @throws {Error} - If not in first hand round
+   */
   public execute(): GameState {
     if (!this.state.rules.flor) {
       throw new Error('You are playing without Flor');

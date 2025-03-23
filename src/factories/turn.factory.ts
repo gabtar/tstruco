@@ -2,7 +2,20 @@ import { Player } from '../models/player';
 import { Turn } from '../models/turn';
 import { Team } from '../types';
 
+/**
+ * A factory for creating Turn objects
+ *
+ * @class TurnFactory
+ * @description Creates Turns objects to handle the Turns of the players in a game of Truco
+ */
 export class TurnFactory {
+  /**
+   * Returns a new Turn object with the actual turns of the game
+   *
+   * @param {string} serializedTurns - The string with the serialized turns of a game of Truco
+   * @param {Player[]} players - The players of a game
+   * @returns {Turn} - The Turn object with the current turns in a Hand
+   */
   public static from(serializedTurns: string, players: Player[]): Turn {
     const turnsCodes = {
       handPlayer: 'H',

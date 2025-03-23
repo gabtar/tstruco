@@ -1,6 +1,6 @@
 import { CardFactory } from '../factories/card.factory';
 import { GameStateFactory } from '../factories/game-state.factory';
-import { EnvidoLevel } from '../types';
+import { EnvidoLevel, FlorLevel } from '../types';
 import { ChantEnvidoCommmand } from './chant-envido-command';
 
 describe('#execute', () => {
@@ -62,5 +62,24 @@ describe('#execute', () => {
     gameState = chantEnvidoCommand2.execute();
 
     expect(gameState.hand.envido.chanted).toHaveLength(2);
+  });
+
+  it('Should trhow Error if flor was chanted/played', () => {
+    gameState = GameStateFactory.createGame({
+      numberOfPlayers: 2,
+      maxPoints: 15,
+      flor: true,
+    });
+    gameState.hand.flor?.chant(FlorLevel.Flor);
+    gameState.hand.turns.playCardTurn = player1;
+    gameState.hand.turns.chantEnvidoTurn = player1;
+
+    const chantEnvidoCommand = new ChantEnvidoCommmand(
+      gameState,
+      player1,
+      EnvidoLevel.Envido,
+    );
+
+    expect(() => chantEnvidoCommand.execute()).toThrow('Cannot chant Envido');
   });
 });

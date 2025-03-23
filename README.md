@@ -11,8 +11,6 @@ tstruco is a typescript library for playing games of [Truco](https://en.wikipedi
 
 </div>
 
-# WIP
-
 ## Setup, instalation and sample usage
 
 Create a new javascript/typescript project and install the library from the npm registry.
@@ -92,25 +90,3 @@ truco.action('action type', params);
 | respondFlor   | truco.action('respondFlor', params)     | { player: number, accepted: boolean }                                      |
 | playFlor      | truco.action('playFlor', params)        | { player: number, cardsCodes: string[] }                                   |
 | goToDeck      | truco.action('goToDeck', params)        | { player: number }                                                         |
-
-
-## Roadmap v1.0.0
-- [x] FIX: Validate the card has been dealt to player when he plays a card
-- [x] FIX: Only the players who have a flor should play it
-- [x] FIX: Add envido score, if envido wasnt chanted so far, when a hand ends by going to deck/decline truco
-- [x] FIX: Deny playing playing envido when first round has ended or envido already played
-- [x] FIX: Player at deck cannot play/chant(eg. when more than 2 players) - Maybe should be enought when setting next turns...
-- [x] FIX: Going to deck when more than 2 players should update current turns...
-- [x] FIX: Going to deck in the middle of a chant should decline the flor/envido/truco and add the points...
-- [x] FIX: Chanting a Flor should add 3 points to the player directly. But if any player from the opponent team has a flor, he should be able to chant contra flor or contra flor al resto, so i should not add directly the 3 points. Need to check rules on flor...
-- [x] Use remaining score when playing 'falta envido' and the current score is more than 15 points
-- [x] If all players go to deck, end and reset the hand
-- [ ] When flor is chanted, disable envido chant during the hand
-- [ ] Improve documentation
-
-## Roadmap v1.1.0
-- [ ] Players can play a face down card(not showing the card value to the opponent)
-- [ ] Resign/Accept the opponent cards during a chant play. Like saying 'son buenas' during envido or flor(maybe by playing w/ empty/no cards)
-- [ ] Chant over Chant feature. Eg. chant envido during a truco chant, if envido is still available
-- [ ] Error handling system w/ custom exceptions
-- [ ] Add a GameDetails interface to display the game status in a JSON object, in a more redeable/friendly way than serialization

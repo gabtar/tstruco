@@ -3,11 +3,26 @@ import { Player } from '../models/player';
 import { Round } from '../models/round';
 import { CardFactory } from './card.factory';
 
+/**
+ * A factory for creating Round objects
+ *
+ * @class RoundFactory
+ * @description Creates Round objects to handle the cards played by players during a Hand of Truco
+ */
 export class RoundFactory {
+  /**
+   * A regex matcher to get cards codes from a serialized string of cards played
+   *
+   * @static
+   */
   private static readonly cardsPerPlayerPerRoundMatcher = /0|[1-9]\d?[A-Z]/g;
 
-  /*
-   * createRound creates the round for the players
+  /**
+   * Returns an array of Rounds with the players passed for a Hand of Truco
+   *
+   * @static
+   * @param {Player[]} - The players of the rounds
+   * @returns {Round[]} - The rounds of the Hand
    */
   public static createRounds(players: Player[]): Round[] {
     return [
@@ -17,8 +32,13 @@ export class RoundFactory {
     ];
   }
 
-  /*
-   * returns an array of rounds with the cards played by players in the serialized cards played string
+  /**
+   * Returns an array of Rounds with the cards player on each Round
+   *
+   * @static
+   * @param {string} serializedPlayedCards - The serialized string of the cards played during the round
+   * @param {Player[]} players - The players participating on the round
+   * @returns {Round[]} - The rounds of the Hand
    */
   public static from(
     serializedPlayedCards: string,
@@ -29,6 +49,15 @@ export class RoundFactory {
       .map((cardsPerRound) => this.deserializeRound(cardsPerRound, players));
   }
 
+  /**
+   * Returns a Round with the cards played
+   *
+   * @private
+   * @static
+   * @param {string} cardsPerRound - The serialized string of the cards played in the round
+   * @param {Player[]} players - The players participating on the round
+   * @returns {Round[]} - The round
+   */
   private static deserializeRound(
     cardsPerRound: string,
     players: Player[],
