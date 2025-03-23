@@ -1,6 +1,6 @@
 {
   "name": "tstruco",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0",
   "description": "Library for playing card games of Truco",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",

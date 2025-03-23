@@ -11,8 +11,6 @@ tstruco is a typescript library for playing games of [Truco](https://en.wikipedi
 
 </div>
 
-# WIP
-
 ## Setup, instalation and sample usage
 
 Create a new javascript/typescript project and install the library from the npm registry.
@@ -33,13 +31,13 @@ truco.action('newGame', { rules: { numberOfPlayers: 2, flor: false, maxPoints: 1
 truco.action('newHand', {}); // starts a new hand and deals the cards for all players 
 
 console.log(truco.serialize());  // displays the serialized game string w/ current game state
-// eg. Outputs: 15#2#10O3C11C12E2E6C#N##N#00-00-00#H0C0--P0---#A0B0#T 
+// eg. Outputs: 15#2#1E3C11C12E2E6C#N##N#00-00-00#H0C0--P0---#A0B0#T 
 // '1E3C11C12E2E6C' this is the serialized cards dealt section. As we see, player 0 has recived the 1E(Ace of Spades in spanish deck) card
 
 truco.action('playCard', { player: 0, card: '1E' }); // player 0 plays el 'Ancho de Espadas'(1E) in the first round of the hand
 
 console.log(truco.serialize());  // the new serialized game string displays the that the first player played 1E card on the first round
-// Outputs: 15#2#10O3C11C12E2E6C#N##N#1E0-00-00#H0C0--P0---#A0B0#T
+// Outputs: 15#2#1E3C11C12E2E6C#N##N#1E0-00-00#H0C0--P0---#A0B0#T
 // '1E0-00-00' this is the cards played section. It now shows that player 0 has played the '1E' card during the first round
 
 ```
@@ -92,20 +90,3 @@ truco.action('action type', params);
 | respondFlor   | truco.action('respondFlor', params)     | { player: number, accepted: boolean }                                      |
 | playFlor      | truco.action('playFlor', params)        | { player: number, cardsCodes: string[] }                                   |
 | goToDeck      | truco.action('goToDeck', params)        | { player: number }                                                         |
-
-
-## Roadmap v1.0.0
-- [ ] FIX: Validate the card has been dealt to player when he plays a card
-- [ ] FIX: Only the players who have a flor should play it
-- [ ] FIX: Add envido score, if envido wasnt chanted so far, when a hand ends by going to deck/decline truco
-- [ ] Use remaining score when playing 'falta envido' and the current score is more than 15 points
-- [ ] If all players go to deck, end and reset the hand
-- [ ] When flor is chanted, disable envido chant during the hand
-- [ ] Improve documentation
-
-## Roadmap v1.1.0
-- [ ] Players can play a face down card(not showing the card value to the opponent)
-- [ ] Resign/Accept the opponent cards during a chant play. Like saying 'son buenas' during envido or flor(maybe by playing w/ empty/no cards)
-- [ ] Chant over Chant feature. Eg. chant envido during a truco chant, if envido is still available
-- [ ] Error handling system w/ custom exceptions
-- [ ] Add a GameDetails interface to display the game status in a JSON object, in a more redeable/friendly way than serialization

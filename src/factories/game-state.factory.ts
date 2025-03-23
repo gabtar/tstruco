@@ -6,18 +6,33 @@ import { PlayerFactory } from './player.factory';
 import { RulesFactory } from './rules.factory';
 import { ScoreFactory } from './score.factory';
 
+/**
+ * A factory for creating GameState objects
+ *
+ * @class GameStateFactory
+ * @description Creates GameState objects for handling games of Truco
+ */
 export class GameStateFactory {
-  /*
-   * Returns a new GameState based on the rules passed
+  /**
+   * Returns a new GameState instance according to the specific rules passed
+   *
+   * @param {GameRules} rules - The rules of a game of Truco
+   * @returns {GameState} - The GameState object according to the rules
    */
   public static createGame(rules: GameRules): GameState {
     const players = PlayerFactory.createPlayers(rules.numberOfPlayers);
     const hand = HandFactory.createHand(players, rules.flor);
-    const score = new Score();
+    const score = new Score(rules.maxPoints);
 
     return new GameState(hand, rules, score);
   }
 
+  /**
+   * Returns a new GameState instance from a serializedGame string
+   *
+   * @param {string} serializedGame - A serialized string from a previos GameState of Truco
+   * @returns {GameState} - The GameState instance
+   */
   public static from(serializedGame: string): GameState {
     const serializedParts = serializedGame.split('#');
 
@@ -36,7 +51,7 @@ export class GameStateFactory {
       players,
       rules.flor,
     );
-    const score = ScoreFactory.from(serializedParts[8]);
+    const score = ScoreFactory.from(serializedParts[8], rules.maxPoints);
 
     return new GameState(hand, rules, score);
   }

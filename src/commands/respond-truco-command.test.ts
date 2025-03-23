@@ -1,5 +1,5 @@
 import { GameStateFactory } from '../factories/game-state.factory';
-import { TrucoLevel } from '../types';
+import { EnvidoLevel, TrucoLevel } from '../types';
 import { RespondTrucoCommmand } from './respond-truco-command';
 
 describe('#execute', () => {
@@ -45,6 +45,7 @@ describe('#execute', () => {
   it('Should update score when declined', () => {
     gameState.hand.turns.responseTrucoChantTurn = player1.team;
     gameState.hand.trucoLevel = TrucoLevel.Truco;
+    gameState.hand.envido.addChant(EnvidoLevel.Envido); // Simulates envido chanted
 
     const respondTrucoCommand = new RespondTrucoCommmand(
       gameState,
@@ -53,5 +54,18 @@ describe('#execute', () => {
     );
 
     expect(respondTrucoCommand.execute().score.getScore(player2.team)).toBe(1);
+  });
+
+  it('Should update score, adding not chanted envido when declined on first round', () => {
+    gameState.hand.turns.responseTrucoChantTurn = player1.team;
+    gameState.hand.trucoLevel = TrucoLevel.Truco;
+
+    const respondTrucoCommand = new RespondTrucoCommmand(
+      gameState,
+      player1,
+      false,
+    );
+
+    expect(respondTrucoCommand.execute().score.getScore(player2.team)).toBe(2);
   });
 });
